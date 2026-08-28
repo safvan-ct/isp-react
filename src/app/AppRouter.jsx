@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
         element: <QuranPage />,
       },
       {
-        path: 'quran/:surahId',
+        path: 'quran/:surahSlug',
         element: <SurahPage />,
       },
       {

@@ -23,15 +23,32 @@
     --font-body: 'Plus Jakarta Sans', sans-serif;
 }
 
+html,
 body {
     background-color: var(--desert-sand);
     color: var(--desert-night);
     font-family: var(--font-body);
-    overflow-x: hidden;
+}
+
+#root {
+    background-color: var(--desert-sand);
+    color: var(--desert-night);
+    font-family: var(--font-body);
+    overflow-x: clip;
+    max-width: 100%;
 }
 
 .font-quranic {
     font-family: var(--font-quranic);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 /* =======================================================
@@ -41,6 +58,7 @@ body {
     background: rgba(247, 243, 235, 0.92);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--desert-dune);
+    z-index: 1060 !important;
 }
 
 .brand-icon {
@@ -201,7 +219,7 @@ footer a:hover {
    ======================================================= */
 /* Navbar */
 .nav-link:hover,
-        .nav-link.active {
+.nav-link.active {
     color: var(--desert-terracotta);
 }
 
@@ -210,7 +228,7 @@ footer a:hover {
     background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
     color: var(--desert-sand);
     border-radius: 24px;
-    padding: 3.5rem 2rem;
+    padding: 2rem 1.5rem;
     border: 1px solid rgba(194, 150, 83, 0.25);
     position: relative;
     overflow: hidden;
@@ -260,7 +278,7 @@ footer a:hover {
 }
 
 .filter-pill-btn.active,
-        .filter-pill-btn:hover {
+.filter-pill-btn:hover {
     background: var(--desert-terracotta);
     color: #FFFFFF;
     border-color: var(--desert-terracotta);
@@ -464,7 +482,7 @@ footer a:hover {
 }
 
 .course-nav-link:hover,
-        .course-nav-link.active {
+.course-nav-link.active {
     color: var(--desert-terracotta);
     border-bottom-color: var(--desert-terracotta);
 }
@@ -619,7 +637,7 @@ footer a:hover {
     background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
     color: var(--desert-sand);
     border-radius: 24px;
-    padding: 3rem 2rem;
+    padding: 2rem 1.5rem;
     border: 1px solid rgba(194, 150, 83, 0.25);
     position: relative;
     overflow: hidden;
@@ -657,7 +675,7 @@ footer a:hover {
 }
 
 .filter-btn.active,
-        .filter-btn:hover {
+.filter-btn:hover {
     background: var(--desert-terracotta);
     color: #fff;
     border-color: var(--desert-terracotta);
@@ -755,7 +773,7 @@ footer a:hover {
     background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
     color: var(--desert-sand);
     border-radius: 24px;
-    padding: 2.5rem 2rem;
+    padding: 1.75rem 1.5rem;
     border: 1px solid rgba(194, 150, 83, 0.25);
     position: relative;
     overflow: hidden;
@@ -892,14 +910,71 @@ footer a:hover {
    ======================================================= */
 /* Navbar */
 /* Breadcrumbs */
-/* Secondary Sticky Reader Bar */
 .sticky-reader-bar {
     position: sticky;
-    top: 73px;
-    z-index: 1020;
-    background: var(--desert-sand-card);
+    top: 63px;
+    z-index: 1040 !important;
+    background: var(--desert-sand-card) !important;
     border-bottom: 1px solid var(--desert-dune);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: top 0.2s ease;
+}
+
+@media (min-width: 992px) {
+    .sticky-reader-bar {
+        top: 75px;
+    }
+}
+
+.sticky-filter-bar {
+    position: sticky;
+    top: 63px;
+    z-index: 1010;
+    background-color: var(--desert-sand) !important;
+    border-bottom: 1px solid rgba(194, 150, 83, 0.15);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    transition: top 0.2s ease;
+}
+
+@media (min-width: 992px) {
+    .sticky-filter-bar {
+        top: 75px;
+    }
+}
+
+.surah-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    max-height: 215px;
+    width: 280px;
+    background-color: #fff;
+    border: 1px solid var(--desert-dune);
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(31, 27, 22, 0.12);
+}
+
+@media (max-width: 480px) {
+    .surah-select-dropdown {
+        left: -35px;
+        transform: none;
+        width: 260px;
+    }
+}
+
+.settings-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1050;
+    width: 260px;
+    background-color: #fff;
+    border: 1px solid var(--desert-dune);
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(31, 27, 22, 0.12);
 }
 
 .reader-btn {
@@ -924,7 +999,7 @@ footer a:hover {
     background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
     color: var(--desert-sand);
     border-radius: 24px;
-    padding: 2.5rem 2rem;
+    padding: 1.75rem 1.5rem;
     border: 1px solid rgba(194, 150, 83, 0.3);
     position: relative;
     overflow: hidden;
@@ -1495,9 +1570,22 @@ footer a:hover {
     background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
     color: var(--desert-sand);
     border-radius: 24px;
-    padding: 3rem 2rem;
+    padding: 2rem 1.5rem;
     border: 1px solid rgba(194, 150, 83, 0.25);
     position: relative;
+    overflow: hidden;
+}
+
+.surah-header-banner::after {
+    content: "القرآن الكريم";
+    position: absolute;
+    right: 20px;
+    bottom: -40px;
+    font-size: 7.5rem;
+    color: rgba(194, 150, 83, 0.04);
+    font-family: var(--font-quranic);
+    pointer-events: none;
+    white-space: nowrap;
 }
 
 .search-input-group {
@@ -1638,14 +1726,14 @@ footer a:hover {
     background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
     color: var(--desert-sand);
     border-radius: 24px;
-    padding: 2.5rem 2rem;
+    padding: 1.75rem 1.5rem;
     border: 1px solid rgba(194, 150, 83, 0.3);
     position: relative;
     overflow: hidden;
 }
 
 .surah-banner::after {
-    content: "الكهف";
+    content: attr(data-arabic-name);
     position: absolute;
     right: 20px;
     bottom: -20px;
@@ -1653,6 +1741,7 @@ footer a:hover {
     color: rgba(194, 150, 83, 0.05);
     font-family: var(--font-quranic);
     pointer-events: none;
+    white-space: nowrap;
 }
 
 .bismillah-card {

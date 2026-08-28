@@ -25,8 +25,8 @@ export default function Navbar() {
           <div>
             <span className="fs-4 fw-bold tracking-wide" style={{ color: 'var(--desert-night)' }}>Al-Athar</span>
             <span 
-              className="d-block text-muted small"
-              style={{ fontSize: '0.65rem', letterSpacing: '1px', marginTop: '-3px' }}
+              className="d-block text-muted small text-nowrap"
+              style={{ fontSize: '0.65rem', letterSpacing: '1px', marginTop: '-3px', whiteSpace: 'nowrap' }}
             >
               ISLAMIC STUDY PORTAL
             </span>

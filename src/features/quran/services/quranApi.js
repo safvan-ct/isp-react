@@ -1,26 +1,105 @@
-import { fetchMockData } from '../../../services/apiClient';
+import apiClient, { fetchMockData } from '../../../services/apiClient';
 
 /**
  * Service to retrieve Quran data. Falls back to mock client under local testing.
  */
-export const getChapters = async () => {
+export const getChapters = async (cursor = '', chapterName = '', revelation = '') => {
   try {
-    // If backend existed: const response = await apiClient.get('/quran/chapters'); return response.data;
-    const response = await fetchMockData('quran/chapters');
-    return response.data;
+    let url = `/quran/chapters?translation=en`;
+    if (chapterName) {
+      url += `&chapter_name=${encodeURIComponent(chapterName)}`;
+    }
+    if (revelation && revelation !== 'all') {
+      url += `&revelation=${encodeURIComponent(revelation.toLowerCase())}`;
+    }
+    if (cursor) {
+      url += `&cursor=${cursor}`;
+    }
+    const response = await apiClient.get(url);
+    // Map the API data structure to match the frontend expectations
+    const mappedChapters = response.data.data.map(chapter => {
+      const translation = chapter.translations?.[0] || {};
+      return {
+        id: chapter.id,
+        slug: chapter.slug,
+        name: translation.name || chapter.slug,
+        englishName: translation.name_tr || "",
+        type: chapter.revelation || "Meccan",
+        versesCount: chapter.no_of_verses || 0,
+        arabicName: chapter.name || "",
+        juz: chapter.juz || 1
+      };
+    });
+    return {
+      chapters: mappedChapters,
+      nextCursor: response.data.meta?.next_cursor || null,
+      meccanCount: response.data.meccan_count || 0,
+      medinanCount: response.data.medinan_count || 0
+    };
   } catch (error) {
     console.error('Error fetching Quran chapters:', error);
     throw error;
   }
 };
 
-export const getVerses = async (surahId) => {
+export const getVerses = async (chapterSlug, cursor = '') => {
+  if (!chapterSlug) return { verses: [], chapter: null, nextCursor: null };
   try {
-    // If backend existed: const response = await apiClient.get(`/quran/verses?surahId=${surahId}`); return response.data;
-    const response = await fetchMockData('quran/verses', { surahId: parseInt(surahId, 10) });
-    return response.data;
+    const url = cursor 
+      ? `/quran/chapters/${chapterSlug}/verses?cursor=${cursor}`
+      : `/quran/chapters/${chapterSlug}/verses`;
+    const response = await apiClient.get(url);
+    const backendChapter = response.data.chapter || {};
+    const backendVerses = response.data.verses?.data || [];
+
+    const translation = backendChapter.translations?.find(t => t.lang === 'en') || {};
+    const mappedChapter = {
+      id: backendChapter.id,
+      slug: backendChapter.slug,
+      name: translation.name || backendChapter.slug,
+      englishName: translation.name_tr || "",
+      type: backendChapter.revelation || "Meccan",
+      versesCount: backendChapter.no_of_verses || 0,
+      arabicName: backendChapter.name || "",
+      juz: backendChapter.juz || 1
+    };
+
+    const mappedVerses = backendVerses.map(verse => {
+      const vTrans = verse.translations?.find(t => t.lang === 'en') || {};
+      return {
+        verseKey: `${verse.quran_chapter_id}:${verse.number_in_chapter}`,
+        juz: verse.juz || 1,
+        page: verse.page || 1,
+        arabic: verse.text || "",
+        transliteration: vTrans.text_romanized || "",
+        translation: vTrans.text || "",
+        tafsir: verse.tafsir || "Commentary and study notes for this verse are coming soon."
+      };
+    });
+
+    return {
+      chapter: mappedChapter,
+      verses: mappedVerses,
+      nextCursor: response.data.verses?.meta?.next_cursor || null
+    };
   } catch (error) {
-    console.error(`Error fetching verses for Surah ${surahId}:`, error);
+    console.error(`Error fetching verses for chapter ${chapterSlug}:`, error);
+    throw error;
+  }
+};
+
+export const getMinimalChapters = async () => {
+  try {
+    const response = await apiClient.get('/quran/chapters?translation=en&all=1&minimal=1');
+    return response.data.data.map(chapter => ({
+      id: chapter.id,
+      slug: chapter.slug,
+      name: chapter.translation || chapter.slug,
+      englishName: chapter.title || "",
+      arabicName: chapter.name || ""
+    }));
+  } catch (error) {
+    console.error('Error fetching minimal chapters:', error);
     throw error;
   }
 };
