@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useHadithList, useHadithChaptersMinimal, useHadithSingle } from "../hooks/useHadith";
+import { getSiteLanguage } from "../../../services/siteLanguage";
 
 export default function HadithDetailPage() {
 	const { bookSlug, chapterSlug, hadithNumber } = useParams();
@@ -178,19 +179,32 @@ export default function HadithDetailPage() {
 	// Helper to extract translation name or title from chapter
 	const getChapterName = (chap) => {
 		if (!chap) return "";
+		const siteLang = getSiteLanguage();
+		const transObj =
+			chap.translations?.find((t) => t.lang === siteLang) ||
+			chap.translations?.find((t) => t.lang === "en") ||
+			chap.translations?.[0];
 		return (
 			chap.translation ||
 			chap.title ||
-			chap.translations?.find((t) => t.lang === "en")?.name ||
+			transObj?.name ||
 			chap.name ||
 			""
 		);
 	};
 
 	// Display names
+	const siteLang = getSiteLanguage();
+	const targetBook = apiBook ?? navBook;
+	const bookTransObj =
+		targetBook?.translations?.find((t) => t.lang === siteLang) ||
+		targetBook?.translations?.find((t) => t.lang === "en") ||
+		targetBook?.translations?.[0];
 	const bookName =
-		(apiBook ?? navBook)?.translations?.find((t) => t.lang === "en")?.name ||
-		(apiBook ?? navBook)?.name ||
+		targetBook?.translation ||
+		targetBook?.title ||
+		bookTransObj?.name ||
+		targetBook?.name ||
 		bookSlug;
 
 	const chapterName = isSingleView
@@ -233,20 +247,48 @@ export default function HadithDetailPage() {
 	// ── Hadith field extractors (matching real API shape) ─────────────
 	/** Arabic text is `hadith.text` */
 	const getArabic = (h) => h.text || "";
-	/** English translation is `hadith.translations[].text` */
-	const getTranslation = (h) =>
-		h.translations?.find((t) => t.lang === "en")?.text || "";
+	/** Translation is `hadith.translations[].text` */
+	const getTranslation = (h) => {
+		const lang = getSiteLanguage();
+		return (
+			h.translations?.find((t) => t.lang === lang)?.text ||
+			h.translations?.find((t) => t.lang === "en")?.text ||
+			h.translations?.[0]?.text ||
+			""
+		);
+	};
 	/** Arabic sub-heading (Bab) */
 	const getArabicHeading = (h) => h.heading || "";
-	/** English sub-heading */
-	const getEnHeading = (h) =>
-		h.translations?.find((t) => t.lang === "en")?.heading || "";
+	/** Sub-heading translation */
+	const getEnHeading = (h) => {
+		const lang = getSiteLanguage();
+		return (
+			h.translations?.find((t) => t.lang === lang)?.heading ||
+			h.translations?.find((t) => t.lang === "en")?.heading ||
+			h.translations?.[0]?.heading ||
+			""
+		);
+	};
 	/** Narrator */
-	const getNarrator = (h) =>
-		h.translations?.find((t) => t.lang === "en")?.narrator || "";
+	const getNarrator = (h) => {
+		const lang = getSiteLanguage();
+		return (
+			h.translations?.find((t) => t.lang === lang)?.narrator ||
+			h.translations?.find((t) => t.lang === "en")?.narrator ||
+			h.translations?.[0]?.narrator ||
+			""
+		);
+	};
 	/** Grade/status */
-	const getGrade = (h) =>
-		h.translations?.find((t) => t.lang === "en")?.status || h.status || "";
+	const getGrade = (h) => {
+		const lang = getSiteLanguage();
+		return (
+			h.translations?.find((t) => t.lang === lang)?.status ||
+			h.translations?.find((t) => t.lang === "en")?.status ||
+			h.status ||
+			""
+		);
+	};
 	/** Display number */
 	const getHadithNum = (h) => h.hadith_number ?? h.id;
 
@@ -779,7 +821,7 @@ export default function HadithDetailPage() {
 									)}
 
 									{/* Card Body: Side-by-Side or Stacked */}
-									{isSideBySide && showTranslation ? (
+									{isSideBySide && showTranslation && (translations[`${hadith.id}_body`] || translation || translating[hadith.id]) ? (
 										<div className="row g-4 align-items-start">
 											{/* Left Column: Translation */}
 											<div className="col-md-6 order-2 order-md-1">
@@ -797,12 +839,7 @@ export default function HadithDetailPage() {
 															<span className="placeholder col-8"></span>
 														</span>
 													) : (
-														translations[`${hadith.id}_body`] ||
-														translation || (
-															<span className="text-muted fst-italic">
-																Translation not available.
-															</span>
-														)
+														translations[`${hadith.id}_body`] || translation
 													)}
 												</div>
 											</div>
@@ -840,7 +877,7 @@ export default function HadithDetailPage() {
 											)}
 
 											{/* Translation */}
-											{showTranslation && (
+											{showTranslation && (translations[`${hadith.id}_body`] || translation || translating[hadith.id]) ? (
 												<div
 													className="hadith-translation fw-medium mb-2"
 													style={{
@@ -855,15 +892,10 @@ export default function HadithDetailPage() {
 															<span className="placeholder col-8"></span>
 														</span>
 													) : (
-														translations[`${hadith.id}_body`] ||
-														translation || (
-															<span className="text-muted fst-italic">
-																Translation not available.
-															</span>
-														)
+														translations[`${hadith.id}_body`] || translation
 													)}
 												</div>
-											)}
+											) : null}
 										</>
 									)}
 								</div>

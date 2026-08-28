@@ -1,11 +1,13 @@
-import apiClient, { fetchMockData } from '../../../services/apiClient';
+import apiClient from '../../../services/apiClient';
+import { getSiteLanguage } from '../../../services/siteLanguage';
 
 /**
  * Service to retrieve Quran data. Falls back to mock client under local testing.
  */
 export const getChapters = async (cursor = '', chapterName = '', revelation = '') => {
+  const lang = getSiteLanguage();
   try {
-    let url = `/quran/chapters?translation=en`;
+    let url = `/quran/chapters?translation=${lang}`;
     if (chapterName) {
       url += `&chapter_name=${encodeURIComponent(chapterName)}`;
     }
@@ -16,14 +18,13 @@ export const getChapters = async (cursor = '', chapterName = '', revelation = ''
       url += `&cursor=${cursor}`;
     }
     const response = await apiClient.get(url);
-    // Map the API data structure to match the frontend expectations
     const mappedChapters = response.data.data.map(chapter => {
-      const translation = chapter.translations?.[0] || {};
+      const translation = chapter.translations?.find(t => t.lang === lang) || chapter.translations?.[0] || {};
       return {
         id: chapter.id,
         slug: chapter.slug,
-        name: translation.name || chapter.slug,
-        englishName: translation.name_tr || "",
+        name: chapter.translation || translation.name || chapter.slug,
+        englishName: chapter.title || translation.name_tr || "",
         type: chapter.revelation || "Meccan",
         versesCount: chapter.no_of_verses || 0,
         arabicName: chapter.name || "",
@@ -44,20 +45,21 @@ export const getChapters = async (cursor = '', chapterName = '', revelation = ''
 
 export const getVerses = async (chapterSlug, cursor = '') => {
   if (!chapterSlug) return { verses: [], chapter: null, nextCursor: null };
+  const lang = getSiteLanguage();
   try {
     const url = cursor 
-      ? `/quran/chapters/${chapterSlug}/verses?cursor=${cursor}`
-      : `/quran/chapters/${chapterSlug}/verses`;
+      ? `/quran/chapters/${chapterSlug}/verses?cursor=${cursor}&translation=${lang}`
+      : `/quran/chapters/${chapterSlug}/verses?translation=${lang}`;
     const response = await apiClient.get(url);
     const backendChapter = response.data.chapter || {};
     const backendVerses = response.data.verses?.data || [];
 
-    const translation = backendChapter.translations?.find(t => t.lang === 'en') || {};
+    const translation = backendChapter.translations?.find(t => t.lang === lang) || backendChapter.translations?.[0] || {};
     const mappedChapter = {
       id: backendChapter.id,
       slug: backendChapter.slug,
-      name: translation.name || backendChapter.slug,
-      englishName: translation.name_tr || "",
+      name: backendChapter.translation || translation.name || backendChapter.slug,
+      englishName: backendChapter.title || translation.name_tr || "",
       type: backendChapter.revelation || "Meccan",
       versesCount: backendChapter.no_of_verses || 0,
       arabicName: backendChapter.name || "",
@@ -65,7 +67,7 @@ export const getVerses = async (chapterSlug, cursor = '') => {
     };
 
     const mappedVerses = backendVerses.map(verse => {
-      const vTrans = verse.translations?.find(t => t.lang === 'en') || {};
+      const vTrans = verse.translations?.find(t => t.lang === lang) || verse.translations?.[0] || {};
       return {
         verseKey: `${verse.quran_chapter_id}:${verse.number_in_chapter}`,
         juz: verse.juz || 1,
@@ -89,8 +91,9 @@ export const getVerses = async (chapterSlug, cursor = '') => {
 };
 
 export const getMinimalChapters = async () => {
+  const lang = getSiteLanguage();
   try {
-    const response = await apiClient.get('/quran/chapters?translation=en&all=1&minimal=1');
+    const response = await apiClient.get(`/quran/chapters?translation=${lang}&all=1&minimal=1`);
     return response.data.data.map(chapter => ({
       id: chapter.id,
       slug: chapter.slug,

@@ -1,7 +1,19 @@
 import { useState, useEffect } from 'react';
 import { getHadithBooks, getHadithChapters, getHadiths, getHadithByNumber, getHadithChaptersMinimal } from '../services/hadithApi';
+import { getSiteLanguage } from '../../../services/siteLanguage';
+
+function useSiteLang() {
+  const [lang, setLang] = useState(getSiteLanguage());
+  useEffect(() => {
+    const handleLangChange = () => setLang(getSiteLanguage());
+    window.addEventListener('siteLanguageChange', handleLangChange);
+    return () => window.removeEventListener('siteLanguageChange', handleLangChange);
+  }, []);
+  return lang;
+}
 
 export function useHadithBooks() {
+  const siteLang = useSiteLang();
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -18,6 +30,7 @@ export function useHadithBooks() {
       const response = await getHadithBooks(cursor);
       
       setBooks((prev) => {
+        if (!cursor) return response.data || [];
         const existingIds = new Set(prev.map((b) => b.id));
         const newBooks = (response.data || []).filter((b) => !existingIds.has(b.id));
         return [...prev, ...newBooks];
@@ -33,8 +46,9 @@ export function useHadithBooks() {
   };
 
   useEffect(() => {
+    setBooks([]);
     fetchBooks();
-  }, []);
+  }, [siteLang]);
 
   const loadMore = () => {
     if (nextCursor && !loading && !loadingMore) {
@@ -46,6 +60,7 @@ export function useHadithBooks() {
 }
 
 export function useHadithChapters(bookSlug) {
+  const siteLang = useSiteLang();
   const [chapters, setChapters] = useState([]);
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -66,6 +81,7 @@ export function useHadithChapters(bookSlug) {
         setBook(response.book);
       }
       setChapters((prev) => {
+        if (!cursor) return response.chapters || [];
         const existingIds = new Set(prev.map((c) => c.id));
         const newChapters = (response.chapters || []).filter((c) => !existingIds.has(c.id));
         return [...prev, ...newChapters];
@@ -86,7 +102,7 @@ export function useHadithChapters(bookSlug) {
     setBook(null);
     setNextCursor(null);
     fetchChapters(null);
-  }, [bookSlug]);
+  }, [bookSlug, siteLang]);
 
   const loadMore = () => {
     if (nextCursor && !loading && !loadingMore) {
@@ -98,6 +114,7 @@ export function useHadithChapters(bookSlug) {
 }
 
 export function useHadithList(bookSlug, chapterSlug) {
+  const siteLang = useSiteLang();
   const [hadiths, setHadiths] = useState([]);
   const [book, setBook] = useState(null);
   const [chapter, setChapter] = useState(null);
@@ -138,7 +155,7 @@ export function useHadithList(bookSlug, chapterSlug) {
     setChapter(null);
     setNextCursor(null);
     fetchHadiths(null);
-  }, [bookSlug, chapterSlug]);
+  }, [bookSlug, chapterSlug, siteLang]);
 
   const loadMore = () => {
     if (nextCursor && !loading && !loadingMore) {
@@ -150,6 +167,7 @@ export function useHadithList(bookSlug, chapterSlug) {
 }
 
 export function useHadithSingle(bookSlug, hadithNumber) {
+  const siteLang = useSiteLang();
   const [hadith, setHadith] = useState(null);
   const [book, setBook] = useState(null);
   const [chapter, setChapter] = useState(null);
@@ -173,12 +191,13 @@ export function useHadithSingle(bookSlug, hadithNumber) {
       }
     };
     fetchSingle();
-  }, [bookSlug, hadithNumber]);
+  }, [bookSlug, hadithNumber, siteLang]);
 
   return { hadith, book, chapter, loading, error };
 }
 
 export function useHadithChaptersMinimal(bookSlug) {
+  const siteLang = useSiteLang();
   const [chapters, setChapters] = useState([]);
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -200,7 +219,7 @@ export function useHadithChaptersMinimal(bookSlug) {
       }
     };
     fetchMinimal();
-  }, [bookSlug]);
+  }, [bookSlug, siteLang]);
 
   return { book, chapters, loading, error };
 }

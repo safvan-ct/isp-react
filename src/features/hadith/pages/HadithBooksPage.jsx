@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHadithBooks } from "../hooks/useHadith";
+import { getSiteLanguage } from "../../../services/siteLanguage";
 
 export default function HadithBooksPage() {
 	const { books, loading, loadingMore, nextCursor, loadMore, error } =
@@ -106,20 +107,29 @@ export default function HadithBooksPage() {
 		}).length;
 	};
 
+	const getBookTrans = (b) => {
+		const siteLang = getSiteLanguage();
+		return (
+			b.translations?.find((t) => t.lang === siteLang) ||
+			b.translations?.find((t) => t.lang === "en") ||
+			b.translations?.[0]
+		);
+	};
+
 	// Filtering Logic
 	const filteredBooks = books.filter((book) => {
-		const englishTrans = book.translations?.find((t) => t.lang === "en");
-		const enName = englishTrans?.name || "";
-		const enWriter = englishTrans?.writer || "";
-		const enDesc = englishTrans?.description || "";
+		const trans = getBookTrans(book);
+		const name = book.translation || book.title || trans?.name || book.name || "";
+		const writer = trans?.writer || book.writer || "";
+		const desc = trans?.description || book.description || "";
 		const statusText = getClassification(book.status);
 
 		const term = searchTerm.toLowerCase();
 		const matchesSearch =
 			book.name.toLowerCase().includes(term) || // Arabic name
-			enName.toLowerCase().includes(term) ||
-			enWriter.toLowerCase().includes(term) ||
-			enDesc.toLowerCase().includes(term) ||
+			name.toLowerCase().includes(term) ||
+			writer.toLowerCase().includes(term) ||
+			desc.toLowerCase().includes(term) ||
 			statusText.toLowerCase().includes(term);
 
 		const bookGroup = book.group?.toLowerCase() || "";
@@ -234,11 +244,9 @@ export default function HadithBooksPage() {
 						) : (
 							<div className="row g-4" id="hadithBookList">
 								{filteredBooks.map((book) => {
-									const englishTrans = book.translations?.find(
-										(t) => t.lang === "en",
-									);
-									const bookName = englishTrans?.name || book.name;
-									const bookDesc = englishTrans?.description || "";
+									const trans = getBookTrans(book);
+									const bookName = book.translation || book.title || trans?.name || book.name;
+									const bookDesc = trans?.description || book.description || "";
 									const chapterText = book.chapter_count
 										? `${book.chapter_count} Chapters`
 										: "Foundational";

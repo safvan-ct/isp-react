@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useHadithChapters } from "../hooks/useHadith";
 import { searchHadithChapters, getHadithByNumber } from "../services/hadithApi";
+import { getSiteLanguage } from "../../../services/siteLanguage";
 
 export default function HadithChaptersPage() {
 	const { bookId } = useParams(); // Holds the book slug, e.g. "sahih-bukhari"
@@ -73,12 +74,33 @@ export default function HadithChaptersPage() {
 	};
 
 	const getArabic = (h) => h?.text || "";
-	const getTranslation = (h) =>
-		h?.translations?.find((t) => t.lang === "en")?.text || "";
-	const getNarrator = (h) =>
-		h?.translations?.find((t) => t.lang === "en")?.narrator || "";
-	const getGrade = (h) =>
-		h?.translations?.find((t) => t.lang === "en")?.status || h?.status || "";
+	const getTranslation = (h) => {
+		const siteLang = getSiteLanguage();
+		return (
+			h?.translations?.find((t) => t.lang === siteLang)?.text ||
+			h?.translations?.find((t) => t.lang === "en")?.text ||
+			h?.translations?.[0]?.text ||
+			""
+		);
+	};
+	const getNarrator = (h) => {
+		const siteLang = getSiteLanguage();
+		return (
+			h?.translations?.find((t) => t.lang === siteLang)?.narrator ||
+			h?.translations?.find((t) => t.lang === "en")?.narrator ||
+			h?.translations?.[0]?.narrator ||
+			""
+		);
+	};
+	const getGrade = (h) => {
+		const siteLang = getSiteLanguage();
+		return (
+			h?.translations?.find((t) => t.lang === siteLang)?.status ||
+			h?.translations?.find((t) => t.lang === "en")?.status ||
+			h?.status ||
+			""
+		);
+	};
 	const getHadithNum = (h) => h?.hadith_number ?? h?.id;
 
 	const handleModalLangChange = async (lang) => {
@@ -224,10 +246,19 @@ export default function HadithChaptersPage() {
 		);
 	}
 
-	const englishBookTrans = book.translations?.find((t) => t.lang === "en");
-	const bookName = englishBookTrans?.name || book.name;
-	const bookDesc = englishBookTrans?.description || "";
-	const bookWriter = englishBookTrans?.writer || book.writer;
+	const siteLang = getSiteLanguage();
+	const bookTrans =
+		book?.translations?.find((t) => t.lang === siteLang) ||
+		book?.translations?.find((t) => t.lang === "en") ||
+		book?.translations?.[0];
+	const bookName =
+		book?.translation ||
+		book?.title ||
+		bookTrans?.name ||
+		book?.name ||
+		"Hadith Collection";
+	const bookDesc = bookTrans?.description || book.description || "";
+	const bookWriter = bookTrans?.writer || book.writer;
 
 	return (
 		<div style={{ backgroundColor: "var(--desert-sand)", minHeight: "80vh" }}>
@@ -366,10 +397,14 @@ export default function HadithChaptersPage() {
 						{displayedChapters.map((chapter) => {
 							const chapterNum = chapter.chapter_number || chapter.id;
 							const formattedNum = chapterNum.toString().padStart(2, "0");
+							const chapTrans =
+								chapter.translations?.find((t) => t.lang === siteLang) ||
+								chapter.translations?.find((t) => t.lang === "en") ||
+								chapter.translations?.[0];
 							const chapterName =
 								chapter.translation ||
 								chapter.title ||
-								chapter.translations?.find((t) => t.lang === "en")?.name ||
+								chapTrans?.name ||
 								chapter.name;
 
 							return (
@@ -579,25 +614,22 @@ export default function HadithChaptersPage() {
 								)}
 
 								{/* Translation */}
-								<div
-									className="hadith-translation fw-medium mb-3"
-									style={{ fontSize: "14px", textAlign: "justify" }}
-								>
-									{isTranslatingModal ? (
-										<span className="placeholder-glow d-block">
-											<span className="placeholder col-12 mb-1"></span>
-											<span className="placeholder col-10 mb-1"></span>
-											<span className="placeholder col-8"></span>
-										</span>
-									) : (
-										modalTranslation ||
-										getTranslation(singleHadithData.hadith) || (
-											<span className="text-muted fst-italic">
-												Translation not available.
+								{(modalTranslation || getTranslation(singleHadithData.hadith) || isTranslatingModal) ? (
+									<div
+										className="hadith-translation fw-medium mb-3"
+										style={{ fontSize: "14px", textAlign: "justify" }}
+									>
+										{isTranslatingModal ? (
+											<span className="placeholder-glow d-block">
+												<span className="placeholder col-12 mb-1"></span>
+												<span className="placeholder col-10 mb-1"></span>
+												<span className="placeholder col-8"></span>
 											</span>
-										)
-									)}
-								</div>
+										) : (
+											modalTranslation || getTranslation(singleHadithData.hadith)
+										)}
+									</div>
+								) : null}
 							</div>
 
 							{/* Modal Footer */}
