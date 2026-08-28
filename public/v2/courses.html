@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Courses & Learning Tracks | Al-Athar Islamic Portal</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <!-- Google Fonts: Amiri & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+        <!-- Custom Style CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-desert sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <div class="brand-icon">
+                    <i class="bi bi-book-half"></i>
+                </div>
+                <div>
+                    <span class="fs-4 fw-bold tracking-wide" style="color: var(--desert-night);">Al-Athar</span>
+                    <span class="d-block text-muted small"
+                        style="font-size: 0.65rem; letter-spacing: 1px; margin-top: -3px;">ISLAMIC STUDY PORTAL</span>
+                </div>
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navContent">
+                <i class="bi bi-list fs-2 text-dark"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-3">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Quran & Tafsir</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Hadith Library</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Courses & Tracks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Maktaba</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="#" class="btn btn-sm btn-desert-outline px-3">Student Portal</a>
+                    <a href="#" class="btn btn-sm btn-desert-primary px-3">Enroll Free</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Main Content -->
+    <main class="container py-4">
+
+        <!-- Header Banner -->
+        <section class="courses-header-banner mb-5 shadow-sm">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7">
+                    <span class="badge bg-warning text-dark mb-2 px-3 py-1 fw-bold"
+                        style="font-size: 0.75rem;">STRUCTURED CURRICULUMS • QUALIFIED SCHOLARS</span>
+                    <h1 class="display-6 fw-bold mb-3">Sacred Knowledge & Learning Tracks</h1>
+                    <p class="mb-0 opacity-75 lead" style="font-size: 1.05rem;">
+                        From fundamental creed and Islamic history to prophetic character and legal jurisprudence,
+                        embark on a progressive journey guided by classical manuscripts and traditional scholarship.
+                    </p>
+                </div>
+                <div class="col-lg-5 text-lg-end">
+                    <div class="d-flex flex-column gap-2 align-items-lg-end">
+                        <div class="d-flex align-items-center gap-3 bg-dark bg-opacity-50 p-3 rounded-3 border border-secondary"
+                            style="max-width: 320px;">
+                            <i class="bi bi-award-fill text-warning fs-2"></i>
+                            <div class="text-start">
+                                <h6 class="fw-bold mb-0 text-white">Ijazah & Certifications</h6>
+                                <small class="text-white-50">Verified completion tracks</small>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3 bg-dark bg-opacity-50 p-3 rounded-3 border border-secondary"
+                            style="max-width: 320px;">
+                            <i class="bi bi-person-video3 text-warning fs-2"></i>
+                            <div class="text-start">
+                                <h6 class="fw-bold mb-0 text-white">Live Scholar Q&A</h6>
+                                <small class="text-white-50">Interactive weekly sessions</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Discipline Filters -->
+        <div class="row align-items-center g-3 mb-4">
+            <div class="col-lg-5">
+                <div class="search-input-group d-flex align-items-center">
+                    <i class="bi bi-search text-muted ms-2 me-2"></i>
+                    <input type="text" id="courseSearch" class="form-control"
+                        placeholder="Search course by topic, text, or scholar..." />
+                    <button class="btn btn-sm text-white px-3 fw-bold"
+                        style="background-color: var(--desert-terracotta); border-radius: 10px;">Search</button>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="d-flex gap-2 overflow-auto pb-1 justify-content-lg-end">
+                    <button class="filter-pill-btn active">All Courses (12)</button>
+                    <button class="filter-pill-btn">Fundamentals & Aqeedah</button>
+                    <button class="filter-pill-btn">History (Tarikh)</button>
+                    <button class="filter-pill-btn">Adab & Akhlaq</button>
+                    <button class="filter-pill-btn">Judicial Laws (Fiqh)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spotlight / Featured Intensive Course -->
+        <div class="featured-program-card mb-5 shadow-sm">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-8">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <span class="badge" style="background-color: var(--desert-terracotta); color: #fff;">Featured
+                            Diploma</span>
+                        <span class="badge bg-outline-dark border text-dark">Enrollment Closing Soon</span>
+                    </div>
+                    <h3 class="fw-bold mb-2">Usul al-Fiqh: Principles of Islamic Jurisprudence & Legal Maxims</h3>
+                    <p class="text-muted mb-3">
+                        An in-depth exploration of how classical jurists derived rulings from primary sources (Quran &
+                        Sunnah), examining consensus (Ijma'), analogical deduction (Qiyas), and legal maxims (Al-Qawa'id
+                        al-Fiqhiyyah).
+                    </p>
+                    <div class="d-flex flex-wrap align-items-center gap-4 text-muted small">
+                        <span><i class="bi bi-person me-1" style="color: var(--desert-terracotta);"></i> Instructor:
+                            <strong>Shaykh Dr. Tariq Al-Mansoor</strong></span>
+                        <span><i class="bi bi-calendar3 me-1" style="color: var(--desert-terracotta);"></i> Duration:
+                            <strong>12 Weeks</strong></span>
+                        <span><i class="bi bi-clock me-1" style="color: var(--desert-terracotta);"></i> Effort:
+                            <strong>3 hrs/week</strong></span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-lg-end border-lg-start ps-lg-4">
+                    <div class="font-quranic fs-2 text-dark mb-1" dir="rtl">أُصُولُ الفِقْهِ وَالقَوَاعِدُ</div>
+                    <p class="small text-muted mb-3">Includes syllabus PDF & manuscript notes</p>
+                    <a href="#" class="btn btn-desert-primary w-100 py-2">
+                        <i class="bi bi-journal-plus me-1"></i> Enroll in Course
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses Grid -->
+        <div class="row g-4" id="coursesList">
+
+            <!-- Course 1: Fundamentals of Islam -->
+            <div class="col-md-6 col-lg-4">
+                <div class="course-card">
+                    <div class="course-thumb-container">
+                        <span class="level-badge badge-beginner">Beginner</span>
+                        <div class="course-thumb-icon">
+                            <i class="bi bi-compass"></i>
+                        </div>
+                        <span class="course-arabic-tag">العَقِيدَةُ</span>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-meta">
+                            <span><i class="bi bi-clock me-1"></i> 8 Weeks</span>
+                            <span><i class="bi bi-journal-text me-1"></i> 16 Modules</span>
+                        </div>
+                        <h5 class="fw-bold mb-2">Fundamentals of Islam & Essential Creed</h5>
+                        <p class="small text-muted mb-4 flex-grow-1">
+                            Comprehensive study of the Pillars of Faith (Arkan al-Iman), classical Tahawiyyah
+                            principles, and core Islamic worldview essentials.
+                        </p>
+
+                        <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                            style="border-color: var(--desert-dune) !important;">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="instructor-avatar">AM</div>
+                                <small class="text-muted fw-semibold">Ustadha Amina</small>
+                            </div>
+                            <a href="course-ds.html" class="btn btn-desert-outline btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 2: History & Civilizations -->
+            <div class="col-md-6 col-lg-4">
+                <div class="course-card">
+                    <div class="course-thumb-container">
+                        <span class="level-badge badge-intermediate">Intermediate</span>
+                        <div class="course-thumb-icon">
+                            <i class="bi bi-hourglass-split"></i>
+                        </div>
+                        <span class="course-arabic-tag">التَّارِيخُ</span>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-meta">
+                            <span><i class="bi bi-clock me-1"></i> 10 Weeks</span>
+                            <span><i class="bi bi-journal-text me-1"></i> 20 Modules</span>
+                        </div>
+                        <h5 class="fw-bold mb-2">History of Islamic Civilization: Madinah to Cordoba</h5>
+                        <p class="small text-muted mb-4 flex-grow-1">
+                            Chronological survey of the Rightly Guided Caliphs, Umayyad & Abbasid eras, scientific
+                            breakthroughs, and the Golden Age of Andalusia.
+                        </p>
+
+                        <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                            style="border-color: var(--desert-dune) !important;">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="instructor-avatar">HS</div>
+                                <small class="text-muted fw-semibold">Dr. Hassan Said</small>
+                            </div>
+                            <a href="#" class="btn btn-desert-outline btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 3: Adab & Akhlaq -->
+            <div class="col-md-6 col-lg-4">
+                <div class="course-card">
+                    <div class="course-thumb-container">
+                        <span class="level-badge badge-all-levels">All Levels</span>
+                        <div class="course-thumb-icon">
+                            <i class="bi bi-heart-pulse"></i>
+                        </div>
+                        <span class="course-arabic-tag">الأَدَبُ وَالأَخْلَاقُ</span>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-meta">
+                            <span><i class="bi bi-clock me-1"></i> 6 Weeks</span>
+                            <span><i class="bi bi-journal-text me-1"></i> 12 Modules</span>
+                        </div>
+                        <h5 class="fw-bold mb-2">Adab & Akhlaq: Prophetic Ethics & Character</h5>
+                        <p class="small text-muted mb-4 flex-grow-1">
+                            Purification of the spiritual heart (Tazkiyat al-Nafs), interpersonal etiquette, humility,
+                            and practical ethics based on Imam al-Ghazali’s works.
+                        </p>
+
+                        <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                            style="border-color: var(--desert-dune) !important;">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="instructor-avatar">ZA</div>
+                                <small class="text-muted fw-semibold">Shaykh Zayd Ali</small>
+                            </div>
+                            <a href="#" class="btn btn-desert-outline btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 4: Judicial Laws & Fiqh -->
+            <div class="col-md-6 col-lg-4">
+                <div class="course-card">
+                    <div class="course-thumb-container">
+                        <span class="level-badge badge-advanced">Advanced</span>
+                        <div class="course-thumb-icon">
+                            <i class="bi bi-bank"></i>
+                        </div>
+                        <span class="course-arabic-tag">الفِقْهُ وَالقَضَاءُ</span>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-meta">
+                            <span><i class="bi bi-clock me-1"></i> 12 Weeks</span>
+                            <span><i class="bi bi-journal-text me-1"></i> 24 Modules</span>
+                        </div>
+                        <h5 class="fw-bold mb-2">Islamic Judicial System & Commercial Law</h5>
+                        <p class="small text-muted mb-4 flex-grow-1">
+                            Comparative study of classical court procedures (Qada'), evidence evaluation, contract law
+                            (Mu'amalat), and contemporary financial ethics.
+                        </p>
+
+                        <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                            style="border-color: var(--desert-dune) !important;">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="instructor-avatar">TM</div>
+                                <small class="text-muted fw-semibold">Dr. Tariq Mansoor</small>
+                            </div>
+                            <a href="#" class="btn btn-desert-outline btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 5: Prophetic Biography (Seerah) -->
+            <div class="col-md-6 col-lg-4">
+                <div class="course-card">
+                    <div class="course-thumb-container">
+                        <span class="level-badge badge-beginner">Beginner</span>
+                        <div class="course-thumb-icon">
+                            <i class="bi bi-stars"></i>
+                        </div>
+                        <span class="course-arabic-tag">السِّيرَةُ النَّبَوِيَّةُ</span>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-meta">
+                            <span><i class="bi bi-clock me-1"></i> 8 Weeks</span>
+                            <span><i class="bi bi-journal-text me-1"></i> 16 Modules</span>
+                        </div>
+                        <h5 class="fw-bold mb-2">Seerah: Analytical Study of the Life of the Prophet</h5>
+                        <p class="small text-muted mb-4 flex-grow-1">
+                            Lessons from the Meccan and Medinan periods, strategic leadership, societal transformation,
+                            and character study (Shama'il).
+                        </p>
+
+                        <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                            style="border-color: var(--desert-dune) !important;">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="instructor-avatar">FK</div>
+                                <small class="text-muted fw-semibold">Shaykh Farooq Khan</small>
+                            </div>
+                            <a href="#" class="btn btn-desert-outline btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 6: Ulum al-Quran & Tafsir Exegesis -->
+            <div class="col-md-6 col-lg-4">
+                <div class="course-card">
+                    <div class="course-thumb-container">
+                        <span class="level-badge badge-intermediate">Intermediate</span>
+                        <div class="course-thumb-icon">
+                            <i class="bi bi-book-half"></i>
+                        </div>
+                        <span class="course-arabic-tag">عُلُومُ القُرْآنِ</span>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-meta">
+                            <span><i class="bi bi-clock me-1"></i> 9 Weeks</span>
+                            <span><i class="bi bi-journal-text me-1"></i> 18 Modules</span>
+                        </div>
+                        <h5 class="fw-bold mb-2">Ulum al-Quran: Methodology of Exegesis (Tafsir)</h5>
+                        <p class="small text-muted mb-4 flex-grow-1">
+                            History of Quranic compilation, Asbab al-Nuzul (revelation contexts), abrogation (Naskh),
+                            and comparing classical Tafsir schools.
+                        </p>
+
+                        <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                            style="border-color: var(--desert-dune) !important;">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="instructor-avatar">MA</div>
+                                <small class="text-muted fw-semibold">Dr. Maryam Al-Attas</small>
+                            </div>
+                            <a href="#" class="btn btn-desert-outline btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center small opacity-75">
+            <p class="mb-1">Al-Athar Academy & Courses Portal</p>
+            <p class="mb-0">Authentic curriculums, certified scholars, and traditional sacred knowledge tracks.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

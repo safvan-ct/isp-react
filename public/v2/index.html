@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Al-Athar | Quranic & Islamic Knowledge Portal</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <!-- Google Fonts: Amiri (Arabic/Quranic flair) & Plus Jakarta Sans (Clean Modern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+        <!-- Custom Style CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- Top Announcement Strip -->
+    <div class="py-2 text-center text-white small" style="background-color: var(--desert-night);">
+        <i class="bi bi-moon-stars me-1 text-warning"></i> Ramadan Intensive & Tajweed Batches Now Open •
+        <a href="#courses" class="text-decoration-underline text-white ms-1">Explore Programs</a>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-desert sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <div class="brand-icon">
+                    <i class="bi bi-book-half"></i>
+                </div>
+                <div>
+                    <span class="fs-4 fw-bold tracking-wide" style="color: var(--desert-night);">Al-Athar</span>
+                    <span class="d-block text-muted small"
+                        style="font-size: 0.65rem; letter-spacing: 1px; margin-top: -3px;">ISLAMIC STUDY PORTAL</span>
+                </div>
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navContent">
+                <i class="bi bi-list fs-2 text-dark"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-3">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="quran-cs.html">Tafsir & Quran</a></li>
+                    <li class="nav-item"><a class="nav-link" href="hadees-bk.html">Maktaba (Library)</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="#login" class="btn btn-desert-outline btn-sm px-3">Sign In</a>
+                    <a href="#register" class="btn btn-desert-primary btn-sm px-3">Join Free</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <span class="badge badge-desert mb-3">
+                        <i class="bi bi-stars me-1"></i> Authentic • Classical • Accessible
+                    </span>
+                    <h1 class="display-4 fw-bold lh-sm mb-3">
+                        Illuminating Minds With The <span style="color: var(--desert-terracotta);">Timeless Word</span>
+                    </h1>
+                    <p class="lead mb-4" style="color: var(--desert-muted); font-size: 1.1rem;">
+                        Delve into Quranic sciences, authentic Hadith commentary, and classical Arabic guided by
+                        traditional scholarship in a modern digital space.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#courses" class="btn btn-desert-primary">
+                            <i class="bi bi-compass me-1"></i> Start Learning
+                        </a>
+                        <a href="#quran" class="btn btn-desert-outline">
+                            <i class="bi bi-play-circle me-1"></i> Read Quran Daily
+                        </a>
+                    </div>
+
+                    <!-- Quick Stat Counters -->
+                    <div class="row mt-5 pt-3 border-top g-3" style="border-color: var(--desert-dune) !important;">
+                        <div class="col-4">
+                            <h4 class="fw-bold mb-0">114</h4>
+                            <small class="text-muted">Surah Tafsirs</small>
+                        </div>
+                        <div class="col-4">
+                            <h4 class="fw-bold mb-0">45+</h4>
+                            <small class="text-muted">Guided Tracks</small>
+                        </div>
+                        <div class="col-4">
+                            <h4 class="fw-bold mb-0">12k+</h4>
+                            <small class="text-muted">Students</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Ayah Card -->
+                <div class="col-lg-6">
+                    <div class="verse-card p-4 p-md-5 shadow-lg">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <span class="text-warning small text-uppercase tracking-wider fw-bold">
+                                <i class="bi bi-bookmark-star me-1"></i> Ayah of the Day
+                            </span>
+                            <span class="badge bg-dark border border-secondary text-secondary">Surah Taha: 114</span>
+                        </div>
+
+                        <!-- Arabic Calligraphy Text -->
+                        <p class="font-quranic fs-2 text-end text-light lh-lg mb-4" dir="rtl">
+                            رَّبِّ زِدْنِي عِلْمًا
+                        </p>
+
+                        <blockquote class="blockquote text-light fs-6 fst-italic mb-3 opacity-75">
+                            "And say: 'My Lord, increase me in knowledge.'"
+                        </blockquote>
+
+                        <div class="pt-3 border-top border-secondary d-flex justify-content-between align-items-center">
+                            <small class="text-muted">Recitation by Mishary Rashid</small>
+                            <button class="btn btn-sm btn-outline-warning rounded-pill px-3">
+                                <i class="bi bi-volume-up-fill me-1"></i> Listen
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Core Study Tracks (Moorish Arch Cards) -->
+    <section class="py-5" id="courses">
+        <div class="container">
+            <div class="text-center max-w-lg mx-auto mb-5">
+                <span class="text-uppercase fw-bold small"
+                    style="color: var(--desert-terracotta); letter-spacing: 1px;">Structured Paths</span>
+                <h2 class="display-6 fw-bold mt-1">Disciplines of Sacred Knowledge</h2>
+                <p class="text-muted">Curated curriculums spanning foundational basics to advanced classical texts.</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Track 1 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="arch-card h-100">
+                        <div class="arch-icon-wrap">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Tajweed & Tilawah</h5>
+                        <p class="text-muted small mb-4">Master Quranic phonetics, makharij, and rules of recitation
+                            with live corrections.</p>
+                        <a href="track.html" class="btn btn-sm btn-desert-outline w-100">Explore Track</a>
+                    </div>
+                </div>
+
+                <!-- Track 2 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="arch-card h-100">
+                        <div class="arch-icon-wrap">
+                            <i class="bi bi-chat-square-quote"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Classical Tafsir</h5>
+                        <p class="text-muted small mb-4">Historical contexts, linguistic depths, and practical
+                            reflections of each Surah.</p>
+                        <a href="#" class="btn btn-sm btn-desert-outline w-100">Explore Track</a>
+                    </div>
+                </div>
+
+                <!-- Track 3 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="arch-card h-100">
+                        <div class="arch-icon-wrap">
+                            <i class="bi bi-translate"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Quranic Arabic</h5>
+                        <p class="text-muted small mb-4">Grammar (Nahw) and morphology (Sarf) geared directly to
+                            comprehending the Revelation.</p>
+                        <a href="#" class="btn btn-sm btn-desert-outline w-100">Explore Track</a>
+                    </div>
+                </div>
+
+                <!-- Track 4 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="arch-card h-100">
+                        <div class="arch-icon-wrap">
+                            <i class="bi bi-journal-text"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Seerah & Hadith</h5>
+                        <p class="text-muted small mb-4">Study the Prophetic character and authentic traditions (Nawawi
+                            40, Riyad us-Saliheen).</p>
+                        <a href="#" class="btn btn-sm btn-desert-outline w-100">Explore Track</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Student Toolkit Section -->
+    <section class="py-5" style="background-color: var(--desert-dune);">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-5">
+                    <span class="badge bg-white text-dark mb-2">Daily Companion</span>
+                    <h3 class="fw-bold">Your Daily Spiritual Cadence</h3>
+                    <p class="text-muted">Integrate steady, manageable milestones into your daily routine. Consistent
+                        steps turn learning into lifelong habit.</p>
+                    <div class="d-flex flex-column gap-2 mt-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-check2-circle fs-5" style="color: var(--desert-terracotta);"></i>
+                            <span class="fw-medium">Audio recitation speed control and repeat loops</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-check2-circle fs-5" style="color: var(--desert-terracotta);"></i>
+                            <span class="fw-medium">Downloadable PDF summaries with vocabulary roots</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-check2-circle fs-5" style="color: var(--desert-terracotta);"></i>
+                            <span class="fw-medium">Ad-free Quran reader with line-by-line notes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="daily-tracker-card shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+                            <div>
+                                <h6 class="fw-bold mb-0">Daily Reflection Streak</h6>
+                                <small class="text-muted">Track your reading & memorization progress</small>
+                            </div>
+                            <span class="badge bg-warning text-dark"><i class="bi bi-fire me-1"></i> 7 Days
+                                Active</span>
+                        </div>
+
+                        <!-- Reading Module Mock -->
+                        <div class="p-3 rounded mb-3" style="background-color: var(--desert-sand);">
+                            <div class="d-flex justify-content-between small text-muted mb-1">
+                                <span>Current Juz: <strong>Juz 30 ('Amma)</strong></span>
+                                <span>78% Complete</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar" role="progressbar"
+                                    style="width: 78%; background-color: var(--desert-terracotta);" aria-valuenow="78"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="small text-muted"><i class="bi bi-clock me-1"></i> Next live session: Today,
+                                8:00 PM</span>
+                            <button class="btn btn-sm btn-desert-primary">Open Reader</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="brand-icon" style="background: var(--desert-gold);">
+                            <i class="bi bi-book-half"></i>
+                        </div>
+                        <span class="fs-4 fw-bold text-white">Al-Athar</span>
+                    </div>
+                    <p class="small opacity-75">
+                        A dedicated virtual sanctuary for students of Islamic knowledge, fostering authentic
+                        comprehension with clarity and tradition.
+                    </p>
+                </div>
+                <div class="col-6 col-lg-2 offset-lg-2">
+                    <h6 class="text-white fw-bold mb-3">Portals</h6>
+                    <ul class="list-unstyled small d-flex flex-column gap-2">
+                        <li><a href="#">Quran Reader</a></li>
+                        <li><a href="#">Hadith Index</a></li>
+                        <li><a href="#">Arabic Grammar</a></li>
+                        <li><a href="#">Class Library</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="text-white fw-bold mb-3">Community</h6>
+                    <ul class="list-unstyled small d-flex flex-column gap-2">
+                        <li><a href="#">Discussion Forum</a></li>
+                        <li><a href="#">Live Halawat</a></li>
+                        <li><a href="#">Scholar Guidance</a></li>
+                        <li><a href="#">Mobile App</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="text-white fw-bold mb-3">Languages</h6>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown">
+                            English (US)
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="#">English</a></li>
+                            <li><a class="dropdown-item" href="#">العربية (Arabic)</a></li>
+                            <li><a class="dropdown-item" href="#">Bahasa Indonesia</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="border-top border-secondary pt-3 d-flex flex-column flex-sm-row justify-content-between align-items-center small opacity-50">
+                <p class="mb-0">© 2026 Al-Athar Portal. All rights reserved.</p>
+                <div class="d-flex gap-3 mt-2 mt-sm-0">
+                    <a href="#" class="text-white"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="text-white"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1937 @@
+/* =======================================================
+   AL-ATHAR CORE GLOBAL STYLES (from index.html)
+   ======================================================= */
+/* =======================================================
+       ARABIAN DESERT COLOR PALETTE & GLOBAL VARIABLES
+       ======================================================= */
+:root {
+    --desert-sand: #F7F3EB;
+    /* Light warm parchment base */
+    --desert-sand-card: #FFFFFF;
+    --desert-dune: #EADBC8;
+    /* Subtle golden beige */
+    --desert-gold: #C29653;
+    /* Warm sunlit brass/gold */
+    --desert-gold-hover: #A87D3B;
+    --desert-terracotta: #A35839;
+    /* Sun-baked clay / accent */
+    --desert-night: #1F1B16;
+    /* Deep midnight charcoal */
+    --desert-muted: #6B6255;
+    /* Warm readable body text */
+    --font-quranic: 'Amiri', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background-color: var(--desert-sand);
+    color: var(--desert-night);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+.font-quranic {
+    font-family: var(--font-quranic);
+}
+
+/* =======================================================
+       HEADER / NAVBAR
+       ======================================================= */
+.navbar-desert {
+    background: rgba(247, 243, 235, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--desert-dune);
+}
+
+.brand-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--desert-gold);
+    color: #fff;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.nav-link {
+    color: var(--desert-night);
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--desert-terracotta);
+}
+
+/* =======================================================
+       HERO SECTION
+       ======================================================= */
+.hero-section {
+    padding: 5rem 0 4rem 0;
+    position: relative;
+}
+
+.badge-desert {
+    background-color: var(--desert-dune);
+    color: var(--desert-terracotta);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+}
+
+.btn-desert-primary {
+    background-color: var(--desert-terracotta);
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    padding: 0.8rem 1.8rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-desert-primary:hover {
+    background-color: #8c472a;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(163, 88, 57, 0.25);
+}
+
+.btn-desert-outline {
+    border: 1.5px solid var(--desert-gold);
+    color: var(--desert-night);
+    font-weight: 600;
+    padding: 0.8rem 1.8rem;
+    border-radius: 10px;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-desert-outline:hover {
+    background-color: var(--desert-gold);
+    color: #fff;
+    border-color: var(--desert-gold);
+}
+
+/* Quran Quote / Surah Highlight Banner */
+.hero-section .verse-card {
+    background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
+    color: var(--desert-sand);
+    border-radius: 20px;
+    border: 1px solid rgba(194, 150, 83, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section .verse-card::after {
+    content: "۞";
+    position: absolute;
+    right: -20px;
+    bottom: -40px;
+    font-size: 10rem;
+    color: rgba(194, 150, 83, 0.05);
+    font-family: var(--font-quranic);
+}
+
+/* =======================================================
+       ISLAMIC ARCH CARDS & FEATURES
+       ======================================================= */
+.arch-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 36px 36px 16px 16px;
+    /* Moorish arch silhouette curve */
+    padding: 2.2rem 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.arch-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--desert-gold);
+    box-shadow: 0 12px 24px rgba(31, 27, 22, 0.06);
+}
+
+.arch-icon-wrap {
+    width: 60px;
+    height: 60px;
+    background: rgba(194, 150, 83, 0.12);
+    color: var(--desert-terracotta);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    border-radius: 50%;
+    margin-bottom: 1.25rem;
+}
+
+/* Daily Hadith / Reflection Pill */
+.daily-tracker-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+/* Footer */
+footer {
+    background-color: var(--desert-night);
+    color: var(--desert-dune);
+    padding: 4rem 0 2rem 0;
+}
+
+footer a {
+    color: var(--desert-dune);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: var(--desert-gold);
+}
+
+
+/* =======================================================
+   COURSES PAGE-SPECIFIC STYLES
+   ======================================================= */
+/* Navbar */
+.nav-link:hover,
+        .nav-link.active {
+    color: var(--desert-terracotta);
+}
+
+/* Header Banner */
+.courses-header-banner {
+    background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
+    color: var(--desert-sand);
+    border-radius: 24px;
+    padding: 3.5rem 2rem;
+    border: 1px solid rgba(194, 150, 83, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.courses-header-banner::after {
+    content: "العلم";
+    position: absolute;
+    right: 20px;
+    bottom: -30px;
+    font-size: 9rem;
+    color: rgba(194, 150, 83, 0.05);
+    font-family: var(--font-quranic);
+    pointer-events: none;
+}
+
+/* Search & Filter Bar */
+.search-input-group {
+    background: #FFFFFF;
+    border-radius: 14px;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid var(--desert-dune);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.search-input-group input {
+    border: none;
+    box-shadow: none;
+    font-size: 0.95rem;
+}
+
+.search-input-group input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.filter-pill-btn {
+    border: 1px solid var(--desert-dune);
+    background: #FFFFFF;
+    color: var(--desert-night);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.45rem 1.1rem;
+    border-radius: 30px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.filter-pill-btn.active,
+        .filter-pill-btn:hover {
+    background: var(--desert-terracotta);
+    color: #FFFFFF;
+    border-color: var(--desert-terracotta);
+}
+
+/* Course Card (Moorish Islamic Curve & Arch Theme) */
+.course-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 28px 28px 18px 18px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+
+.course-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--desert-gold);
+    box-shadow: 0 14px 28px rgba(31, 27, 22, 0.09);
+}
+
+.course-thumb-container {
+    height: 180px;
+    background: linear-gradient(135deg, #2A241E 0%, #3D332B 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--desert-dune);
+}
+
+.course-thumb-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(194, 150, 83, 0.2);
+    border: 1px solid rgba(194, 150, 83, 0.4);
+    color: var(--desert-gold);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    transition: transform 0.3s ease;
+}
+
+.course-card:hover .course-thumb-icon {
+    transform: scale(1.1) rotate(5deg);
+    background: var(--desert-terracotta);
+    color: #FFFFFF;
+    border-color: var(--desert-terracotta);
+}
+
+.level-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.3rem 0.75rem;
+    border-radius: 8px;
+}
+
+.badge-beginner {
+    background: rgba(46, 125, 50, 0.9);
+    color: #FFFFFF;
+}
+
+.badge-intermediate {
+    background: rgba(194, 150, 83, 0.95);
+    color: #FFFFFF;
+}
+
+.badge-advanced {
+    background: rgba(163, 88, 57, 0.95);
+    color: #FFFFFF;
+}
+
+.badge-all-levels {
+    background: rgba(31, 27, 22, 0.85);
+    color: var(--desert-dune);
+}
+
+.course-arabic-tag {
+    position: absolute;
+    bottom: 12px;
+    right: 15px;
+    font-family: var(--font-quranic);
+    font-size: 1.4rem;
+    color: rgba(247, 243, 235, 0.85);
+}
+
+.course-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.course-meta {
+    font-size: 0.8rem;
+    color: var(--desert-muted);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.instructor-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--desert-dune);
+    color: var(--desert-terracotta);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* Buttons */
+/* Featured Program Spotlight Box */
+.featured-program-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 24px;
+    padding: 2.2rem;
+    position: relative;
+    background-image: radial-gradient(var(--desert-dune) 0.8px, transparent 0.8px);
+    background-size: 18px 18px;
+}
+
+/* Footer */
+
+/* =======================================================
+   COURSE-DS PAGE-SPECIFIC STYLES
+   ======================================================= */
+/* Navbar */
+/* Breadcrumbs */
+.breadcrumb-item a {
+    color: var(--desert-muted);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--desert-terracotta);
+}
+
+.breadcrumb-item.active {
+    color: var(--desert-terracotta);
+    font-weight: 600;
+}
+
+/* Course Hero Banner */
+.course-hero-banner {
+    background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
+    color: var(--desert-sand);
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    border: 1px solid rgba(194, 150, 83, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.course-hero-banner::after {
+    content: "أُصُولُ الفِقْهِ";
+    position: absolute;
+    right: 20px;
+    bottom: -30px;
+    font-size: 8rem;
+    color: rgba(194, 150, 83, 0.05);
+    font-family: var(--font-quranic);
+    pointer-events: none;
+}
+
+/* Sticky Navigation Bar for Course Sections */
+.sticky-course-nav {
+    position: sticky;
+    top: 73px;
+    z-index: 1020;
+    background: var(--desert-sand-card);
+    border-bottom: 1px solid var(--desert-dune);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.course-nav-link {
+    color: var(--desert-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.85rem 1.1rem;
+    text-decoration: none;
+    display: inline-block;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.course-nav-link:hover,
+        .course-nav-link.active {
+    color: var(--desert-terracotta);
+    border-bottom-color: var(--desert-terracotta);
+}
+
+/* Content Cards */
+.detail-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Learning Outcome Item */
+.outcome-box {
+    background: var(--desert-sand);
+    border: 1px solid var(--desert-dune);
+    border-radius: 14px;
+    padding: 1.2rem;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    gap: 0.85rem;
+}
+
+.outcome-icon {
+    width: 34px;
+    height: 34px;
+    background: rgba(163, 88, 57, 0.12);
+    color: var(--desert-terracotta);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+/* Curriculum Accordion Customization */
+.accordion-item {
+    background-color: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 14px !important;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.accordion-button {
+    background-color: var(--desert-sand);
+    color: var(--desert-night);
+    font-weight: 700;
+    padding: 1.25rem 1.5rem;
+    box-shadow: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: rgba(194, 150, 83, 0.12);
+    color: var(--desert-terracotta);
+}
+
+.accordion-button::after {
+    filter: sepia(100%) hue-rotate(350deg) saturate(300%);
+}
+
+.lesson-row {
+    padding: 0.9rem 1.25rem;
+    border-bottom: 1px solid var(--desert-sand);
+    display: flex;
+    align-items: center;
+    justify-content: justify-between;
+    transition: background 0.2s ease;
+}
+
+.lesson-row:last-child {
+    border-bottom: none;
+}
+
+.lesson-row:hover {
+    background-color: rgba(247, 243, 235, 0.6);
+}
+
+/* Scholar Profile Avatar & Badge */
+.scholar-avatar {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, var(--desert-terracotta), var(--desert-gold));
+    color: #fff;
+    font-size: 2.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 3px solid var(--desert-sand-card);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Sticky Sidebar Enrollment Box */
+.sticky-enroll-card {
+    position: sticky;
+    top: 140px;
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 12px 30px rgba(31, 27, 22, 0.06);
+}
+
+.video-preview-frame {
+    height: 190px;
+    background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--desert-sand);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.btn-play-preview {
+    width: 58px;
+    height: 58px;
+    background: var(--desert-terracotta);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 0 20px rgba(163, 88, 57, 0.5);
+    transition: transform 0.2s ease;
+}
+
+.btn-play-preview:hover {
+    transform: scale(1.1);
+    background: var(--desert-gold);
+}
+
+/* Buttons */
+/* Footer */
+
+/* =======================================================
+   HADEES-BK PAGE-SPECIFIC STYLES
+   ======================================================= */
+/* Navbar */
+/* Header Banner */
+.hadith-header-banner {
+    background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
+    color: var(--desert-sand);
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    border: 1px solid rgba(194, 150, 83, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.hadith-header-banner::after {
+    content: "الحديث";
+    position: absolute;
+    right: 25px;
+    bottom: -30px;
+    font-size: 8rem;
+    color: rgba(194, 150, 83, 0.05);
+    font-family: var(--font-quranic);
+    pointer-events: none;
+}
+
+.search-input-group {
+    background: #FFFFFF;
+    border-radius: 14px;
+    padding: 0.35rem 0.6rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Filter Pills */
+.filter-btn {
+    border: 1px solid var(--desert-dune);
+    background: #fff;
+    color: var(--desert-night);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.45rem 1.1rem;
+    border-radius: 30px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.filter-btn.active,
+        .filter-btn:hover {
+    background: var(--desert-terracotta);
+    color: #fff;
+    border-color: var(--desert-terracotta);
+}
+
+/* Hadith Book Card */
+.book-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 20px;
+    padding: 1.6rem;
+    transition: all 0.28s cubic-bezier(0.165, 0.84, 0.44, 1);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--desert-gold);
+    box-shadow: 0 12px 24px rgba(31, 27, 22, 0.08);
+    color: inherit;
+}
+
+/* Book Spine Geometric Emblem */
+.book-emblem {
+    width: 48px;
+    height: 48px;
+    background: rgba(194, 150, 83, 0.12);
+    border: 1px solid rgba(194, 150, 83, 0.3);
+    color: var(--desert-terracotta);
+    font-size: 1.3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    transition: all 0.25s ease;
+}
+
+.book-card:hover .book-emblem {
+    background: var(--desert-terracotta);
+    color: #FFFFFF;
+    border-color: var(--desert-terracotta);
+}
+
+/* Grade/Classification Badges */
+.classification-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.25rem 0.65rem;
+    border-radius: 8px;
+}
+
+.badge-sahih {
+    background: rgba(46, 125, 50, 0.12);
+    color: #2E7D32;
+}
+
+.badge-sunan {
+    background: rgba(194, 150, 83, 0.15);
+    color: #926A28;
+}
+
+.badge-compilation {
+    background: rgba(163, 88, 57, 0.15);
+    color: var(--desert-terracotta);
+}
+
+/* Daily Hadith Feature Card */
+.hadith-spotlight-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+    background-image: radial-gradient(var(--desert-dune) 0.8px, transparent 0.8px);
+    background-size: 18px 18px;
+}
+
+/* Custom Button */
+/* Footer */
+
+/* =======================================================
+   HADEES-CS PAGE-SPECIFIC STYLES
+   ======================================================= */
+/* Navbar */
+/* Breadcrumbs */
+/* Book Overview Banner */
+.book-header-banner {
+    background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
+    color: var(--desert-sand);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(194, 150, 83, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.book-header-banner::after {
+    content: "البخاري";
+    position: absolute;
+    right: 20px;
+    bottom: -30px;
+    font-size: 8rem;
+    color: rgba(194, 150, 83, 0.05);
+    font-family: var(--font-quranic);
+    pointer-events: none;
+}
+
+.stat-pill {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(194, 150, 83, 0.3);
+    border-radius: 12px;
+    padding: 0.5rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Search & Filter Bar */
+.search-input-group {
+    background: #FFFFFF;
+    border-radius: 14px;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid var(--desert-dune);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+/* Chapter (Kitab) Card */
+.chapter-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 18px;
+    padding: 1.4rem;
+    transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+}
+
+.chapter-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--desert-gold);
+    box-shadow: 0 10px 22px rgba(31, 27, 22, 0.08);
+    color: inherit;
+}
+
+.chapter-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: transparent;
+    border-radius: 18px 0 0 18px;
+    transition: background 0.2s ease;
+}
+
+.chapter-card:hover::before {
+    background: var(--desert-terracotta);
+}
+
+/* Geometric Star/Diamond Badge for Chapter Index */
+.chapter-number-badge {
+    width: 44px;
+    height: 44px;
+    background: var(--desert-sand);
+    border: 1px solid var(--desert-dune);
+    color: var(--desert-terracotta);
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    transform: rotate(45deg);
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+}
+
+.chapter-number-badge span {
+    transform: rotate(-45deg);
+}
+
+.chapter-card:hover .chapter-number-badge {
+    background: var(--desert-terracotta);
+    color: #FFFFFF;
+    border-color: var(--desert-terracotta);
+}
+
+.hadith-range-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: rgba(194, 150, 83, 0.12);
+    color: #8C6527;
+    border: 1px solid rgba(194, 150, 83, 0.25);
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+}
+
+.section-category-header {
+    color: var(--desert-terracotta);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-category-header::after {
+    content: "";
+    flex-grow: 1;
+    height: 1px;
+    background: var(--desert-dune);
+}
+
+/* Footer */
+
+/* =======================================================
+   HADEES-VS PAGE-SPECIFIC STYLES
+   ======================================================= */
+/* Navbar */
+/* Breadcrumbs */
+/* Secondary Sticky Reader Bar */
+.sticky-reader-bar {
+    position: sticky;
+    top: 73px;
+    z-index: 1020;
+    background: var(--desert-sand-card);
+    border-bottom: 1px solid var(--desert-dune);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.reader-btn {
+    background: var(--desert-sand);
+    border: 1px solid var(--desert-dune);
+    color: var(--desert-night);
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 0.4rem 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.reader-btn:hover {
+    background: var(--desert-gold);
+    color: #fff;
+    border-color: var(--desert-gold);
+}
+
+/* Header Banner */
+.chapter-banner {
+    background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
+    color: var(--desert-sand);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(194, 150, 83, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.chapter-banner::after {
+    content: "الإيمان";
+    position: absolute;
+    right: 20px;
+    bottom: -20px;
+    font-size: 8rem;
+    color: rgba(194, 150, 83, 0.05);
+    font-family: var(--font-quranic);
+    pointer-events: none;
+}
+
+/* Sub-Chapter / Bab Section Divider Card */
+.bab-header-card {
+    background: linear-gradient(90deg, rgba(194, 150, 83, 0.12) 0%, rgba(247, 243, 235, 0.5) 100%);
+    border: 1px solid var(--desert-dune);
+    border-left: 5px solid var(--desert-terracotta);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Hadith Card */
+.hadith-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 20px;
+    padding: 2rem 1.75rem;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.hadith-card:hover {
+    border-color: var(--desert-gold);
+    box-shadow: 0 8px 20px rgba(31, 27, 22, 0.05);
+}
+
+.hadith-card.highlighted {
+    border-left: 4px solid var(--desert-terracotta);
+    background: #FFFDF9;
+}
+
+/* Geometric Number Badge */
+.hadith-number-badge {
+    width: 44px;
+    height: 44px;
+    background: var(--desert-sand);
+    border: 1px solid var(--desert-dune);
+    color: var(--desert-terracotta);
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    transform: rotate(45deg);
+}
+
+.hadith-number-badge span {
+    transform: rotate(-45deg);
+}
+
+/* Chain of Narrators (Isnad) Styling */
+.isnad-pill {
+    background: rgba(194, 150, 83, 0.08);
+    border: 1px solid rgba(194, 150, 83, 0.25);
+    color: #8C6225;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.4rem 0.85rem;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* Grade Badge */
+.grade-badge-sahih {
+    background: rgba(46, 125, 50, 0.12);
+    color: #2E7D32;
+    border: 1px solid rgba(46, 125, 50, 0.3);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 8px;
+}
+
+/* Arabic Hadith Text */
+.hadith-arabic-text {
+    font-family: var(--font-quranic);
+    font-size: 2.1rem;
+    line-height: 2.3;
+    color: var(--desert-night);
+    text-align: right;
+    direction: rtl;
+    word-spacing: 3px;
+}
+
+/* English Translation Text */
+.hadith-translation {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--desert-night);
+}
+
+/* Action Buttons */
+.hadith-action-btn {
+    color: var(--desert-muted);
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.hadith-action-btn:hover {
+    color: var(--desert-terracotta);
+    background: var(--desert-sand);
+}
+
+/* Expandable Sharh (Commentary Box) */
+.sharh-box {
+    background: var(--desert-sand);
+    border: 1px dashed var(--desert-dune);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 1.25rem;
+    font-size: 0.95rem;
+    color: var(--desert-muted);
+}
+
+/* Bottom Audio Player Bar */
+.audio-player-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--desert-night);
+    color: var(--desert-sand);
+    padding: 0.8rem 1.5rem;
+    z-index: 1040;
+    border-top: 2px solid var(--desert-gold);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.btn-play-main {
+    width: 44px;
+    height: 44px;
+    background: var(--desert-gold);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-play-main:hover {
+    background: var(--desert-terracotta);
+    transform: scale(1.05);
+}
+
+/* Footer */
+
+/* =======================================================
+   LEARNING PAGE-SPECIFIC STYLES
+   ======================================================= */
+/* Navbar Header */
+/* Lesson Workspace Header */
+.lesson-header-card {
+    background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
+    color: var(--desert-sand);
+    border-radius: 20px;
+    padding: 1.75rem 2rem;
+    border: 1px solid rgba(194, 150, 83, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.lesson-header-card::after {
+    content: "الحُكْمُ الشَّرْعِيُّ";
+    position: absolute;
+    right: 20px;
+    bottom: -20px;
+    font-size: 5.5rem;
+    color: rgba(194, 150, 83, 0.05);
+    font-family: var(--font-quranic);
+    pointer-events: none;
+}
+
+/* Interactive Focus Player */
+.video-viewport {
+    height: 400px;
+    background: linear-gradient(135deg, #1F1B16 0%, #0F0D0A 100%);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--desert-sand);
+    position: relative;
+    border: 1px solid rgba(194, 150, 83, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.btn-play-hero {
+    width: 68px;
+    height: 68px;
+    background: var(--desert-terracotta);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 0 25px rgba(163, 88, 57, 0.5);
+    transition: transform 0.25s ease;
+}
+
+.btn-play-hero:hover {
+    transform: scale(1.08);
+    background: var(--desert-gold);
+}
+
+/* Proof Cards */
+.quran-proof-card {
+    background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
+    color: var(--desert-sand);
+    border-radius: 18px;
+    padding: 1.75rem;
+    border: 1px solid rgba(194, 150, 83, 0.3);
+    position: relative;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.quran-proof-card .quran-arabic-text {
+    font-family: var(--font-quranic);
+    font-size: 2rem;
+    line-height: 2.2;
+    color: #FFFFFF;
+    text-align: right;
+    direction: rtl;
+}
+
+.hadith-proof-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-left: 5px solid var(--desert-terracotta);
+    border-radius: 18px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.hadith-arabic-text {
+    font-family: var(--font-quranic);
+    font-size: 1.85rem;
+    line-height: 2.2;
+    color: var(--desert-night);
+    text-align: right;
+    direction: rtl;
+}
+
+/* Interactive Self-Check Quiz Card */
+.quiz-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 18px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.quiz-option {
+    background: var(--desert-sand);
+    border: 1px solid var(--desert-dune);
+    border-radius: 12px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.65rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.quiz-option:hover {
+    background: #FFFDF9;
+    border-color: var(--desert-gold);
+    color: var(--desert-terracotta);
+}
+
+.quiz-option.selected {
+    background: rgba(163, 88, 57, 0.12);
+    border-color: var(--desert-terracotta);
+    color: var(--desert-terracotta);
+    font-weight: 700;
+}
+
+/* Vocabulary Chip */
+.vocab-chip {
+    background: rgba(194, 150, 83, 0.12);
+    border: 1px solid rgba(194, 150, 83, 0.3);
+    color: #8C6225;
+    border-radius: 10px;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.85rem;
+}
+
+/* Curriculum Accordion Sidebar */
+.curriculum-sidebar-card {
+    position: sticky;
+    top: 90px;
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 24px rgba(31, 27, 22, 0.05);
+}
+
+.lesson-item {
+    padding: 0.9rem 1.2rem;
+    border-bottom: 1px solid var(--desert-sand);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: var(--desert-night);
+    transition: all 0.2s ease;
+}
+
+.lesson-item:hover {
+    background-color: var(--desert-sand);
+    color: var(--desert-terracotta);
+}
+
+.lesson-item.active {
+    background-color: rgba(194, 150, 83, 0.15);
+    border-left: 4px solid var(--desert-terracotta);
+    font-weight: 700;
+}
+
+/* Tabs Styling */
+.nav-tabs .nav-link {
+    color: var(--desert-muted);
+    font-weight: 600;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 0.85rem 1.2rem;
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--desert-terracotta);
+    background: transparent;
+    border-bottom-color: var(--desert-terracotta);
+}
+
+/* Buttons */
+/* Footer */
+
+/* =======================================================
+   MODULE PAGE-SPECIFIC STYLES
+   ======================================================= */
+/* Navbar */
+/* Breadcrumbs */
+/* Lecture Player Frame */
+.lecture-video-theater {
+    background: linear-gradient(135deg, #17130F 0%, #2A241E 100%);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(194, 150, 83, 0.3);
+    box-shadow: 0 16px 36px rgba(31, 27, 22, 0.15);
+}
+
+.lecture-video-theater::before {
+    content: var(--lesson-watermark, "الإِسْلَامُ وَالإِيمَانُ");
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 9rem;
+    color: rgba(194, 150, 83, 0.04);
+    font-family: var(--font-quranic);
+    pointer-events: none;
+}
+
+.player-overlay-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+}
+
+.btn-play-theater {
+    width: 76px;
+    height: 76px;
+    background: var(--desert-terracotta);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 0 25px rgba(163, 88, 57, 0.6);
+    transition: all 0.3s ease;
+}
+
+.btn-play-theater:hover {
+    transform: scale(1.1);
+    background: var(--desert-gold);
+}
+
+.player-controls-strip {
+    background: linear-gradient(to top, rgba(15, 12, 9, 0.95), transparent);
+    padding: 1rem 1.5rem;
+    z-index: 3;
+}
+
+/* Content Cards */
+.module-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Classical Matn Callout Box */
+.matn-quote-box {
+    background: var(--desert-sand);
+    border: 1px solid var(--desert-dune);
+    border-right: 5px solid var(--desert-gold);
+    border-radius: 16px;
+    padding: 1.5rem 1.75rem;
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+/* Nav Tabs Customization */
+.nav-tabs-desert {
+    border-bottom: 2px solid var(--desert-dune);
+    gap: 0.5rem;
+}
+
+.nav-tabs-desert .nav-link {
+    color: var(--desert-muted);
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-weight: 600;
+    padding: 0.8rem 1.25rem;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+.nav-tabs-desert .nav-link:hover {
+    color: var(--desert-terracotta);
+    border-bottom-color: rgba(163, 88, 57, 0.4);
+}
+
+.nav-tabs-desert .nav-link.active {
+    color: var(--desert-terracotta);
+    border-bottom-color: var(--desert-terracotta);
+    background: transparent;
+}
+
+/* Terminology Glossary Table */
+.table-glossary th {
+    background-color: var(--desert-sand);
+    color: var(--desert-terracotta);
+    font-weight: 700;
+    border-color: var(--desert-dune);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table-glossary td {
+    border-color: var(--desert-dune);
+    vertical-align: middle;
+    font-size: 0.92rem;
+}
+
+/* Sidebar Lesson Navigation */
+.sidebar-playlist {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 20px;
+    overflow: hidden;
+    position: sticky;
+    top: 90px;
+}
+
+.playlist-item {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--desert-sand);
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+}
+
+.playlist-item:last-child {
+    border-bottom: none;
+}
+
+.playlist-item:hover {
+    background-color: rgba(247, 243, 235, 0.7);
+    color: var(--desert-terracotta);
+}
+
+.playlist-item.active {
+    background-color: rgba(194, 150, 83, 0.12);
+    border-left: 4px solid var(--desert-terracotta);
+}
+
+.lesson-badge-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--desert-sand);
+    border: 1px solid var(--desert-dune);
+    color: var(--desert-night);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.playlist-item.active .lesson-badge-num {
+    background: var(--desert-terracotta);
+    color: #fff;
+    border-color: var(--desert-terracotta);
+}
+
+/* Buttons */
+/* Footer */
+
+/* =======================================================
+   QURAN-CS PAGE-SPECIFIC STYLES
+   ======================================================= */
+/* Navbar */
+/* Search & Filter Header */
+.surah-header-banner {
+    background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
+    color: var(--desert-sand);
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    border: 1px solid rgba(194, 150, 83, 0.25);
+    position: relative;
+}
+
+.search-input-group {
+    background: #FFFFFF;
+    border-radius: 14px;
+    padding: 0.35rem 0.6rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Filter Pills */
+.filter-btn {
+    border: 1px solid var(--desert-dune);
+    background: #fff;
+    color: var(--desert-night);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.45rem 1.1rem;
+    border-radius: 30px;
+    transition: all 0.2s ease;
+}
+
+/* Surah Islamic Card */
+.surah-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 18px;
+    padding: 1.35rem;
+    transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.surah-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--desert-gold);
+    box-shadow: 0 10px 22px rgba(31, 27, 22, 0.08);
+    color: inherit;
+}
+
+.surah-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: transparent;
+    transition: background 0.2s ease;
+}
+
+.surah-card:hover::before {
+    background: var(--desert-terracotta);
+}
+
+/* Islamic Octagonal / Star-Badge Index */
+.surah-number-badge {
+    width: 44px;
+    height: 44px;
+    background: var(--desert-sand);
+    border: 1px solid var(--desert-dune);
+    color: var(--desert-terracotta);
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    transform: rotate(45deg);
+    transition: all 0.25s ease;
+}
+
+.surah-number-badge span {
+    transform: rotate(-45deg);
+}
+
+.surah-card:hover .surah-number-badge {
+    background: var(--desert-terracotta);
+    color: #FFFFFF;
+    border-color: var(--desert-terracotta);
+}
+
+.revelation-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+}
+
+.revelation-meccan {
+    background: rgba(194, 150, 83, 0.15);
+    color: #926A28;
+}
+
+.revelation-medinan {
+    background: rgba(163, 88, 57, 0.15);
+    color: var(--desert-terracotta);
+}
+
+/* Quick Read Juz Bar */
+.juz-quick-scroll {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: thin;
+}
+
+.juz-pill {
+    white-space: nowrap;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.8rem;
+    background: #FFFFFF;
+    border: 1px solid var(--desert-dune);
+    border-radius: 20px;
+    color: var(--desert-night);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.juz-pill:hover {
+    background: var(--desert-gold);
+    color: #fff;
+    border-color: var(--desert-gold);
+}
+
+/* Footer */
+
+/* =======================================================
+   QURAN-VS PAGE-SPECIFIC STYLES
+   ======================================================= */
+/* Secondary Sticky Reading Bar */
+.surah-banner {
+    background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
+    color: var(--desert-sand);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(194, 150, 83, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.surah-banner::after {
+    content: "الكهف";
+    position: absolute;
+    right: 20px;
+    bottom: -20px;
+    font-size: 8rem;
+    color: rgba(194, 150, 83, 0.05);
+    font-family: var(--font-quranic);
+    pointer-events: none;
+}
+
+.bismillah-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 20px;
+    padding: 1.75rem 1rem;
+    position: relative;
+    background-image: radial-gradient(var(--desert-dune) 0.75px, transparent 0.75px);
+    background-size: 16px 16px;
+}
+
+.verse-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 20px;
+    padding: 2rem 1.75rem;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.verse-card:hover {
+    border-color: var(--desert-gold);
+    box-shadow: 0 8px 20px rgba(31, 27, 22, 0.05);
+}
+
+.verse-card.playing {
+    border-left: 4px solid var(--desert-terracotta);
+    background: #FFFDF9;
+}
+
+/* Islamic Octagonal / Star Verse Badge */
+.verse-number-badge {
+    width: 42px;
+    height: 42px;
+    background: var(--desert-sand);
+    border: 1px solid var(--desert-dune);
+    color: var(--desert-terracotta);
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    transform: rotate(45deg);
+}
+
+.verse-number-badge span {
+    transform: rotate(-45deg);
+}
+
+/* Arabic Text Styling */
+.quran-arabic-text {
+    font-family: var(--font-quranic);
+    font-size: 2.2rem;
+    line-height: 2.3;
+    color: var(--desert-night);
+    text-align: right;
+    direction: rtl;
+    word-spacing: 4px;
+}
+
+.verse-translation {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--desert-night);
+}
+
+.verse-transliteration {
+    font-size: 0.92rem;
+    color: var(--desert-muted);
+    font-style: italic;
+}
+
+/* Action Buttons */
+.verse-action-btn {
+    color: var(--desert-muted);
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.verse-action-btn:hover {
+    color: var(--desert-terracotta);
+    background: var(--desert-sand);
+}
+
+/* Tafsir Collapse Box */
+.tafsir-box {
+    background: var(--desert-sand);
+    border: 1px dashed var(--desert-dune);
+    border-radius: 14px;
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    font-size: 0.95rem;
+    color: var(--desert-muted);
+}
+
+/* Custom Scrollbar for Drawer */
+.offcanvas {
+    background-color: var(--desert-sand-card);
+}
+
+
+/* =======================================================
+   TRACK PAGE-SPECIFIC STYLES
+   ======================================================= */
+/* Navbar */
+/* Breadcrumbs */
+/* Track Hero Banner */
+.track-hero-banner {
+    background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
+    color: var(--desert-sand);
+    border-radius: 24px;
+    padding: 3.5rem 2rem;
+    border: 1px solid rgba(194, 150, 83, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.track-hero-banner::after {
+    content: "مَسَارُ التَّفْسِيرِ";
+    position: absolute;
+    right: 20px;
+    bottom: -30px;
+    font-size: 8rem;
+    color: rgba(194, 150, 83, 0.05);
+    font-family: var(--font-quranic);
+    pointer-events: none;
+}
+
+/* Track Roadmap Timeline Steps */
+.roadmap-container {
+    position: relative;
+    padding-left: 2.5rem;
+}
+
+.roadmap-container::before {
+    content: "";
+    position: absolute;
+    left: 1.1rem;
+    top: 20px;
+    bottom: 20px;
+    width: 3px;
+    background: linear-gradient(180deg, var(--desert-terracotta) 0%, var(--desert-gold) 60%, var(--desert-dune) 100%);
+    border-radius: 4px;
+}
+
+.roadmap-step {
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+
+.roadmap-step:last-child {
+    margin-bottom: 0;
+}
+
+.roadmap-marker {
+    position: absolute;
+    left: -2.5rem;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    background: var(--desert-sand-card);
+    border: 3px solid var(--desert-terracotta);
+    color: var(--desert-terracotta);
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    z-index: 2;
+}
+
+.roadmap-step.completed .roadmap-marker {
+    background: var(--desert-terracotta);
+    color: #FFFFFF;
+}
+
+.roadmap-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 20px;
+    padding: 1.75rem;
+    transition: all 0.25s ease;
+}
+
+.roadmap-card:hover {
+    border-color: var(--desert-gold);
+    box-shadow: 0 10px 24px rgba(31, 27, 22, 0.06);
+}
+
+/* Course Module Pill inside Roadmap */
+.course-item-box {
+    background: var(--desert-sand);
+    border: 1px solid var(--desert-dune);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.2s ease;
+}
+
+.course-item-box:hover {
+    background: #FFFDF9;
+    border-color: var(--desert-gold);
+}
+
+/* Quran Foundation Spotlight Box */
+.quran-spotlight-box {
+    background: linear-gradient(135deg, #2A241E 0%, #17130F 100%);
+    color: var(--desert-sand);
+    border-radius: 20px;
+    padding: 2.2rem 2rem;
+    border: 1px solid rgba(194, 150, 83, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.quran-spotlight-box::after {
+    content: "۞";
+    position: absolute;
+    right: -20px;
+    bottom: -40px;
+    font-size: 10rem;
+    color: rgba(194, 150, 83, 0.05);
+    font-family: var(--font-quranic);
+}
+
+.quran-spotlight-box .quran-arabic-text {
+    font-family: var(--font-quranic);
+    font-size: 2.1rem;
+    line-height: 2.3;
+    color: #FFFFFF;
+    text-align: right;
+    direction: rtl;
+}
+
+/* Scholar Mentor Card */
+.mentor-card {
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 18px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mentor-avatar {
+    width: 54px;
+    height: 54px;
+    background: linear-gradient(135deg, var(--desert-terracotta), var(--desert-gold));
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Sticky Sidebar Enrollment Box */
+.sticky-track-card {
+    position: sticky;
+    top: 100px;
+    background: var(--desert-sand-card);
+    border: 1px solid var(--desert-dune);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 12px 30px rgba(31, 27, 22, 0.06);
+}
+
+/* Buttons */
+/* Footer */

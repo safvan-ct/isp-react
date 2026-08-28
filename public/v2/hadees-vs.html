@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sahih al-Bukhari - Kitab al-Iman (Book of Belief) | Al-Athar Reader</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <!-- Google Fonts: Amiri & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+        <!-- Custom Style CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="pb-5 mb-5">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-desert sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <div class="brand-icon">
+                    <i class="bi bi-book-half"></i>
+                </div>
+                <div>
+                    <span class="fs-4 fw-bold tracking-wide" style="color: var(--desert-night);">Al-Athar</span>
+                    <span class="d-block text-muted small"
+                        style="font-size: 0.65rem; letter-spacing: 1px; margin-top: -3px;">ISLAMIC STUDY PORTAL</span>
+                </div>
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navContent">
+                <i class="bi bi-list fs-2 text-dark"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-3">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Quran & Tafsir</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Hadith Library</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Maktaba</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" data-bs-toggle="offcanvas"
+                        data-bs-target="#readerSettings">
+                        <i class="bi bi-sliders me-1"></i> Preferences
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sticky Reader Bar Controls -->
+    <div class="sticky-reader-bar py-2">
+        <div class="container d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <!-- Chapter Jump -->
+            <div class="d-flex align-items-center gap-2">
+                <a href="#" class="reader-btn text-decoration-none">
+                    <i class="bi bi-chevron-left"></i> <span class="d-none d-sm-inline">Prev Chapter</span>
+                </a>
+
+                <select class="form-select form-select-sm border-secondary-subtle font-quranic fw-bold"
+                    style="width: auto; background-color: var(--desert-sand);">
+                    <option value="1">1. Bad' al-Wahy (Revelation)</option>
+                    <option value="2" selected>2. Kitab al-Iman (كتاب الإيمان)</option>
+                    <option value="3">3. Kitab al-'Ilm (Knowledge)</option>
+                    <option value="4">4. Kitab al-Wudu' (Ablution)</option>
+                </select>
+
+                <a href="#" class="reader-btn text-decoration-none">
+                    <span class="d-none d-sm-inline">Next Chapter</span> <i class="bi bi-chevron-right"></i>
+                </a>
+            </div>
+
+            <!-- Quick Jump & View Options -->
+            <div class="d-flex align-items-center gap-2">
+                <div class="d-flex align-items-center gap-1">
+                    <span class="small text-muted d-none d-md-inline">Hadith #:</span>
+                    <select class="form-select form-select-sm border-secondary-subtle"
+                        style="width: 75px; background-color: var(--desert-sand);">
+                        <option selected>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>58</option>
+                    </select>
+                </div>
+                <button class="reader-btn" data-bs-toggle="offcanvas" data-bs-target="#readerSettings">
+                    <i class="bi bi-gear-fill me-1"></i> <span class="d-none d-md-inline">Display Settings</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Main Content -->
+    <main class="container py-4">
+
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb small">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Hadith Library</a></li>
+                <li class="breadcrumb-item"><a href="#">Sahih al-Bukhari</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Book 2: Belief (Iman)</li>
+            </ol>
+        </nav>
+
+        <!-- Chapter Header Showcase Banner -->
+        <section class="chapter-banner mb-4 shadow-sm">
+            <div class="row align-items-center g-3">
+                <div class="col-md-7">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <span class="badge bg-warning text-dark px-3 py-1 fw-bold">BOOK 2 OF 97</span>
+                        <span class="badge bg-outline-light border text-light px-2 py-1">SAHIH AL-BUKHARI</span>
+                        <span class="badge bg-outline-light border text-light px-2 py-1">51 AHADITH</span>
+                    </div>
+                    <h1 class="fw-bold display-6 mb-1">Book of Belief (Kitab al-Iman)</h1>
+                    <p class="mb-0 text-white-50 small">Defining the reality of faith, its pillars, branches, and its
+                        manifestation through word and righteous action.</p>
+                </div>
+
+                <div class="col-md-5 text-md-end">
+                    <div class="font-quranic display-4 fw-bold text-warning mb-0" dir="rtl">كِتَابُ الإِيمَانِ</div>
+                    <div class="small text-white-50 mt-1">
+                        <i class="bi bi-journal-check me-1"></i> Reference range: <strong>Hadith 8 – 58</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sub-Chapter / Bab Heading 1 -->
+        <div class="bab-header-card shadow-sm">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <div>
+                    <span class="text-uppercase fw-bold small"
+                        style="color: var(--desert-terracotta); letter-spacing: 0.5px;">Bab 1 • Bab Al-Iman</span>
+                    <h5 class="fw-bold mb-0 text-dark">Chapter: The statement of the Prophet (ﷺ) "Islam is built on five
+                        pillars"</h5>
+                </div>
+                <div class="font-quranic fs-3 fw-bold" dir="rtl" style="color: var(--desert-night);">
+                    بَابُ قَوْلِ النَّبِيِّ ﷺ: «بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ»
+                </div>
+            </div>
+        </div>
+
+        <!-- Hadith 1 Card (In-book 8) -->
+        <div class="hadith-card highlighted shadow-sm" id="h8">
+            <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-4">
+                <!-- Hadith Identification Badges -->
+                <div class="d-flex align-items-center gap-3">
+                    <div class="hadith-number-badge">
+                        <span>8</span>
+                    </div>
+                    <div>
+                        <span class="grade-badge-sahih me-1">Sahih</span>
+                        <span class="badge bg-light text-dark border">Book 2, Hadith 1</span>
+                        <span class="badge bg-light text-dark border">USC-MSA Ref: Vol. 1, Book 2, Hadith 8</span>
+                    </div>
+                </div>
+
+                <!-- Action Toolbar -->
+                <div class="d-flex align-items-center gap-1">
+                    <button class="hadith-action-btn" title="Listen Audio"><i
+                            class="bi bi-play-circle-fill text-warning fs-5"></i></button>
+                    <button class="hadith-action-btn" title="Bookmark"><i class="bi bi-bookmark"></i></button>
+                    <button class="hadith-action-btn" title="Copy Text"><i class="bi bi-copy"></i></button>
+                    <button class="hadith-action-btn" title="Scholarly Commentary (Sharh)" data-bs-toggle="collapse"
+                        data-bs-target="#sharh8"><i class="bi bi-journal-bookmark-fill"></i></button>
+                    <button class="hadith-action-btn" title="Share"><i class="bi bi-share"></i></button>
+                </div>
+            </div>
+
+            <!-- Chain of Narrators (Isnad Pill) -->
+            <div class="mb-3">
+                <span class="isnad-pill">
+                    <i class="bi bi-diagram-3-fill"></i>
+                    <span>Isnad: Al-Makki ibn Ibrahim ← Yazid ibn Abi 'Ubayd ← Salamah ibn al-Akwa' ← 'Abdullah ibn
+                        'Umar (رضي الله عنهما)</span>
+                </span>
+            </div>
+
+            <!-- Arabic Hadith Text -->
+            <div class="hadith-arabic-text mb-4">
+                حَدَّثَنَا عُبَيْدُ اللَّهِ بْنُ مُوسَى، قَالَ: أَخْبَرَنَا حَنْظَلَةُ بْنُ أَبِي سُفْيَانَ، عَنْ
+                عِكْرِمَةَ بْنِ خَالِدٍ، عَنِ ابْنِ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: قَالَ رَسُولُ اللَّهِ صَلَّى
+                اللَّهُ عَلَيْهِ وَسَلَّمَ:
+                <br />
+                <span style="color: var(--desert-terracotta);">«بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لاَ
+                    إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلاَةِ، وَإِيتَاءِ
+                    الزَّكَاةِ، وَالْحَجِّ، وَصَوْمِ رَمَضَانَ»</span>
+            </div>
+
+            <!-- English Translation -->
+            <div class="hadith-translation fw-medium mb-2">
+                Narrated 'Abdullah bin 'Umar (may Allah be pleased with them both):
+                <br />
+                Allah's Messenger (ﷺ) said: <strong>"Islam is built on five (pillars):</strong>
+                <ol class="mt-2 mb-0 ps-3">
+                    <li>To testify that none has the right to be worshipped but Allah and Muhammad is Allah's Messenger.
+                    </li>
+                    <li>To offer the (compulsory congregational) prayers dutifully and perfectly.</li>
+                    <li>To pay Zakat (obligatory charity).</li>
+                    <li>To perform Hajj (i.e. Pilgrimage to Mecca).</li>
+                    <li>To observe fast during the month of Ramadan."</li>
+                </ol>
+            </div>
+
+            <!-- Expandable Sharh Box -->
+            <div class="collapse" id="sharh8">
+                <div class="sharh-box">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <i class="bi bi-journal-text fs-5" style="color: var(--desert-terracotta);"></i>
+                        <h6 class="fw-bold mb-0 text-dark">Sharh Fath al-Bari — Ibn Hajar al-'Asqalani (رحمه الله)</h6>
+                    </div>
+                    <p class="mb-0">
+                        Imam Ibn Hajar notes that Imam al-Bukhari deliberately placed this Hadith at the beginning of
+                        <em>Kitab al-Iman</em> to establish that Islam and Iman are interconnected realities. The
+                        metaphor of a house built on five structural pillars illustrates that while these five form the
+                        essential foundation, the structure is perfected by secondary deeds of righteousness.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sub-Chapter / Bab Heading 2 -->
+        <div class="bab-header-card shadow-sm">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <div>
+                    <span class="text-uppercase fw-bold small"
+                        style="color: var(--desert-terracotta); letter-spacing: 0.5px;">Bab 2 • Branches of Faith</span>
+                    <h5 class="fw-bold mb-0 text-dark">Chapter: Matters pertaining to Faith (Shu'ab al-Iman)</h5>
+                </div>
+                <div class="font-quranic fs-3 fw-bold" dir="rtl" style="color: var(--desert-night);">
+                    بَابُ أُمُورِ الإِيمَانِ
+                </div>
+            </div>
+        </div>
+
+        <!-- Hadith 2 Card (In-book 9) -->
+        <div class="hadith-card shadow-sm" id="h9">
+            <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="hadith-number-badge">
+                        <span>9</span>
+                    </div>
+                    <div>
+                        <span class="grade-badge-sahih me-1">Sahih</span>
+                        <span class="badge bg-light text-dark border">Book 2, Hadith 2</span>
+                        <span class="badge bg-light text-dark border">USC-MSA Ref: Vol. 1, Book 2, Hadith 9</span>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-1">
+                    <button class="hadith-action-btn" title="Listen Audio"><i class="bi bi-play-circle"></i></button>
+                    <button class="hadith-action-btn" title="Bookmark"><i class="bi bi-bookmark"></i></button>
+                    <button class="hadith-action-btn" title="Copy Text"><i class="bi bi-copy"></i></button>
+                    <button class="hadith-action-btn" title="Sharh" data-bs-toggle="collapse"
+                        data-bs-target="#sharh9"><i class="bi bi-journal-bookmark"></i></button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <span class="isnad-pill">
+                    <i class="bi bi-diagram-3-fill"></i>
+                    <span>Isnad: Qutaybah ← Al-Layth ← 'Uqayl ← Ibn Shihab ← Abu Salama ← Abu Hurairah (رضي الله
+                        عنه)</span>
+                </span>
+            </div>
+
+            <div class="hadith-arabic-text mb-4">
+                عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ، عَنِ النَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ قَالَ:
+                <br />
+                <span style="color: var(--desert-terracotta);">«الإِيمَانُ بِضْعٌ وَسِتُّونَ شُعْبَةً، وَالْحَيَاءُ
+                    شُعْبَةٌ مِنَ الإِيمَانِ»</span>
+            </div>
+
+            <div class="hadith-translation fw-medium mb-2">
+                Narrated Abu Hurairah (may Allah be pleased with him):
+                <br />
+                The Prophet (ﷺ) said: <strong>"Faith (Iman) has over sixty branches, and Haya' (self-respect, modesty,
+                    and modesty before Allah) is a branch of faith."</strong>
+            </div>
+
+            <div class="collapse" id="sharh9">
+                <div class="sharh-box">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <i class="bi bi-journal-text fs-5" style="color: var(--desert-terracotta);"></i>
+                        <h6 class="fw-bold mb-0 text-dark">Commentary Note</h6>
+                    </div>
+                    <p class="mb-0">
+                        <em>Haya'</em> is specifically highlighted because it acts as an inner moral compass that
+                        prompts a believer to fulfill obligations and refrain from transgression.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hadith 3 Card (In-book 13) -->
+        <div class="hadith-card shadow-sm" id="h13">
+            <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="hadith-number-badge">
+                        <span>13</span>
+                    </div>
+                    <div>
+                        <span class="grade-badge-sahih me-1">Sahih</span>
+                        <span class="badge bg-light text-dark border">Book 2, Hadith 6</span>
+                        <span class="badge bg-light text-dark border">USC-MSA Ref: Vol. 1, Book 2, Hadith 13</span>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-1">
+                    <button class="hadith-action-btn" title="Listen Audio"><i class="bi bi-play-circle"></i></button>
+                    <button class="hadith-action-btn" title="Bookmark"><i class="bi bi-bookmark"></i></button>
+                    <button class="hadith-action-btn" title="Copy Text"><i class="bi bi-copy"></i></button>
+                    <button class="hadith-action-btn" title="Sharh" data-bs-toggle="collapse"
+                        data-bs-target="#sharh13"><i class="bi bi-journal-bookmark"></i></button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <span class="isnad-pill">
+                    <i class="bi bi-diagram-3-fill"></i>
+                    <span>Isnad: Musaddad ← Yahya ← Shu'bah ← Qatadah ← Anas ibn Malik (رضي الله عنه)</span>
+                </span>
+            </div>
+
+            <div class="hadith-arabic-text mb-4">
+                عَنْ أَنَسٍ رَضِيَ اللَّهُ عَنْهُ، عَنِ النَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ قَالَ:
+                <br />
+                <span style="color: var(--desert-terracotta);">«لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا
+                    يُحِبُّ لِنَفْسِهِ»</span>
+            </div>
+
+            <div class="hadith-translation fw-medium mb-2">
+                Narrated Anas (may Allah be pleased with him):
+                <br />
+                The Prophet (ﷺ) said: <strong>"None of you truly believes until he loves for his brother (or neighbor)
+                    what he loves for himself."</strong>
+            </div>
+
+            <div class="collapse" id="sharh13">
+                <div class="sharh-box">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <i class="bi bi-journal-text fs-5" style="color: var(--desert-terracotta);"></i>
+                        <h6 class="fw-bold mb-0 text-dark">Commentary Note</h6>
+                    </div>
+                    <p class="mb-0">
+                        True perfection of faith requires genuine altruism and wishing well-being, guidance, and success
+                        for others just as one desires for oneself.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Chapter Pagination -->
+        <div class="d-flex justify-content-between align-items-center my-5 pt-3 border-top"
+            style="border-color: var(--desert-dune) !important;">
+            <a href="#" class="btn btn-desert-outline rounded-pill px-4">
+                <i class="bi bi-arrow-left me-1"></i> Prev Book: Revelation
+            </a>
+            <a href="#" class="btn btn-desert-primary rounded-pill px-4"
+                style="background-color: var(--desert-terracotta); border: none;">
+                Next Book: Knowledge <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Sticky Bottom Audio Player Bar -->
+    <div class="audio-player-bar">
+        <div class="container d-flex align-items-center justify-content-between gap-3">
+            <!-- Active Hadith Audio Info -->
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn-play-main">
+                    <i class="bi bi-pause-fill"></i>
+                </button>
+                <div>
+                    <div class="fw-bold text-white small mb-0">Sahih al-Bukhari • Hadith #8</div>
+                    <small class="text-white-50" style="font-size: 0.75rem;">Reciter: Shaykh Abdul Mohsen
+                        Al-Qasim</small>
+                </div>
+            </div>
+
+            <!-- Playback Progress Bar -->
+            <div class="d-none d-md-flex align-items-center gap-2 flex-grow-1 mx-4 max-w-md">
+                <span class="small text-white-50" style="font-size: 0.75rem;">0:08</span>
+                <div class="progress flex-grow-1" style="height: 6px; background: rgba(255,255,255,0.15);">
+                    <div class="progress-bar" role="progressbar"
+                        style="width: 42%; background-color: var(--desert-gold);" aria-valuenow="42" aria-valuemin="0"
+                        aria-valuemax="100"></div>
+                </div>
+                <span class="small text-white-50" style="font-size: 0.75rem;">0:32</span>
+            </div>
+
+            <!-- Quick Audio Controls -->
+            <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-sm text-white-50 p-1" title="Playback Speed"><span
+                        class="badge bg-secondary">1.0x</span></button>
+                <button class="btn btn-sm text-white-50 p-1" title="Repeat"><i class="bi bi-repeat fs-5"></i></button>
+                <button class="btn btn-sm text-white-50 p-1 d-none d-sm-inline" title="Volume"><i
+                        class="bi bi-volume-up fs-5"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offcanvas Display Preferences Drawer -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="readerSettings">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold" style="color: var(--desert-night);">
+                <i class="bi bi-sliders me-2" style="color: var(--desert-terracotta);"></i> Hadith View Settings
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+
+            <!-- Arabic Text Size -->
+            <div class="mb-4">
+                <label class="form-label fw-bold small text-uppercase">Arabic Text Size</label>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="small text-muted">A-</span>
+                    <input type="range" class="form-range" min="1.6" max="3.2" step="0.1" value="2.1"
+                        id="arabicHadithSlider">
+                    <span class="fs-5 fw-bold">A+</span>
+                </div>
+            </div>
+
+            <!-- Primary Commentary Choice -->
+            <div class="mb-4">
+                <label class="form-label fw-bold small text-uppercase">Primary Sharh (Commentary)</label>
+                <select class="form-select">
+                    <option selected>Fath al-Bari (Ibn Hajar al-'Asqalani)</option>
+                    <option>'Umdat al-Qari (Badr al-Din al-'Ayni)</option>
+                    <option>Irshad al-Sari (Al-Qastallani)</option>
+                </select>
+            </div>
+
+            <!-- Display Toggles -->
+            <div class="mb-4">
+                <label class="form-label fw-bold small text-uppercase mb-3">Toggles</label>
+
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" id="toggleIsnad" checked>
+                    <label class="form-check-label small fw-medium" for="toggleIsnad">Show Isnad Chains</label>
+                </div>
+
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" id="toggleGrade" checked>
+                    <label class="form-check-label small fw-medium" for="toggleGrade">Show Authentication Grades</label>
+                </div>
+
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" id="toggleTashkeel" checked>
+                    <label class="form-check-label small fw-medium" for="toggleTashkeel">Full Arabic Diacritics
+                        (Tashkeel)</label>
+                </div>
+            </div>
+
+            <!-- Reading Theme Variant -->
+            <div class="mb-4">
+                <label class="form-label fw-bold small text-uppercase">Reading Theme</label>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-dark flex-fill active py-2"
+                        style="background-color: #F7F3EB;">Sand</button>
+                    <button class="btn btn-outline-dark flex-fill py-2" style="background-color: #FFFFFF;">Pure
+                        White</button>
+                    <button class="btn btn-outline-dark flex-fill text-white py-2"
+                        style="background-color: #1F1B16;">Night</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center small opacity-75">
+            <p class="mb-1">Al-Athar Hadith Study & Research Portal</p>
+            <p class="mb-0">Authenticated references, Isnad indices, and verified classical commentaries.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

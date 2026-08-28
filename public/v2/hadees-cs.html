@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sahih al-Bukhari - Chapters (Kutub) | Al-Athar</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <!-- Google Fonts: Amiri & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+        <!-- Custom Style CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-desert sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <div class="brand-icon">
+                    <i class="bi bi-book-half"></i>
+                </div>
+                <div>
+                    <span class="fs-4 fw-bold tracking-wide" style="color: var(--desert-night);">Al-Athar</span>
+                    <span class="d-block text-muted small"
+                        style="font-size: 0.65rem; letter-spacing: 1px; margin-top: -3px;">ISLAMIC STUDY PORTAL</span>
+                </div>
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navContent">
+                <i class="bi bi-list fs-2 text-dark"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-3">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Quran & Tafsir</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Hadith Library</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Maktaba</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="#" class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+                        <i class="bi bi-arrow-left me-1"></i> All Collections
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Body -->
+    <main class="container py-4">
+
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb small">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Hadith Library</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Sahih al-Bukhari</li>
+            </ol>
+        </nav>
+
+        <!-- Book Showcase Banner -->
+        <section class="book-header-banner mb-4 shadow-sm">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-8">
+                    <div class="d-flex flex-wrap gap-2 mb-2">
+                        <span class="badge bg-warning text-dark fw-bold px-3 py-1">KUTUB AL-SITTAH</span>
+                        <span class="badge bg-dark border border-secondary text-light">Imam Muhammad al-Bukhari (194–256
+                            AH)</span>
+                    </div>
+                    <h1 class="display-6 fw-bold mb-2">Sahih al-Bukhari (صحيح البخاري)</h1>
+                    <p class="mb-3 opacity-75 small">
+                        <em>Al-Jami' al-Musnad al-Sahih al-Mukhtasar</em> — The pinnacle of authentic Prophetic
+                        narrations, systematically classified into thematic books of creed, worship, transactions, and
+                        prophetic manners.
+                    </p>
+
+                    <div class="d-flex flex-wrap gap-3">
+                        <div class="stat-pill">
+                            <i class="bi bi-journal-bookmark text-warning"></i>
+                            <span class="small"><strong>97</strong> Chapters (Kutub)</span>
+                        </div>
+                        <div class="stat-pill">
+                            <i class="bi bi-chat-square-quote text-warning"></i>
+                            <span class="small"><strong>7,563</strong> Total Ahadith</span>
+                        </div>
+                        <div class="stat-pill">
+                            <i class="bi bi-check-circle text-warning"></i>
+                            <span class="small"><strong>100%</strong> Sahih Grade</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 text-lg-end">
+                    <div class="font-quranic display-4 fw-bold text-warning mb-1" dir="rtl">صَحِيحُ البُخَارِي</div>
+                    <p class="small text-white-50 mb-3">Authentic Chain Transmission</p>
+                    <a href="#" class="btn btn-sm btn-outline-warning rounded-pill px-4">
+                        <i class="bi bi-play-circle me-1"></i> Start from Hadith 1
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Topic Filter -->
+        <div class="row align-items-center g-3 mb-4">
+            <div class="col-lg-6">
+                <div class="search-input-group d-flex align-items-center">
+                    <i class="bi bi-search text-muted ms-2 me-2"></i>
+                    <input type="text" id="chapterSearch" class="form-control"
+                        placeholder="Search chapter by English name, Arabic, or number..." />
+                    <button class="btn btn-sm text-white px-3 fw-bold"
+                        style="background-color: var(--desert-terracotta); border-radius: 10px;">Find</button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="d-flex gap-2 overflow-auto pb-1 justify-content-lg-end">
+                    <button class="filter-pill-btn active">All (97)</button>
+                    <button class="filter-pill-btn">Faith & Revelation</button>
+                    <button class="filter-pill-btn">Worship & Purification</button>
+                    <button class="filter-pill-btn">Transactions</button>
+                    <button class="filter-pill-btn">Adab & Heart Softeners</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter Section: Revelation & Faith -->
+        <div class="section-category-header">
+            <i class="bi bi-brightness-high"></i> Section I: Revelation & Creed (الإيمان والوحي)
+        </div>
+
+        <div class="row g-3 g-md-4 mb-5">
+            <!-- Chapter 1 -->
+            <div class="col-md-6 col-lg-4">
+                <a href="hadees-vs.html" class="chapter-card shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="chapter-number-badge">
+                                <span>01</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Revelation</h6>
+                                <small class="text-muted">Bad' al-Wahy</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="font-quranic fs-3 fw-bold mb-1" dir="rtl">بدء الوحي</div>
+                            <span class="hadith-range-tag">Hadith 1 – 7</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 2 -->
+            <div class="col-md-6 col-lg-4">
+                <a href="#" class="chapter-card shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="chapter-number-badge">
+                                <span>02</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Belief (Faith)</h6>
+                                <small class="text-muted">Kitab al-Iman</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="font-quranic fs-3 fw-bold mb-1" dir="rtl">كتاب الإيمان</div>
+                            <span class="hadith-range-tag">Hadith 8 – 58</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 3 -->
+            <div class="col-md-6 col-lg-4">
+                <a href="#" class="chapter-card shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="chapter-number-badge">
+                                <span>03</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Knowledge</h6>
+                                <small class="text-muted">Kitab al-'Ilm</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="font-quranic fs-3 fw-bold mb-1" dir="rtl">كتاب العلم</div>
+                            <span class="hadith-range-tag">Hadith 59 – 134</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Chapter Section: Purification & Prayer -->
+        <div class="section-category-header">
+            <i class="bi bi-droplet"></i> Section II: Purification & Acts of Worship (الطهارة والعبادات)
+        </div>
+
+        <div class="row g-3 g-md-4 mb-5">
+            <!-- Chapter 4 -->
+            <div class="col-md-6 col-lg-4">
+                <a href="#" class="chapter-card shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="chapter-number-badge">
+                                <span>04</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Ablution (Wudu')</h6>
+                                <small class="text-muted">Kitab al-Wudu'</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="font-quranic fs-3 fw-bold mb-1" dir="rtl">كتاب الوضوء</div>
+                            <span class="hadith-range-tag">Hadith 135 – 247</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 5 -->
+            <div class="col-md-6 col-lg-4">
+                <a href="#" class="chapter-card shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="chapter-number-badge">
+                                <span>05</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Bathing (Ghusl)</h6>
+                                <small class="text-muted">Kitab al-Ghusl</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="font-quranic fs-3 fw-bold mb-1" dir="rtl">كتاب الغسل</div>
+                            <span class="hadith-range-tag">Hadith 248 – 293</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 8 -->
+            <div class="col-md-6 col-lg-4">
+                <a href="#" class="chapter-card shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="chapter-number-badge">
+                                <span>08</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Prayer (Salat)</h6>
+                                <small class="text-muted">Kitab as-Salat</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="font-quranic fs-3 fw-bold mb-1" dir="rtl">كتاب الصلاة</div>
+                            <span class="hadith-range-tag">Hadith 349 – 520</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 24 -->
+            <div class="col-md-6 col-lg-4">
+                <a href="#" class="chapter-card shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="chapter-number-badge">
+                                <span>24</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Obligatory Charity</h6>
+                                <small class="text-muted">Kitab az-Zakat</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="font-quranic fs-3 fw-bold mb-1" dir="rtl">كتاب الزكاة</div>
+                            <span class="hadith-range-tag">Hadith 1395 – 1512</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 25 -->
+            <div class="col-md-6 col-lg-4">
+                <a href="#" class="chapter-card shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="chapter-number-badge">
+                                <span>25</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Hajj Pilgrimage</h6>
+                                <small class="text-muted">Kitab al-Hajj</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="font-quranic fs-3 fw-bold mb-1" dir="rtl">كتاب الحج</div>
+                            <span class="hadith-range-tag">Hadith 1513 – 1772</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 30 -->
+            <div class="col-md-6 col-lg-4">
+                <a href="#" class="chapter-card shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="chapter-number-badge">
+                                <span>30</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Fasting (Sawm)</h6>
+                                <small class="text-muted">Kitab as-Sawm</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="font-quranic fs-3 fw-bold mb-1" dir="rtl">كتاب الصوم</div>
+                            <span class="hadith-range-tag">Hadith 1891 – 2007</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Chapter Section: Ethics & Heart Softeners -->
+        <div class="section-category-header">
+            <i class="bi bi-heart"></i> Section III: Manners & Heart Softeners (الآداب والرقاق)
+        </div>
+
+        <div class="row g-3 g-md-4 mb-4">
+            <!-- Chapter 78 -->
+            <div class="col-md-6 col-lg-4">
+                <a href="#" class="chapter-card shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="chapter-number-badge">
+                                <span>78</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Good Manners (Adab)</h6>
+                                <small class="text-muted">Kitab al-Adab</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="font-quranic fs-3 fw-bold mb-1" dir="rtl">كتاب الأدب</div>
+                            <span class="hadith-range-tag">Hadith 5970 – 6226</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 81 -->
+            <div class="col-md-6 col-lg-4">
+                <a href="#" class="chapter-card shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="chapter-number-badge">
+                                <span>81</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Heart-Melting Traditions</h6>
+                                <small class="text-muted">Kitab ar-Riqaq</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="font-quranic fs-3 fw-bold mb-1" dir="rtl">كتاب الرقاق</div>
+                            <span class="hadith-range-tag">Hadith 6412 – 6593</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Chapter 97 -->
+            <div class="col-md-6 col-lg-4">
+                <a href="#" class="chapter-card shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="chapter-number-badge">
+                                <span>97</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Islamic Monotheism</h6>
+                                <small class="text-muted">Kitab at-Tawhid</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="font-quranic fs-3 fw-bold mb-1" dir="rtl">كتاب التوحيد</div>
+                            <span class="hadith-range-tag">Hadith 7371 – 7563</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center small opacity-75">
+            <p class="mb-1">Al-Athar Hadith & Sunnah Repository</p>
+            <p class="mb-0">Authenticated references, Isnad indices, and verified classical commentaries.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

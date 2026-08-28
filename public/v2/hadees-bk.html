@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hadith Collections & Compilations | Al-Athar</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <!-- Google Fonts: Amiri & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+        <!-- Custom Style CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-desert sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <div class="brand-icon">
+                    <i class="bi bi-book-half"></i>
+                </div>
+                <div>
+                    <span class="fs-4 fw-bold tracking-wide" style="color: var(--desert-night);">Al-Athar</span>
+                    <span class="d-block text-muted small"
+                        style="font-size: 0.65rem; letter-spacing: 1px; margin-top: -3px;">ISLAMIC STUDY PORTAL</span>
+                </div>
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navContent">
+                <i class="bi bi-list fs-2 text-dark"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-3">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Quran & Tafsir</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Hadith Library</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Scholarly Biographies</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="#" class="btn btn-sm btn-outline-secondary rounded-pill px-3"><i
+                            class="bi bi-bookmark-star me-1"></i> Saved Ahadith</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Body Container -->
+    <main class="container py-4">
+
+        <!-- Header & Interactive Search Banner -->
+        <section class="hadith-header-banner mb-4 shadow-sm">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7">
+                    <span class="badge bg-warning text-dark mb-2 px-3 py-1 fw-bold"
+                        style="font-size: 0.75rem;">AUTHENTIC TRADITIONS • KUTUB AL-HADITH</span>
+                    <h1 class="display-6 fw-bold mb-2">Canonical Hadith Collections (كُتُبُ الحَدِيثِ)</h1>
+                    <p class="mb-0 opacity-75 small">Explore the Prophetic sunnah through the Kutub al-Sittah, verified
+                        commentaries, and topical compilations with complete Isnad chains.</p>
+                </div>
+                <div class="col-lg-5">
+                    <div class="search-input-group d-flex align-items-center">
+                        <i class="bi bi-search text-muted ms-2 me-2"></i>
+                        <input type="text" id="hadithSearch" class="form-control"
+                            placeholder="Search book, compiler, or Hadith number..." />
+                        <button class="btn btn-sm text-white px-3 fw-bold"
+                            style="background-color: var(--desert-terracotta); border-radius: 10px;">Search</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Hadith Spotlight Card -->
+        <div class="hadith-spotlight-card mb-5 shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge" style="background-color: var(--desert-gold); color: #fff;">Hadith of the
+                        Day</span>
+                    <span class="small text-muted">Sahih al-Bukhari • Book 1, Hadith 1</span>
+                </div>
+                <button class="btn btn-sm btn-link text-decoration-none text-muted p-0" title="Share"><i
+                        class="bi bi-share"></i></button>
+            </div>
+
+            <p class="font-quranic fs-3 text-end mb-3 lh-lg" dir="rtl">
+                إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى
+            </p>
+
+            <blockquote class="blockquote fs-6 text-dark fst-italic mb-2">
+                "Actions are judged by motives (intentions), so each man will have what he intended."
+            </blockquote>
+
+            <div class="d-flex justify-content-between align-items-center pt-2 border-top border-secondary-subtle">
+                <small class="text-muted">Narrated by: 'Umar bin Al-Khattab (رضي الله عنه)</small>
+                <a href="hadees-cs.html" class="btn btn-sm text-decoration-none fw-bold"
+                    style="color: var(--desert-terracotta);">Read Full Hadith & Sharh <i
+                        class="bi bi-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Collection Category Filter Tabs -->
+        <div class="d-flex align-items-center gap-2 mb-4 overflow-auto pb-2">
+            <button class="filter-btn active">All Collections (10)</button>
+            <button class="filter-btn">Kutub al-Sittah (The Six Books)</button>
+            <button class="filter-btn">Foundational Sahihs</button>
+            <button class="filter-btn">Sunan Works</button>
+            <button class="filter-btn">Selected Adab & Fiqh</button>
+        </div>
+
+        <!-- Hadith Books Grid -->
+        <div class="row g-4" id="hadithBookList">
+
+            <!-- Book 1: Sahih al-Bukhari -->
+            <div class="col-md-6 col-lg-4">
+                <div class="book-card shadow-sm">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="book-emblem">
+                            <i class="bi bi-journal-richtext"></i>
+                        </div>
+                        <span class="classification-badge badge-sahih">Sahih Collection</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-baseline mb-2">
+                        <h5 class="fw-bold mb-0">Sahih al-Bukhari</h5>
+                        <span class="font-quranic fs-4 fw-bold" dir="rtl">صَحِيحُ البُخَارِي</span>
+                    </div>
+
+                    <p class="small text-muted mb-3 flex-grow-1">
+                        Compiled by Imam Muhammad al-Bukhari (194–256 AH). The most authentic book after the Quran,
+                        arranged by legal & theological topics.
+                    </p>
+
+                    <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                        style="border-color: var(--desert-dune) !important;">
+                        <div>
+                            <span class="d-block fw-bold small text-dark">7,563 Ahadith</span>
+                            <span class="text-muted" style="font-size: 0.75rem;">97 Chapters</span>
+                        </div>
+                        <a href="#" class="btn btn-desert-outline btn-sm">Explore Book</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book 2: Sahih Muslim -->
+            <div class="col-md-6 col-lg-4">
+                <div class="book-card shadow-sm">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="book-emblem">
+                            <i class="bi bi-journal-richtext"></i>
+                        </div>
+                        <span class="classification-badge badge-sahih">Sahih Collection</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-baseline mb-2">
+                        <h5 class="fw-bold mb-0">Sahih Muslim</h5>
+                        <span class="font-quranic fs-4 fw-bold" dir="rtl">صَحِيحُ مُسْلِم</span>
+                    </div>
+
+                    <p class="small text-muted mb-3 flex-grow-1">
+                        Compiled by Imam Muslim ibn al-Hajjaj (204–261 AH). Renowned for its rigorous thematic
+                        organization and preservation of narration variants.
+                    </p>
+
+                    <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                        style="border-color: var(--desert-dune) !important;">
+                        <div>
+                            <span class="d-block fw-bold small text-dark">7,500 Ahadith</span>
+                            <span class="text-muted" style="font-size: 0.75rem;">56 Chapters</span>
+                        </div>
+                        <a href="#" class="btn btn-desert-outline btn-sm">Explore Book</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book 3: Sunan an-Nasa'i -->
+            <div class="col-md-6 col-lg-4">
+                <div class="book-card shadow-sm">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="book-emblem">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <span class="classification-badge badge-sunan">Sunan Collection</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-baseline mb-2">
+                        <h5 class="fw-bold mb-0">Sunan an-Nasa'i</h5>
+                        <span class="font-quranic fs-4 fw-bold" dir="rtl">سُنَنُ النَّسَائِي</span>
+                    </div>
+
+                    <p class="small text-muted mb-3 flex-grow-1">
+                        Compiled by Imam Ahmad al-Nasa'i (214–303 AH). Distinguished by strict authentication criteria
+                        second only to the two Sahihs.
+                    </p>
+
+                    <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                        style="border-color: var(--desert-dune) !important;">
+                        <div>
+                            <span class="d-block fw-bold small text-dark">5,758 Ahadith</span>
+                            <span class="text-muted" style="font-size: 0.75rem;">51 Chapters</span>
+                        </div>
+                        <a href="#" class="btn btn-desert-outline btn-sm">Explore Book</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book 4: Sunan Abi Dawud -->
+            <div class="col-md-6 col-lg-4">
+                <div class="book-card shadow-sm">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="book-emblem">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <span class="classification-badge badge-sunan">Sunan Collection</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-baseline mb-2">
+                        <h5 class="fw-bold mb-0">Sunan Abi Dawud</h5>
+                        <span class="font-quranic fs-4 fw-bold" dir="rtl">سُنَنُ أَبِي دَاوُد</span>
+                    </div>
+
+                    <p class="small text-muted mb-3 flex-grow-1">
+                        Compiled by Imam Abu Dawud al-Sijistani (202–275 AH). Centered heavily upon legal rulings
+                        (Ahkam) and legislative traditions.
+                    </p>
+
+                    <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                        style="border-color: var(--desert-dune) !important;">
+                        <div>
+                            <span class="d-block fw-bold small text-dark">5,274 Ahadith</span>
+                            <span class="text-muted" style="font-size: 0.75rem;">43 Chapters</span>
+                        </div>
+                        <a href="#" class="btn btn-desert-outline btn-sm">Explore Book</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book 5: Jami` at-Tirmidhi -->
+            <div class="col-md-6 col-lg-4">
+                <div class="book-card shadow-sm">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="book-emblem">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <span class="classification-badge badge-sunan">Sunan Collection</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-baseline mb-2">
+                        <h5 class="fw-bold mb-0">Jami' at-Tirmidhi</h5>
+                        <span class="font-quranic fs-4 fw-bold" dir="rtl">جَامِعُ التِّرْمِذِي</span>
+                    </div>
+
+                    <p class="small text-muted mb-3 flex-grow-1">
+                        Compiled by Imam al-Tirmidhi (209–279 AH). Renowned for grading Hadith gradations (Sahih, Hasan,
+                        Da'if) and noting jurisprudential differences.
+                    </p>
+
+                    <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                        style="border-color: var(--desert-dune) !important;">
+                        <div>
+                            <span class="d-block fw-bold small text-dark">3,956 Ahadith</span>
+                            <span class="text-muted" style="font-size: 0.75rem;">46 Chapters</span>
+                        </div>
+                        <a href="#" class="btn btn-desert-outline btn-sm">Explore Book</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book 6: Sunan Ibn Majah -->
+            <div class="col-md-6 col-lg-4">
+                <div class="book-card shadow-sm">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="book-emblem">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <span class="classification-badge badge-sunan">Sunan Collection</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-baseline mb-2">
+                        <h5 class="fw-bold mb-0">Sunan Ibn Majah</h5>
+                        <span class="font-quranic fs-4 fw-bold" dir="rtl">سُنَنُ ابْنِ مَاجَه</span>
+                    </div>
+
+                    <p class="small text-muted mb-3 flex-grow-1">
+                        Compiled by Imam Ibn Majah (209–273 AH). Features clear legal structure with numerous unique
+                        narrations (Zawa'id).
+                    </p>
+
+                    <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                        style="border-color: var(--desert-dune) !important;">
+                        <div>
+                            <span class="d-block fw-bold small text-dark">4,341 Ahadith</span>
+                            <span class="text-muted" style="font-size: 0.75rem;">37 Chapters</span>
+                        </div>
+                        <a href="#" class="btn btn-desert-outline btn-sm">Explore Book</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book 7: Muwatta Malik -->
+            <div class="col-md-6 col-lg-4">
+                <div class="book-card shadow-sm">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="book-emblem">
+                            <i class="bi bi-bookmark-check"></i>
+                        </div>
+                        <span class="classification-badge badge-compilation">Early Classic</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-baseline mb-2">
+                        <h5 class="fw-bold mb-0">Muwatta Malik</h5>
+                        <span class="font-quranic fs-4 fw-bold" dir="rtl">مُوَطَّأُ مَالِك</span>
+                    </div>
+
+                    <p class="small text-muted mb-3 flex-grow-1">
+                        Compiled by Imam Malik ibn Anas (93–179 AH). The earliest recorded legal manual and authentic
+                        Hadith collection reflecting Madinah's early practice.
+                    </p>
+
+                    <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                        style="border-color: var(--desert-dune) !important;">
+                        <div>
+                            <span class="d-block fw-bold small text-dark">1,858 Ahadith</span>
+                            <span class="text-muted" style="font-size: 0.75rem;">61 Chapters</span>
+                        </div>
+                        <a href="#" class="btn btn-desert-outline btn-sm">Explore Book</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book 8: Riyad us-Saliheen -->
+            <div class="col-md-6 col-lg-4">
+                <div class="book-card shadow-sm">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="book-emblem">
+                            <i class="bi bi-heart-pulse"></i>
+                        </div>
+                        <span class="classification-badge badge-compilation">Ethics & Adab</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-baseline mb-2">
+                        <h5 class="fw-bold mb-0">Riyad us-Saliheen</h5>
+                        <span class="font-quranic fs-4 fw-bold" dir="rtl">رِيَاضُ الصَّالِحِين</span>
+                    </div>
+
+                    <p class="small text-muted mb-3 flex-grow-1">
+                        Compiled by Imam Yahya ibn Sharaf al-Nawawi (631–676 AH). "The Gardens of the Righteous" — a
+                        curated manual of spiritual purification and manners.
+                    </p>
+
+                    <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                        style="border-color: var(--desert-dune) !important;">
+                        <div>
+                            <span class="d-block fw-bold small text-dark">1,896 Ahadith</span>
+                            <span class="text-muted" style="font-size: 0.75rem;">19 Books</span>
+                        </div>
+                        <a href="#" class="btn btn-desert-outline btn-sm">Explore Book</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book 9: Al-Arba'in an-Nawawiyyah -->
+            <div class="col-md-6 col-lg-4">
+                <div class="book-card shadow-sm">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="book-emblem">
+                            <i class="bi bi-stars"></i>
+                        </div>
+                        <span class="classification-badge badge-compilation">Core Primer</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-baseline mb-2">
+                        <h5 class="fw-bold mb-0">An-Nawawi's 40 Hadith</h5>
+                        <span class="font-quranic fs-4 fw-bold" dir="rtl">الأَرْبَعُونَ النَّوَوِيَّة</span>
+                    </div>
+
+                    <p class="small text-muted mb-3 flex-grow-1">
+                        Imam al-Nawawi’s foundational anthology encapsulating the quintessential maxims and core
+                        principles of the Islamic faith.
+                    </p>
+
+                    <div class="pt-3 border-top d-flex justify-content-between align-items-center"
+                        style="border-color: var(--desert-dune) !important;">
+                        <div>
+                            <span class="d-block fw-bold small text-dark">42 Ahadith</span>
+                            <span class="text-muted" style="font-size: 0.75rem;">Foundational</span>
+                        </div>
+                        <a href="#" class="btn btn-desert-outline btn-sm">Explore Book</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center small opacity-75">
+            <p class="mb-1">Al-Athar Hadith & Sunnah Repository</p>
+            <p class="mb-0">Authenticated references, Isnad indices, and verified classical commentaries.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
