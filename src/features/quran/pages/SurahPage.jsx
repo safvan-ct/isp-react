@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useQuranVerses, useMinimalChapters } from "../hooks/useQuran";
 
@@ -33,6 +33,44 @@ export default function SurahPage() {
 	const [arabicFontSize, setArabicFontSize] = useState(28);
 	const [translationFontSize, setTranslationFontSize] = useState(16);
 	const [isReadMode, setIsReadMode] = useState(false);
+	const audioRef = useRef(null);
+	const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+	const [audioTime, setAudioTime] = useState(0);
+	const [audioDuration, setAudioDuration] = useState(0);
+	const [playbackRate, setPlaybackRate] = useState(1.0);
+	const [isRepeat, setIsRepeat] = useState(false);
+	const [isPlayingFullSurah, setIsPlayingFullSurah] = useState(false);
+	const isPlayingFullSurahRef = useRef(false);
+	const pendingNextVerseRef = useRef(null);
+
+	// Synchronize ref with state
+	useEffect(() => {
+		isPlayingFullSurahRef.current = isPlayingFullSurah;
+	}, [isPlayingFullSurah]);
+
+	// Cleanup audio on unmount or when surah slug changes
+	useEffect(() => {
+		return () => {
+			if (audioRef.current) {
+				audioRef.current.pause();
+				audioRef.current = null;
+			}
+			setIsPlayingFullSurah(false);
+			pendingNextVerseRef.current = null;
+		};
+	}, [surahSlug]);
+
+	// Continuous autoplay handler when loading more verses
+	useEffect(() => {
+		if (pendingNextVerseRef.current && !versesLoading && !loadingMore) {
+			const nextKey = pendingNextVerseRef.current;
+			const found = verses.some((v) => v.verseKey === nextKey);
+			if (found) {
+				pendingNextVerseRef.current = null;
+				handlePlayAudio(nextKey);
+			}
+		}
+	}, [verses, versesLoading, loadingMore]);
 
 	// Handlers
 	const toggleTafsir = (verseKey) => {
@@ -51,10 +89,142 @@ export default function SurahPage() {
 
 	const handlePlayAudio = (verseKey) => {
 		if (activePlayingVerse === verseKey) {
-			setActivePlayingVerse(null); // Pause
+			if (audioRef.current) {
+				audioRef.current.pause();
+			}
+			setActivePlayingVerse(null);
+			setIsAudioPlaying(false);
 		} else {
-			setActivePlayingVerse(verseKey); // Play
+			if (audioRef.current) {
+				audioRef.current.pause();
+				audioRef.current = null;
+			}
+
+			// Split "1:1" to chapter 1, ayah 1
+			const [chapterId, verseNumber] = verseKey.split(":");
+			const audioUrl = `https://the-quran-project.github.io/Quran-Audio/Data/1/${chapterId}_${verseNumber}.mp3`;
+
+			const audio = new Audio(audioUrl);
+			audio.playbackRate = playbackRate;
+			audio.loop = isRepeat;
+			audioRef.current = audio;
+			setActivePlayingVerse(verseKey);
+			setIsAudioPlaying(true);
+
+			audio.play().catch((err) => {
+				console.error("Audio playback failed:", err);
+				setActivePlayingVerse(null);
+				setIsAudioPlaying(false);
+			});
+
+			// Attach Audio Listeners
+			audio.ontimeupdate = () => {
+				setAudioTime(audio.currentTime);
+			};
+			audio.onloadedmetadata = () => {
+				setAudioDuration(audio.duration || 0);
+			};
+			audio.onplay = () => {
+				setIsAudioPlaying(true);
+			};
+			audio.onpause = () => {
+				setIsAudioPlaying(false);
+			};
+			audio.onended = () => {
+				setIsAudioPlaying(false);
+
+				// Handle Play Full Surah continuous logic
+				if (isPlayingFullSurahRef.current) {
+					const currentIndex = verses.findIndex((v) => v.verseKey === verseKey);
+					if (currentIndex !== -1 && currentIndex < verses.length - 1) {
+						// Play the next loaded verse
+						const nextVerse = verses[currentIndex + 1];
+						handlePlayAudio(nextVerse.verseKey);
+						// Scroll next verse card into view
+						setTimeout(() => {
+							const nextEl = document.getElementById(`v${currentIndex + 2}`);
+							if (nextEl) {
+								nextEl.scrollIntoView({ behavior: "smooth", block: "center" });
+							}
+						}, 300);
+					} else if (nextCursor) {
+						// Load more verses from server
+						const [chapId, vNum] = verseKey.split(":");
+						const nextVerseNumber = parseInt(vNum) + 1;
+						pendingNextVerseRef.current = `${chapId}:${nextVerseNumber}`;
+						loadMore();
+					} else {
+						// End of Surah
+						setIsPlayingFullSurah(false);
+						setActivePlayingVerse(null);
+						audioRef.current = null;
+					}
+				} else {
+					setActivePlayingVerse(null);
+					audioRef.current = null;
+				}
+			};
 		}
+	};
+
+	const togglePlayFullSurah = () => {
+		if (isPlayingFullSurah) {
+			if (audioRef.current) {
+				audioRef.current.pause();
+			}
+			setIsPlayingFullSurah(false);
+			setActivePlayingVerse(null);
+			setIsAudioPlaying(false);
+			pendingNextVerseRef.current = null;
+		} else {
+			if (verses && verses.length > 0) {
+				setIsPlayingFullSurah(true);
+				handlePlayAudio(verses[0].verseKey);
+
+				setTimeout(() => {
+					const firstEl = document.getElementById("v1");
+					if (firstEl) {
+						firstEl.scrollIntoView({ behavior: "smooth", block: "center" });
+					}
+				}, 300);
+			}
+		}
+	};
+
+	const handleMainPlayPause = () => {
+		if (!audioRef.current) return;
+		if (isAudioPlaying) {
+			audioRef.current.pause();
+		} else {
+			audioRef.current
+				.play()
+				.catch((err) => console.error("Play failed:", err));
+		}
+	};
+
+	const toggleSpeed = () => {
+		const rates = [1.0, 1.25, 1.5, 2.0];
+		const currentIndex = rates.indexOf(playbackRate);
+		const nextRate = rates[(currentIndex + 1) % rates.length];
+		setPlaybackRate(nextRate);
+		if (audioRef.current) {
+			audioRef.current.playbackRate = nextRate;
+		}
+	};
+
+	const toggleRepeat = () => {
+		const nextRepeat = !isRepeat;
+		setIsRepeat(nextRepeat);
+		if (audioRef.current) {
+			audioRef.current.loop = nextRepeat;
+		}
+	};
+
+	const formatTime = (secs) => {
+		if (isNaN(secs)) return "0:00";
+		const minutes = Math.floor(secs / 60);
+		const seconds = Math.floor(secs % 60);
+		return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 	};
 
 	const handleCopyText = (text, verseKey) => {
@@ -187,9 +357,7 @@ export default function SurahPage() {
 
 							{/* Dropdown Menu Overlay */}
 							{isDropdownOpen && (
-								<div
-									className="surah-select-dropdown py-1 mt-1 overflow-auto"
-								>
+								<div className="surah-select-dropdown py-1 mt-1 overflow-auto">
 									{chapters.map((c) => {
 										const isSelected = c.id === currentChapter?.id;
 										return (
@@ -297,9 +465,7 @@ export default function SurahPage() {
 
 							{/* Settings Dropdown menu */}
 							{isSettingsOpen && (
-								<div
-									className="settings-dropdown p-3 mt-1"
-								>
+								<div className="settings-dropdown p-3 mt-1">
 									<h6 className="fw-bold mb-3 small text-uppercase tracking-wider">
 										Reader Options
 									</h6>
@@ -410,18 +576,39 @@ export default function SurahPage() {
 							</p>
 						</div>
 
-						<div className="col-md-5 text-md-end text-start mt-3 mt-md-0">
+						<div className="col-md-5 text-md-end text-start mt-3 mt-md-0 d-flex flex-column align-items-md-end align-items-start gap-2 justify-content-center">
 							<div
-								className="font-quranic display-4 fw-bold text-warning mb-0"
+								className="mt-md-4 font-quranic display-4 fw-bold text-warning mb-0"
 								dir="rtl"
 								style={{ fontFamily: "var(--font-quranic)" }}
 							>
 								{currentChapter.arabicName}
 							</div>
-							{/* <div className="small text-white-50 mt-1">
-								<i className="bi bi-headphones me-1"></i> Reciter:{" "}
-								<strong>Mishary Rashid Alafasy</strong>
-							</div> */}
+							<button
+								className="btn d-inline-flex align-items-center gap-2 px-4 py-2 mt-2 border-0 shadow"
+								style={{
+									backgroundColor:
+										isPlayingFullSurah && isAudioPlaying
+											? "var(--desert-terracotta)"
+											: "var(--desert-gold)",
+									color: "#fff",
+									borderRadius: "50px",
+									fontWeight: "600",
+									fontSize: "0.85rem",
+									cursor: "pointer",
+									transition: "all 0.2s ease",
+								}}
+								onClick={togglePlayFullSurah}
+							>
+								<i
+									className={`bi ${isPlayingFullSurah && isAudioPlaying ? "bi-pause-fill fs-5" : "bi-play-fill fs-5"}`}
+								></i>
+								<span>
+									{isPlayingFullSurah && isAudioPlaying
+										? "Playing Surah"
+										: "Play Full Surah"}
+								</span>
+							</button>
 						</div>
 					</div>
 				</div>
@@ -518,12 +705,14 @@ export default function SurahPage() {
 										<button
 											className="verse-action-btn"
 											title={
-												isPlaying ? "Pause Verse Audio" : "Play Verse Audio"
+												isPlaying && isAudioPlaying
+													? "Pause Verse Audio"
+													: "Play Verse Audio"
 											}
 											onClick={() => handlePlayAudio(verse.verseKey)}
 										>
 											<i
-												className={`bi ${isPlaying ? "bi-pause-circle-fill text-danger" : "bi-play-circle-fill text-warning"} fs-5`}
+												className={`bi ${isPlaying && isAudioPlaying ? "bi-pause-circle-fill text-danger" : "bi-play-circle-fill text-warning"} fs-5`}
 											></i>
 										</button>
 										<button
@@ -616,7 +805,7 @@ export default function SurahPage() {
 				)}
 
 				{/* Bottom Pagination / Surah Navigation */}
-				<div
+				{/* <div
 					className="d-flex justify-content-between align-items-center my-5 pt-3 border-top flex-wrap gap-2"
 					style={{ borderColor: "var(--desert-dune) !important" }}
 				>
@@ -642,7 +831,7 @@ export default function SurahPage() {
 					>
 						Next Surah <i className="bi bi-arrow-right ms-1"></i>
 					</button>
-				</div>
+				</div> */}
 			</main>
 
 			{/* Sticky Bottom Audio Player Bar */}
@@ -653,20 +842,24 @@ export default function SurahPage() {
 						<div className="d-flex align-items-center gap-3">
 							<button
 								className="btn-play-main border-0"
-								onClick={() => setActivePlayingVerse(null)}
+								onClick={handleMainPlayPause}
+								style={{ cursor: "pointer" }}
 							>
-								<i className="bi bi-pause-fill"></i>
+								<i
+									className={`bi ${isAudioPlaying ? "bi-pause-fill" : "bi-play-fill"}`}
+								></i>
 							</button>
 							<div>
 								<div className="fw-bold text-white small mb-0">
-									Surah {currentChapter.name} • Verse {activePlayingVerse}
+									{currentChapter.name} • Verse{" "}
+									{activePlayingVerse.split(":")[1] || activePlayingVerse}
 								</div>
-								<small
+								{/* <small
 									className="text-white-50"
 									style={{ fontSize: "0.75rem" }}
 								>
 									Mishary Rashid Alafasy
-								</small>
+								</small> */}
 							</div>
 						</div>
 
@@ -677,34 +870,36 @@ export default function SurahPage() {
 						>
 							<span
 								className="small text-white-50"
-								style={{ fontSize: "0.75rem" }}
+								style={{ fontSize: "0.75rem", minWidth: "30px" }}
 							>
-								0:12
+								{formatTime(audioTime)}
 							</span>
-							<div
-								className="progress flex-grow-1"
+							<input
+								type="range"
+								className="form-range progress-slider flex-grow-1"
+								min="0"
+								max={audioDuration || 100}
+								value={audioTime}
+								onChange={(e) => {
+									const time = parseFloat(e.target.value);
+									setAudioTime(time);
+									if (audioRef.current) {
+										audioRef.current.currentTime = time;
+									}
+								}}
 								style={{
 									height: "6px",
+									cursor: "pointer",
+									accentColor: "var(--desert-gold)",
 									backgroundColor: "rgba(255,255,255,0.15)",
+									borderRadius: "3px",
 								}}
-							>
-								<div
-									className="progress-bar"
-									role="progressbar"
-									style={{
-										width: "30%",
-										backgroundColor: "var(--desert-gold)",
-									}}
-									aria-valuenow="30"
-									aria-valuemin="0"
-									aria-valuemax="100"
-								></div>
-							</div>
+							/>
 							<span
 								className="small text-white-50"
-								style={{ fontSize: "0.75rem" }}
+								style={{ fontSize: "0.75rem", minWidth: "30px" }}
 							>
-								0:45
+								{formatTime(audioDuration)}
 							</span>
 						</div>
 
@@ -712,21 +907,38 @@ export default function SurahPage() {
 						<div className="d-flex align-items-center gap-2 text-white">
 							<button
 								className="btn btn-sm text-white-50 p-1 border-0 bg-transparent"
-								title="Speed"
+								title="Playback Speed"
+								onClick={toggleSpeed}
+								style={{ cursor: "pointer" }}
 							>
-								<span className="badge bg-secondary">1.0x</span>
+								<span className="badge bg-secondary">
+									{playbackRate.toFixed(2)}x
+								</span>
 							</button>
 							<button
 								className="btn btn-sm text-white-50 p-1 border-0 bg-transparent"
-								title="Repeat"
+								title="Repeat Toggle"
+								onClick={toggleRepeat}
+								style={{ cursor: "pointer" }}
 							>
-								<i className="bi bi-repeat fs-5 text-white"></i>
+								<i
+									className={`bi bi-repeat fs-5 ${isRepeat ? "text-warning" : "text-white-50"}`}
+								></i>
 							</button>
 							<button
-								className="btn btn-sm text-white-50 p-1 d-none d-sm-inline border-0 bg-transparent"
-								title="Volume"
+								className="btn btn-sm text-white-50 p-1 border-0 bg-transparent"
+								title="Close Player"
+								onClick={() => {
+									if (audioRef.current) {
+										audioRef.current.pause();
+										audioRef.current = null;
+									}
+									setActivePlayingVerse(null);
+									setIsAudioPlaying(false);
+								}}
+								style={{ cursor: "pointer" }}
 							>
-								<i className="bi bi-volume-up fs-5 text-white"></i>
+								<i className="bi bi-x-lg fs-5 text-white"></i>
 							</button>
 						</div>
 					</div>
