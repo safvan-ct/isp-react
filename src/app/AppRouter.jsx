@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
         element: <HadithChaptersPage />,
       },
       {
-        path: 'hadith/:bookId/:chapterId',
+        path: 'hadith/:bookSlug/:chapterSlug',
         element: <HadithDetailPage />,
       },
       {
