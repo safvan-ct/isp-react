@@ -1,25 +1,46 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useHadithList, useHadithChapters } from "../hooks/useHadith";
+import { useHadithList, useHadithChaptersMinimal, useHadithSingle } from "../hooks/useHadith";
 
 export default function HadithDetailPage() {
-	const { bookSlug, chapterSlug } = useParams();
+	const { bookSlug, chapterSlug, hadithNumber } = useParams();
 	const navigate = useNavigate();
+	const isSingleView = Boolean(hadithNumber);
 
-	// Fetch chapter list for navigation + header info
-	const { book: navBook, chapters } = useHadithChapters(bookSlug);
+	// Fetch minimal chapter list (all=1&minimal=1) for filter bar dropdown & header info
+	const { book: navBook, chapters } = useHadithChaptersMinimal(bookSlug);
 
-	// Fetch hadiths (cursor-paginated) — also returns book/chapter meta
+	// Single Hadith hook (when URL is /hadith/:bookSlug/hadiths/:hadithNumber)
 	const {
-		hadiths,
-		book: apiBook,
-		chapter: apiChapter,
-		loading,
+		hadith: singleHadith,
+		book: singleBook,
+		chapter: singleChapter,
+		loading: singleLoading,
+		error: singleError,
+	} = useHadithSingle(bookSlug, isSingleView ? hadithNumber : null);
+
+	// Chapter Hadith list hook (when URL is /hadith/:bookSlug/:chapterSlug)
+	const {
+		hadiths: listHadiths,
+		book: listBook,
+		chapter: listChapter,
+		loading: listLoading,
 		loadingMore,
 		nextCursor,
 		loadMore,
-		error,
-	} = useHadithList(bookSlug, chapterSlug);
+		error: listError,
+	} = useHadithList(bookSlug, isSingleView ? null : chapterSlug);
+
+	const hadiths = isSingleView
+		? singleHadith
+			? [singleHadith]
+			: []
+		: listHadiths;
+
+	const apiBook = isSingleView ? singleBook : listBook;
+	const apiChapter = isSingleView ? singleChapter : listChapter;
+	const loading = isSingleView ? singleLoading : listLoading;
+	const error = isSingleView ? singleError : listError;
 
 	// UI states
 	const [expandedHeadings, setExpandedHeadings] = useState({});
@@ -27,6 +48,112 @@ export default function HadithDetailPage() {
 	const [copiedHadith, setCopiedHadith] = useState(null);
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+	const [arabicFontSize, setArabicFontSize] = useState(22);
+	const [translationFontSize, setTranslationFontSize] = useState(14);
+	const [showTranslation, setShowTranslation] = useState(true);
+	const [isSideBySide, setIsSideBySide] = useState(false);
+
+	// Translation states
+	const [selectedLang, setSelectedLang] = useState("en"); // 'en' | 'ml' | 'hi'
+	const [translations, setTranslations] = useState({}); // { [hadithId_field]: string }
+	const [translating, setTranslating] = useState({}); // { [hadithId]: boolean }
+	const translationCache = useRef({});
+
+	const LANGUAGES = [
+		{ code: "en", label: "EN", name: "English" },
+		{ code: "ml", label: "ML", name: "മലയാളം" },
+		{ code: "hi", label: "HI", name: "हिन्दी" },
+	];
+
+	/** Split text into chunks of at most `maxLen` chars, breaking at sentence boundaries */
+	const chunkText = (text, maxLen = 400) => {
+		if (text.length <= maxLen) return [text];
+		const chunks = [];
+		let remaining = text;
+		while (remaining.length > maxLen) {
+			// Try to break at a sentence boundary (". ") within the allowed length
+			let cut = remaining.lastIndexOf(". ", maxLen);
+			if (cut <= 0) {
+				// Fallback: break at last space within maxLen
+				cut = remaining.lastIndexOf(" ", maxLen);
+			}
+			if (cut <= 0) cut = maxLen; // Hard cut if no space found
+			chunks.push(remaining.slice(0, cut + 1).trim());
+			remaining = remaining.slice(cut + 1).trim();
+		}
+		if (remaining.length > 0) chunks.push(remaining);
+		return chunks;
+	};
+
+	/** Translate a single chunk via Google Translate free endpoint */
+	const translateChunk = async (text, targetLang) => {
+		const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
+		const res = await fetch(url);
+		if (!res.ok) throw new Error(`HTTP ${res.status}`);
+		const data = await res.json();
+		return data[0]?.map((c) => c[0]).join("") || text;
+	};
+
+	/** Translate a full (possibly long) string, chunking as needed */
+	const translateText = async (text, targetLang) => {
+		if (!text || targetLang === "en") return text;
+		const cacheKey = `${targetLang}::${text.slice(0, 80)}`;
+		if (translationCache.current[cacheKey])
+			return translationCache.current[cacheKey];
+		try {
+			const chunks = chunkText(text, 400);
+			const translated = (
+				await Promise.all(chunks.map((c) => translateChunk(c, targetLang)))
+			).join(" ");
+			translationCache.current[cacheKey] = translated;
+			return translated;
+		} catch {
+			return text; // fallback to original on error
+		}
+	};
+
+	/** Translate all loaded hadiths to the chosen language */
+	const translateAll = async (lang) => {
+		if (lang === "en") {
+			setTranslations({});
+			return;
+		}
+		const pending = {};
+		hadiths.forEach((h) => {
+			pending[h.id] = true;
+		});
+		setTranslating(pending);
+
+		const results = {};
+		await Promise.all(
+			hadiths.map(async (h) => {
+				const heading = getEnHeading(h);
+				const body = getTranslation(h);
+				const [tHeading, tBody] = await Promise.all([
+					heading ? translateText(heading, lang) : Promise.resolve(""),
+					body ? translateText(body, lang) : Promise.resolve(""),
+				]);
+				results[`${h.id}_heading`] = tHeading;
+				results[`${h.id}_body`] = tBody;
+			}),
+		);
+
+		setTranslations(results);
+		setTranslating({});
+	};
+
+	/** When language changes, trigger translation */
+	const handleLangChange = (lang) => {
+		setSelectedLang(lang);
+		translateAll(lang);
+	};
+
+	/** When new hadiths load and a non-EN lang is active, translate new ones */
+	useEffect(() => {
+		if (selectedLang !== "en" && hadiths.length > 0) {
+			translateAll(selectedLang);
+		}
+	}, [hadiths.length]);
 
 	// Infinite scroll – load more when user reaches the bottom
 	const bottomRef = useRef(null);
@@ -48,32 +175,56 @@ export default function HadithDetailPage() {
 	);
 	const activeChapter = chapters[currentChapterIndex] ?? apiChapter;
 
+	// Helper to extract translation name or title from chapter
+	const getChapterName = (chap) => {
+		if (!chap) return "";
+		return (
+			chap.translation ||
+			chap.title ||
+			chap.translations?.find((t) => t.lang === "en")?.name ||
+			chap.name ||
+			""
+		);
+	};
+
 	// Display names
 	const bookName =
 		(apiBook ?? navBook)?.translations?.find((t) => t.lang === "en")?.name ||
 		(apiBook ?? navBook)?.name ||
 		bookSlug;
 
-	const chapterName =
-		activeChapter?.translations?.find((t) => t.lang === "en")?.name ||
-		activeChapter?.name ||
-		apiChapter?.translations?.find((t) => t.lang === "en")?.name ||
-		apiChapter?.name ||
-		chapterSlug;
+	const chapterName = isSingleView
+		? getChapterName(activeChapter) ||
+		  getChapterName(apiChapter) ||
+		  `Hadith #${hadithNumber}`
+		: getChapterName(activeChapter) ||
+		  getChapterName(apiChapter) ||
+		  chapterSlug;
 
 	// Navigation helpers
-	const isPrevDisabled = currentChapterIndex <= 0 && chapters.length > 0;
-	const isNextDisabled =
-		chapters.length > 0 && currentChapterIndex >= chapters.length - 1;
+	const isPrevDisabled = isSingleView
+		? Number(hadithNumber) <= 1
+		: currentChapterIndex <= 0 && chapters.length > 0;
+
+	const isNextDisabled = isSingleView
+		? false
+		: chapters.length > 0 && currentChapterIndex >= chapters.length - 1;
 
 	const goToPrevChapter = () => {
-		if (currentChapterIndex > 0) {
+		if (isSingleView) {
+			if (Number(hadithNumber) > 1) {
+				navigate(`/hadith/${bookSlug}/hadiths/${Number(hadithNumber) - 1}`);
+			}
+		} else if (currentChapterIndex > 0) {
 			const prev = chapters[currentChapterIndex - 1];
 			navigate(`/hadith/${bookSlug}/${prev.slug || prev.id}`);
 		}
 	};
+
 	const goToNextChapter = () => {
-		if (currentChapterIndex < chapters.length - 1) {
+		if (isSingleView) {
+			navigate(`/hadith/${bookSlug}/hadiths/${Number(hadithNumber) + 1}`);
+		} else if (currentChapterIndex < chapters.length - 1) {
 			const next = chapters[currentChapterIndex + 1];
 			navigate(`/hadith/${bookSlug}/${next.slug || next.id}`);
 		}
@@ -207,6 +358,8 @@ export default function HadithDetailPage() {
 									{chapters.map((c) => {
 										const slug = c.slug || c.id;
 										const name =
+											c.translation ||
+											c.title ||
 											c.translations?.find((t) => t.lang === "en")?.name ||
 											c.name;
 										const isSelected = String(slug) === String(chapterSlug);
@@ -291,14 +444,150 @@ export default function HadithDetailPage() {
 
 							{/* Settings dropdown panel */}
 							{isSettingsOpen && (
-								<div className="settings-dropdown p-3 mt-1">
-									<h6 className="fw-bold mb-3 small text-uppercase">
-										Reader Options
-									</h6>
-									<div className="small text-muted mb-0">
-										<i className="bi bi-info-circle me-1"></i>
-										Display settings coming soon.
+								<div
+									className="settings-dropdown p-3 mt-1"
+									style={{ minWidth: "220px" }}
+								>
+									{/* Toggle Translation switch */}
+									<div className="form-check form-switch mb-2">
+										<input
+											className="form-check-input"
+											type="checkbox"
+											id="toggleHadithTranslation"
+											checked={showTranslation}
+											onChange={() => setShowTranslation(!showTranslation)}
+										/>
+										<label
+											className="form-check-label small fw-semibold"
+											htmlFor="toggleHadithTranslation"
+										>
+											Translation
+										</label>
 									</div>
+
+									{/* Toggle Side-by-Side View switch */}
+									<div className="form-check form-switch mb-3">
+										<input
+											className="form-check-input"
+											type="checkbox"
+											id="toggleTwoSideView"
+											checked={isSideBySide}
+											onChange={() => setIsSideBySide(!isSideBySide)}
+										/>
+										<label
+											className="form-check-label small fw-semibold"
+											htmlFor="toggleTwoSideView"
+										>
+											Side-by-Side View
+										</label>
+									</div>
+
+									{showTranslation && (
+										<>
+											<h6 className="fw-bold mb-2 small text-uppercase">
+												Language
+											</h6>
+											<div className="d-flex gap-1 flex-wrap">
+												{LANGUAGES.map((lang) => (
+													<button
+														key={lang.code}
+														onClick={() => handleLangChange(lang.code)}
+														className="btn btn-sm fw-semibold px-3 py-1"
+														style={{
+															backgroundColor:
+																selectedLang === lang.code
+																	? "var(--desert-terracotta)"
+																	: "var(--desert-sand-card, #f0ebe0)",
+															color:
+																selectedLang === lang.code
+																	? "#fff"
+																	: "var(--desert-night)",
+															border:
+																selectedLang === lang.code
+																	? "1px solid var(--desert-terracotta)"
+																	: "1px solid var(--desert-dune)",
+															borderRadius: "20px",
+															fontSize: "0.78rem",
+															transition: "all 0.2s ease",
+														}}
+													>
+														{lang.label}
+														{/* <span className="ms-1 opacity-75" style={{ fontSize: "0.72rem" }}>
+															{lang.name}
+														</span> */}
+													</button>
+												))}
+											</div>
+											{Object.keys(translating).length > 0 && (
+												<span className="d-flex align-items-center gap-1 text-muted small mt-2">
+													<span
+														className="spinner-border spinner-border-sm"
+														role="status"
+													></span>
+													Translating…
+												</span>
+											)}
+										</>
+									)}
+
+									<hr
+										className="my-3"
+										style={{ borderColor: "var(--desert-dune)" }}
+									/>
+
+									{/* Arabic font size */}
+									<div className="mb-3">
+										<label className="small text-muted mb-1 d-flex justify-content-between">
+											<span>
+												<i className="bi bi-type me-1"></i>Arabic Size
+											</span>
+											<span
+												className="fw-bold"
+												style={{ color: "var(--desert-terracotta)" }}
+											>
+												{arabicFontSize}px
+											</span>
+										</label>
+										<input
+											type="range"
+											className="form-range"
+											min="20"
+											max="48"
+											step="2"
+											value={arabicFontSize}
+											onChange={(e) =>
+												setArabicFontSize(parseInt(e.target.value))
+											}
+										/>
+									</div>
+
+									{/* Translation font size */}
+									{showTranslation && (
+										<div>
+											<label className="small text-muted mb-1 d-flex justify-content-between">
+												<span>
+													<i className="bi bi-fonts me-1"></i>Translation Size
+												</span>
+												<span
+													className="fw-bold"
+													style={{ color: "var(--desert-terracotta)" }}
+												>
+													{translationFontSize}px
+												</span>
+											</label>
+											<input
+												type="range"
+												className="form-range"
+												min="12"
+												max="24"
+												step="1"
+												value={translationFontSize}
+												onChange={(e) =>
+													setTranslationFontSize(parseInt(e.target.value))
+												}
+											/>
+										</div>
+									)}
 								</div>
 							)}
 						</div>
@@ -333,7 +622,10 @@ export default function HadithDetailPage() {
 				</nav>
 
 				{/* Chapter Banner */}
-				<section className="chapter-banner mb-4 shadow-sm text-start">
+				<section
+					className="chapter-banner mb-4 shadow-sm text-start"
+					data-arabic-name={activeChapter?.name || apiChapter?.name || ""}
+				>
 					<div className="row align-items-center g-3">
 						<div className="col-md-7">
 							<div className="d-flex align-items-center gap-2 mb-2 flex-wrap">
@@ -403,11 +695,21 @@ export default function HadithDetailPage() {
 													{arabicHeading}
 												</div>
 											)}
-
 											<div>
-												{enHeading && (
-													<h5 className="fw-bold mb-0 mt-1">{enHeading}</h5>
-												)}
+												{showTranslation &&
+													(translations[`${hadith.id}_heading`] ||
+														enHeading) && (
+														<h5 className="fw-bold mb-0 mt-1">
+															{translating[hadith.id] ? (
+																<span className="placeholder-glow d-block">
+																	<span className="placeholder col-8"></span>
+																</span>
+															) : (
+																translations[`${hadith.id}_heading`] ||
+																enHeading
+															)}
+														</h5>
+													)}
 											</div>
 										</div>
 									</div>
@@ -476,19 +778,94 @@ export default function HadithDetailPage() {
 										</div>
 									)}
 
-									{/* Arabic text */}
-									{arabicText && (
-										<div className="hadith-arabic-text mb-4">{arabicText}</div>
-									)}
+									{/* Card Body: Side-by-Side or Stacked */}
+									{isSideBySide && showTranslation ? (
+										<div className="row g-4 align-items-start">
+											{/* Left Column: Translation */}
+											<div className="col-md-6 order-2 order-md-1">
+												<div
+													className="hadith-translation fw-medium mb-2"
+													style={{
+														fontSize: `${translationFontSize}px`,
+														textAlign: "justify",
+													}}
+												>
+													{translating[hadith.id] ? (
+														<span className="placeholder-glow d-block">
+															<span className="placeholder col-12 mb-1"></span>
+															<span className="placeholder col-10 mb-1"></span>
+															<span className="placeholder col-8"></span>
+														</span>
+													) : (
+														translations[`${hadith.id}_body`] ||
+														translation || (
+															<span className="text-muted fst-italic">
+																Translation not available.
+															</span>
+														)
+													)}
+												</div>
+											</div>
 
-									{/* English translation */}
-									<div className="hadith-translation fw-medium mb-2">
-										{translation || (
-											<span className="text-muted fst-italic">
-												Translation not available.
-											</span>
-										)}
-									</div>
+											{/* Right Column: Arabic Text */}
+											<div className="col-md-6 order-1 order-md-2 border-start-md">
+												{arabicText && (
+													<div
+														className="hadith-arabic-text mb-2"
+														style={{
+															fontSize: `${arabicFontSize}px`,
+															lineHeight: 1.8,
+															textAlign: "justify",
+														}}
+													>
+														{arabicText}
+													</div>
+												)}
+											</div>
+										</div>
+									) : (
+										<>
+											{/* Arabic text */}
+											{arabicText && (
+												<div
+													className="hadith-arabic-text mb-4"
+													style={{
+														fontSize: `${arabicFontSize}px`,
+														lineHeight: 1.8,
+														textAlign: "justify",
+													}}
+												>
+													{arabicText}
+												</div>
+											)}
+
+											{/* Translation */}
+											{showTranslation && (
+												<div
+													className="hadith-translation fw-medium mb-2"
+													style={{
+														fontSize: `${translationFontSize}px`,
+														textAlign: "justify",
+													}}
+												>
+													{translating[hadith.id] ? (
+														<span className="placeholder-glow d-block">
+															<span className="placeholder col-12 mb-1"></span>
+															<span className="placeholder col-10 mb-1"></span>
+															<span className="placeholder col-8"></span>
+														</span>
+													) : (
+														translations[`${hadith.id}_body`] ||
+														translation || (
+															<span className="text-muted fst-italic">
+																Translation not available.
+															</span>
+														)
+													)}
+												</div>
+											)}
+										</>
+									)}
 								</div>
 							</div>
 						);

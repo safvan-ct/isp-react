@@ -780,7 +780,7 @@ footer a:hover {
 }
 
 .book-header-banner::after {
-    content: "البخاري";
+    content: attr(data-arabic-name);
     position: absolute;
     right: 20px;
     bottom: -30px;
@@ -788,6 +788,7 @@ footer a:hover {
     color: rgba(194, 150, 83, 0.05);
     font-family: var(--font-quranic);
     pointer-events: none;
+    white-space: nowrap;
 }
 
 .stat-pill {
@@ -814,13 +815,16 @@ footer a:hover {
     background: var(--desert-sand-card);
     border: 1px solid var(--desert-dune);
     border-radius: 18px;
-    padding: 1.4rem;
+    padding: 1.25rem 1.4rem;
     transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
     text-decoration: none;
     color: inherit;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     position: relative;
     overflow: hidden;
+    height: 100%;
 }
 
 .chapter-card:hover {
@@ -882,6 +886,22 @@ footer a:hover {
     border: 1px solid rgba(194, 150, 83, 0.25);
     padding: 0.25rem 0.65rem;
     border-radius: 20px;
+    white-space: nowrap;
+}
+
+/* Line clamp utility classes */
+.line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .section-category-header {
@@ -1006,7 +1026,7 @@ footer a:hover {
 }
 
 .chapter-banner::after {
-    content: "الإيمان";
+    content: attr(data-arabic-name);
     position: absolute;
     right: 20px;
     bottom: -20px;
@@ -1014,6 +1034,7 @@ footer a:hover {
     color: rgba(194, 150, 83, 0.05);
     font-family: var(--font-quranic);
     pointer-events: none;
+    white-space: nowrap;
 }
 
 /* Sub-Chapter / Bab Section Divider Card */
@@ -1100,7 +1121,7 @@ footer a:hover {
     font-size: 2.1rem;
     line-height: 2.3;
     color: var(--desert-night);
-    text-align: right;
+    text-align: justify;
     direction: rtl;
     word-spacing: 3px;
 }
@@ -1110,6 +1131,7 @@ footer a:hover {
     font-size: 1.05rem;
     line-height: 1.7;
     color: var(--desert-night);
+    text-align: justify;
 }
 
 /* Action Buttons */
@@ -1271,7 +1293,7 @@ footer a:hover {
     font-size: 1.85rem;
     line-height: 2.2;
     color: var(--desert-night);
-    text-align: right;
+    text-align: justify;
     direction: rtl;
 }
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getHadithBooks, getHadithChapters, getHadiths } from '../services/hadithApi';
+import { getHadithBooks, getHadithChapters, getHadiths, getHadithByNumber, getHadithChaptersMinimal } from '../services/hadithApi';
 
 export function useHadithBooks() {
   const [books, setBooks] = useState([]);
@@ -147,4 +147,60 @@ export function useHadithList(bookSlug, chapterSlug) {
   };
 
   return { hadiths, book, chapter, loading, loadingMore, nextCursor, loadMore, error };
+}
+
+export function useHadithSingle(bookSlug, hadithNumber) {
+  const [hadith, setHadith] = useState(null);
+  const [book, setBook] = useState(null);
+  const [chapter, setChapter] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!bookSlug || !hadithNumber) return;
+    const fetchSingle = async () => {
+      try {
+        setLoading(true);
+        const result = await getHadithByNumber(bookSlug, hadithNumber);
+        setHadith(result.hadith);
+        if (result.book) setBook(result.book);
+        if (result.chapter) setChapter(result.chapter);
+        setError(null);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSingle();
+  }, [bookSlug, hadithNumber]);
+
+  return { hadith, book, chapter, loading, error };
+}
+
+export function useHadithChaptersMinimal(bookSlug) {
+  const [chapters, setChapters] = useState([]);
+  const [book, setBook] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!bookSlug) return;
+    const fetchMinimal = async () => {
+      try {
+        setLoading(true);
+        const res = await getHadithChaptersMinimal(bookSlug);
+        setChapters(res.chapters);
+        if (res.book) setBook(res.book);
+        setError(null);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchMinimal();
+  }, [bookSlug]);
+
+  return { book, chapters, loading, error };
 }
