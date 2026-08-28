@@ -2048,3 +2048,33 @@ footer a:hover {
 
 /* Buttons */
 /* Footer */
+
+/* =======================================================
+   CUSTOM FORM INPUTS & SWITCHES (Desert Terracotta Theme)
+   ======================================================= */
+.form-check-input:checked {
+    background-color: var(--desert-terracotta) !important;
+    border-color: var(--desert-terracotta) !important;
+}
+
+.form-check-input:focus {
+    border-color: var(--desert-terracotta) !important;
+    box-shadow: 0 0 0 0.25rem rgba(163, 88, 57, 0.25) !important;
+}
+
+.form-check-input {
+    border-color: var(--desert-dune);
+    cursor: pointer;
+}
+
+.form-range::-webkit-slider-thumb {
+    background-color: var(--desert-terracotta) !important;
+}
+
+.form-range::-moz-range-thumb {
+    background-color: var(--desert-terracotta) !important;
+}
+
+.form-range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 0.25rem rgba(163, 88, 57, 0.25) !important;
+}

@@ -1,15 +1,13 @@
 import apiClient from '../../../services/apiClient';
-import { getSiteLanguage } from '../../../services/siteLanguage';
 
 /**
  * Service to retrieve Hadith (Maktaba) collections from the backend.
  */
 export const getHadithBooks = async (cursor = null) => {
-  const lang = getSiteLanguage();
   try {
-    const url = cursor ? `/hadith/books?cursor=${cursor}&translation=${lang}` : `/hadith/books?translation=${lang}`;
-    const response = await apiClient.get(url);
-    return response.data; // Return the full envelope (data, links, meta)
+    const params = cursor ? { cursor } : {};
+    const response = await apiClient.get('/hadith/books', { params });
+    return response.data;
   } catch (error) {
     console.error('Error fetching Hadith books:', error);
     throw error;
@@ -17,12 +15,9 @@ export const getHadithBooks = async (cursor = null) => {
 };
 
 export const getHadithChapters = async (bookSlug, cursor = null) => {
-  const lang = getSiteLanguage();
   try {
-    const url = cursor 
-      ? `/hadith/books/${bookSlug}/chapters?cursor=${cursor}&translation=${lang}`
-      : `/hadith/books/${bookSlug}/chapters?translation=${lang}`;
-    const response = await apiClient.get(url);
+    const params = cursor ? { cursor } : {};
+    const response = await apiClient.get(`/hadith/books/${bookSlug}/chapters`, { params });
     return {
       book: response.data.book,
       chapters: response.data.chapters?.data || [],
@@ -35,14 +30,10 @@ export const getHadithChapters = async (bookSlug, cursor = null) => {
 };
 
 export const getHadiths = async (bookSlug, chapterSlug, cursor = null) => {
-  const lang = getSiteLanguage();
   try {
-    const url = cursor
-      ? `/hadith/books/${bookSlug}/chapters/${chapterSlug}/hadiths?cursor=${cursor}&translation=${lang}`
-      : `/hadith/books/${bookSlug}/chapters/${chapterSlug}/hadiths?translation=${lang}`;
-    const response = await apiClient.get(url);
+    const params = cursor ? { cursor } : {};
+    const response = await apiClient.get(`/hadith/books/${bookSlug}/chapters/${chapterSlug}/hadiths`, { params });
     const resData = response.data;
-    // Real response shape: { book, chapter, verses: { data, links, meta } }
     const verses = resData.verses?.data ?? resData.data ?? resData ?? [];
     const nextCursor = resData.verses?.meta?.next_cursor ?? null;
     return {
@@ -58,10 +49,9 @@ export const getHadiths = async (bookSlug, chapterSlug, cursor = null) => {
 };
 
 export const searchHadithChapters = async (bookSlug, chapterName) => {
-  const lang = getSiteLanguage();
   try {
-    const url = `/hadith/books/${bookSlug}/chapters?chapter_name=${encodeURIComponent(chapterName)}&translation=${lang}`;
-    const response = await apiClient.get(url);
+    const params = { chapter_name: chapterName };
+    const response = await apiClient.get(`/hadith/books/${bookSlug}/chapters`, { params });
     const chapters = response.data.chapters?.data || response.data.chapters || response.data.data || [];
     return {
       book: response.data.book,
@@ -75,10 +65,8 @@ export const searchHadithChapters = async (bookSlug, chapterName) => {
 };
 
 export const getHadithByNumber = async (bookSlug, hadithNumber) => {
-  const lang = getSiteLanguage();
   try {
-    const url = `/hadith/books/${bookSlug}/hadiths/${hadithNumber}?translation=${lang}`;
-    const response = await apiClient.get(url);
+    const response = await apiClient.get(`/hadith/books/${bookSlug}/hadiths/${hadithNumber}`);
     const resData = response.data;
     const versesList = resData.verses?.data ?? resData.verses ?? resData.data;
     const hadithObj = Array.isArray(versesList)
@@ -96,10 +84,9 @@ export const getHadithByNumber = async (bookSlug, hadithNumber) => {
 };
 
 export const getHadithChaptersMinimal = async (bookSlug) => {
-  const lang = getSiteLanguage();
   try {
-    const url = `/hadith/books/${bookSlug}/chapters?all=1&minimal=1&translation=${lang}`;
-    const response = await apiClient.get(url);
+    const params = { all: 1, minimal: 1 };
+    const response = await apiClient.get(`/hadith/books/${bookSlug}/chapters`, { params });
     const resData = response.data;
     const chaptersList = resData.chapters?.data || resData.chapters || resData.data || [];
     return {

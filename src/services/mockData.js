@@ -1,48 +1,5 @@
 // Structured mock database for Al-Athar Portal
 
-export const hadithChapters = {
-	bukhari: [
-		{
-			id: 1,
-			name: "Revelation (Wahy)",
-			arabicName: "كتاب بدء الوحى",
-			count: 7,
-		},
-		{ id: 2, name: "Belief (Iman)", arabicName: "كتاب الإيمان", count: 35 },
-		{ id: 3, name: "Knowledge ('Ilm)", arabicName: "كتاب العلم", count: 50 },
-		{ id: 4, name: "Ablution (Wudu)", arabicName: "كتاب الوضوء", count: 80 },
-	],
-};
-
-export const hadithList = {
-	bukhari_1: [
-		{
-			id: 1,
-			narrator: "Umar bin Al-Khattab",
-			arabic:
-				'سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ ‏ "‏ إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى، فَمَنْ كَانَتْ هِجْرَتُهُ إِلَى دُنْيَا يُصِيبُهَا أَوْ إِلَى امْرَأَةٍ يَنْكِحُهَا فَهِجْرَتُهُ إِلَى مَا هَاجَرَ إِلَيْهِ ‏"‏‏.‏',
-			translation:
-				"I heard Allah's Messenger (ﷺ) saying, 'The reward of deeds depends upon the intentions and every person will get the reward according to what he has intended. So whoever emigrated for worldly benefits or for a woman to marry, his emigration was for what he emigrated for.'",
-			grade: "Sahih",
-			reference: "Sahih al-Bukhari 1 (Book 1, Hadith 1)",
-			explanation:
-				"This Hadith is a foundational principle of Islamic jurisprudence. It highlights that actions are judged solely based on sincerity and intentions behind them. Even noble acts are rendered useless if done for worldly praise.",
-		},
-		{
-			id: 2,
-			narrator: "Aisha (Mother of the Believers)",
-			arabic:
-				'أَنَّ حَارِثَ بْنَ هِشَامٍ سَأَلَ رَسُولَ اللَّهِ صلى الله عليه وسلم كَيْفَ يَأْتِيكَ الْوَحْىُ فَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏ "‏ أَحْيَانًا يَأْتِينِي مِثْلَ صَلْصَلَةِ الْجَرَسِ ـ وَهُوَ أَشَدُّهُ عَلَىَّ ـ فَيُفْصَمُ عَنِّي وَقَدْ وَعَيْتُ عَنْهُ مَا قَالَ، وَأَحْيَانًا يَتَمَثَّلُ لِيَ الْمَلَكُ رَجُلاً فَيُكَلِّمُنِي فَأَعِي مَا يَقُولُ ‏"‏‏.‏',
-			translation:
-				"Harith bin Hisham asked Allah's Messenger (ﷺ) 'O Allah's Messenger (ﷺ)! How is the Divine Inspiration revealed to you?' Allah's Messenger (ﷺ) replied, 'Sometimes it is revealed like the ringing of a bell, this form is the hardest of all and then this state passes off after I have grasped what is inspired. Sometimes the Angel comes in the form of a man and talks to me and I grasp whatever he says.'",
-			grade: "Sahih",
-			reference: "Sahih al-Bukhari 2 (Book 1, Hadith 2)",
-			explanation:
-				"This Hadith explains the physical modes of receiving revelation. The Prophet experienced intense physical pressure when the words were cast directly into his heart.",
-		},
-	],
-};
-
 export const academyTracks = [
 	{
 		id: "tajweed",

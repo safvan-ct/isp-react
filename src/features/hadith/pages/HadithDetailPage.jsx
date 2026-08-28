@@ -1,47 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useHadithList, useHadithChaptersMinimal, useHadithSingle } from "../hooks/useHadith";
+import { useHadithList, useHadithChaptersMinimal } from "../hooks/useHadith";
 import { getSiteLanguage } from "../../../services/siteLanguage";
 
 export default function HadithDetailPage() {
-	const { bookSlug, chapterSlug, hadithNumber } = useParams();
+	const { bookSlug, chapterSlug } = useParams();
 	const navigate = useNavigate();
-	const isSingleView = Boolean(hadithNumber);
 
 	// Fetch minimal chapter list (all=1&minimal=1) for filter bar dropdown & header info
 	const { book: navBook, chapters } = useHadithChaptersMinimal(bookSlug);
 
-	// Single Hadith hook (when URL is /hadith/:bookSlug/hadiths/:hadithNumber)
-	const {
-		hadith: singleHadith,
-		book: singleBook,
-		chapter: singleChapter,
-		loading: singleLoading,
-		error: singleError,
-	} = useHadithSingle(bookSlug, isSingleView ? hadithNumber : null);
-
 	// Chapter Hadith list hook (when URL is /hadith/:bookSlug/:chapterSlug)
 	const {
-		hadiths: listHadiths,
-		book: listBook,
-		chapter: listChapter,
-		loading: listLoading,
+		hadiths,
+		book: apiBook,
+		chapter: apiChapter,
+		loading,
 		loadingMore,
 		nextCursor,
 		loadMore,
-		error: listError,
-	} = useHadithList(bookSlug, isSingleView ? null : chapterSlug);
+		error,
+	} = useHadithList(bookSlug, chapterSlug);
 
-	const hadiths = isSingleView
-		? singleHadith
-			? [singleHadith]
-			: []
-		: listHadiths;
 
-	const apiBook = isSingleView ? singleBook : listBook;
-	const apiChapter = isSingleView ? singleChapter : listChapter;
-	const loading = isSingleView ? singleLoading : listLoading;
-	const error = isSingleView ? singleError : listError;
 
 	// UI states
 	const [expandedHeadings, setExpandedHeadings] = useState({});
@@ -207,38 +188,25 @@ export default function HadithDetailPage() {
 		targetBook?.name ||
 		bookSlug;
 
-	const chapterName = isSingleView
-		? getChapterName(activeChapter) ||
-		  getChapterName(apiChapter) ||
-		  `Hadith #${hadithNumber}`
-		: getChapterName(activeChapter) ||
-		  getChapterName(apiChapter) ||
-		  chapterSlug;
+	const chapterName =
+		getChapterName(activeChapter) ||
+		getChapterName(apiChapter) ||
+		chapterSlug;
 
 	// Navigation helpers
-	const isPrevDisabled = isSingleView
-		? Number(hadithNumber) <= 1
-		: currentChapterIndex <= 0 && chapters.length > 0;
-
-	const isNextDisabled = isSingleView
-		? false
-		: chapters.length > 0 && currentChapterIndex >= chapters.length - 1;
+	const isPrevDisabled = currentChapterIndex <= 0 && chapters.length > 0;
+	const isNextDisabled =
+		chapters.length > 0 && currentChapterIndex >= chapters.length - 1;
 
 	const goToPrevChapter = () => {
-		if (isSingleView) {
-			if (Number(hadithNumber) > 1) {
-				navigate(`/hadith/${bookSlug}/hadiths/${Number(hadithNumber) - 1}`);
-			}
-		} else if (currentChapterIndex > 0) {
+		if (currentChapterIndex > 0) {
 			const prev = chapters[currentChapterIndex - 1];
 			navigate(`/hadith/${bookSlug}/${prev.slug || prev.id}`);
 		}
 	};
 
 	const goToNextChapter = () => {
-		if (isSingleView) {
-			navigate(`/hadith/${bookSlug}/hadiths/${Number(hadithNumber) + 1}`);
-		} else if (currentChapterIndex < chapters.length - 1) {
+		if (currentChapterIndex < chapters.length - 1) {
 			const next = chapters[currentChapterIndex + 1];
 			navigate(`/hadith/${bookSlug}/${next.slug || next.id}`);
 		}

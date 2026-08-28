@@ -666,9 +666,8 @@ export default function HadithChaptersPage() {
 											const cSlug =
 												singleHadithData.chapter.slug ||
 												singleHadithData.chapter.id;
-											const hId = singleHadithData.hadith.id;
 											setSingleHadithData(null);
-											navigate(`/hadith/${bookId}/${cSlug}#h${hId}`);
+											navigate(`/hadith/${bookId}/${cSlug}`);
 										}}
 									>
 										View Full Chapter <i className="bi bi-arrow-right ms-1"></i>

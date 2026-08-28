@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as mockData from "./mockData";
+import { getSiteLanguage } from "./siteLanguage";
 
 // Create Axios Instance
 const apiClient = axios.create({
@@ -9,20 +9,24 @@ const apiClient = axios.create({
 	},
 });
 
+// Automatic Interceptor: Inject site language translation param into all API requests
+apiClient.interceptors.request.use((config) => {
+	config.params = config.params || {};
+	if (!config.params.translation) {
+		config.params.translation = getSiteLanguage();
+	}
+	return config;
+});
+
 /**
  * Helper to fetch local mock data simulating network latency.
- * Enables zero-code-change migrations to actual API endpoints in production.
  */
 export const fetchMockData = async (endpoint, params = {}) => {
 	await new Promise((resolve) => setTimeout(resolve, 150)); // low latency simulation
 
 	switch (endpoint) {
 		case "courses/tracks":
-			return { data: mockData.academyTracks };
-		case "courses/track": {
-			const track = mockData.academyTracks.find((t) => t.id === params.trackId);
-			return { data: track || null };
-		}
+			return { data: [] };
 		default:
 			throw new Error(`Endpoint not mocked: ${endpoint}`);
 	}
