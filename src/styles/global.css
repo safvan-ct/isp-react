@@ -1792,8 +1792,34 @@ footer a:hover {
 }
 
 .verse-card.playing {
-    border-left: 4px solid var(--desert-terracotta);
-    background: #FFFDF9;
+    border-left: 5px solid var(--desert-terracotta) !important;
+    border-color: var(--desert-terracotta) !important;
+    background: #FAF3EA !important;
+    box-shadow: 0 8px 24px rgba(163, 88, 57, 0.14) !important;
+}
+
+.verse-card.playing .quran-arabic-text {
+    color: var(--desert-terracotta) !important;
+    transition: color 0.3s ease;
+}
+
+.verse-card.playing .verse-transliteration {
+    color: var(--desert-terracotta) !important;
+    font-weight: 600;
+}
+
+.verse-card.playing .verse-number-badge {
+    background: var(--desert-terracotta) !important;
+    border-color: var(--desert-terracotta) !important;
+    color: #FFFFFF !important;
+}
+
+.playing-ayah-text {
+    color: inherit;
+    background-color: transparent !important;
+    border-radius: 0;
+    padding: 0;
+    transition: all 0.3s ease;
 }
 
 /* Islamic Octagonal / Star Verse Badge */

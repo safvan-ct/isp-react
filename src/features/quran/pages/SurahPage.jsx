@@ -48,15 +48,31 @@ export default function SurahPage() {
 		isPlayingFullSurahRef.current = isPlayingFullSurah;
 	}, [isPlayingFullSurah]);
 
-	// Cleanup audio on unmount or when surah slug changes
-	useEffect(() => {
-		return () => {
-			if (audioRef.current) {
+	const stopAudio = () => {
+		if (audioRef.current) {
+			try {
 				audioRef.current.pause();
-				audioRef.current = null;
+				audioRef.current.currentTime = 0;
+				audioRef.current.src = "";
+			} catch (err) {
+				console.error("Audio pause error:", err);
 			}
-			setIsPlayingFullSurah(false);
-			pendingNextVerseRef.current = null;
+			audioRef.current = null;
+		}
+		setActivePlayingVerse(null);
+		setIsAudioPlaying(false);
+		setIsPlayingFullSurah(false);
+		isPlayingFullSurahRef.current = false;
+		pendingNextVerseRef.current = null;
+		setAudioTime(0);
+		setAudioDuration(0);
+	};
+
+	// Cleanup and stop audio when surah slug changes or on unmount
+	useEffect(() => {
+		stopAudio();
+		return () => {
+			stopAudio();
 		};
 	}, [surahSlug]);
 
@@ -71,6 +87,77 @@ export default function SurahPage() {
 			}
 		}
 	}, [verses, versesLoading, loadingMore]);
+
+	// Auto-scroll active playing verse card into view
+	useEffect(() => {
+		if (activePlayingVerse) {
+			const idx = verses.findIndex((v) => v.verseKey === activePlayingVerse);
+			if (idx !== -1) {
+				const el = document.getElementById(`v${idx + 1}`);
+				if (el) {
+					el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+				}
+			}
+		}
+	}, [activePlayingVerse, verses]);
+
+	// Word-by-word active audio text color highlighter
+	const renderArabicWithWordHighlight = (
+		arabicText,
+		isPlaying,
+		isAudioPlaying,
+		audioTime,
+		audioDuration
+	) => {
+		if (!arabicText) return null;
+		const tokens = arabicText.split(/(\s+)/);
+		if (!isPlaying || !isAudioPlaying || !audioDuration || audioDuration <= 0) {
+			return (
+				<span
+					style={{
+						color: isPlaying ? "var(--desert-terracotta)" : "inherit",
+						transition: "color 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+					}}
+				>
+					{arabicText}
+				</span>
+			);
+		}
+
+		const wordsOnly = tokens.filter((t) => t.trim().length > 0);
+		const activeWordIdx = Math.min(
+			wordsOnly.length - 1,
+			Math.floor((audioTime / audioDuration) * wordsOnly.length)
+		);
+
+		let wordCounter = 0;
+		return tokens.map((token, i) => {
+			if (token.trim().length === 0) {
+				return <span key={i}>{token}</span>;
+			}
+			const isCurrentWord = wordCounter === activeWordIdx;
+			wordCounter++;
+			return (
+				<span
+					key={i}
+					style={{
+						color: isCurrentWord
+							? "var(--desert-terracotta)"
+							: isPlaying
+							? "var(--desert-gold-hover, #9e7534)"
+							: "var(--desert-night)",
+						textShadow: isCurrentWord
+							? "0 0 12px rgba(163, 88, 57, 0.25)"
+							: "none",
+						transition: "color 0.35s cubic-bezier(0.4, 0, 0.2, 1), text-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+						display: "inline-block",
+					}}
+				>
+					{token}
+				</span>
+			);
+		});
+	};
 
 	// Handlers
 	const toggleTafsir = (verseKey) => {
@@ -240,12 +327,14 @@ export default function SurahPage() {
 
 	const goToPrevSurah = () => {
 		if (!isFirst) {
+			stopAudio();
 			navigate(`/quran/${chapters[currentIndex - 1].slug}`);
 		}
 	};
 
 	const goToNextSurah = () => {
 		if (!isLast) {
+			stopAudio();
 			navigate(`/quran/${chapters[currentIndex + 1].slug}`);
 		}
 	};
@@ -364,6 +453,7 @@ export default function SurahPage() {
 											<button
 												key={c.id}
 												onClick={() => {
+													stopAudio();
 													navigate(`/quran/${c.slug}`);
 													setIsDropdownOpen(false);
 												}}
@@ -651,24 +741,43 @@ export default function SurahPage() {
 								wordSpacing: "2px",
 							}}
 						>
-							{verses.map((verse, index) => (
-								<span key={verse.verseKey} className="d-inline-wrap">
-									{verse.arabic}
+							{verses.map((verse, index) => {
+								const isPlaying = activePlayingVerse === verse.verseKey;
+								return (
 									<span
-										className="badge bg-warning text-dark mx-2 rounded-circle d-inline-flex align-items-center justify-content-center"
-										style={{
-											width: "2.2rem",
-											height: "2.2rem",
-											fontSize: `${Math.max(12, arabicFontSize * 0.45)}px`,
-											verticalAlign: "middle",
-											border: "1px solid var(--desert-gold)",
-											fontFamily: "sans-serif",
-										}}
+										key={verse.verseKey}
+										className="d-inline-wrap"
+										style={{ backgroundColor: "transparent" }}
 									>
-										{index + 1}
+										{renderArabicWithWordHighlight(
+											verse.arabic,
+											isPlaying,
+											isAudioPlaying,
+											audioTime,
+											audioDuration
+										)}
+										<span
+											className={`badge ${isPlaying ? "bg-terracotta text-white" : "bg-warning text-dark"} mx-2 rounded-circle d-inline-flex align-items-center justify-content-center`}
+											style={{
+												width: "2.2rem",
+												height: "2.2rem",
+												fontSize: `${Math.max(12, arabicFontSize * 0.45)}px`,
+												verticalAlign: "middle",
+												border: isPlaying
+													? "1px solid var(--desert-terracotta)"
+													: "1px solid var(--desert-gold)",
+												backgroundColor: isPlaying
+													? "var(--desert-terracotta)"
+													: undefined,
+												color: isPlaying ? "#ffffff" : undefined,
+												fontFamily: "sans-serif",
+											}}
+										>
+											{index + 1}
+										</span>
 									</span>
-								</span>
-							))}
+								);
+							})}
 						</div>
 					</div>
 				) : (
@@ -753,7 +862,13 @@ export default function SurahPage() {
 									className="quran-arabic-text mb-4"
 									style={{ fontSize: `${arabicFontSize}px`, lineHeight: 1.8 }}
 								>
-									{verse.arabic}
+									{renderArabicWithWordHighlight(
+										verse.arabic,
+										isPlaying,
+										isAudioPlaying,
+										audioTime,
+										audioDuration
+									)}
 								</div>
 
 								{/* Transliteration */}
