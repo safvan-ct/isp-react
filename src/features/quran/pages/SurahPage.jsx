@@ -107,7 +107,7 @@ export default function SurahPage() {
 		isPlaying,
 		isAudioPlaying,
 		audioTime,
-		audioDuration
+		audioDuration,
 	) => {
 		if (!arabicText) return null;
 		const tokens = arabicText.split(/(\s+)/);
@@ -127,7 +127,7 @@ export default function SurahPage() {
 		const wordsOnly = tokens.filter((t) => t.trim().length > 0);
 		const activeWordIdx = Math.min(
 			wordsOnly.length - 1,
-			Math.floor((audioTime / audioDuration) * wordsOnly.length)
+			Math.floor((audioTime / audioDuration) * wordsOnly.length),
 		);
 
 		let wordCounter = 0;
@@ -144,12 +144,13 @@ export default function SurahPage() {
 						color: isCurrentWord
 							? "var(--desert-terracotta)"
 							: isPlaying
-							? "var(--desert-gold-hover, #9e7534)"
-							: "var(--desert-night)",
+								? "var(--desert-gold-hover, #9e7534)"
+								: "var(--desert-night)",
 						textShadow: isCurrentWord
 							? "0 0 12px rgba(163, 88, 57, 0.25)"
 							: "none",
-						transition: "color 0.35s cubic-bezier(0.4, 0, 0.2, 1), text-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+						transition:
+							"color 0.35s cubic-bezier(0.4, 0, 0.2, 1), text-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
 						display: "inline-block",
 					}}
 				>
@@ -256,13 +257,13 @@ export default function SurahPage() {
 
 	const togglePlayFullSurah = () => {
 		if (isPlayingFullSurah) {
-			if (audioRef.current) {
+			if (audioRef.current && isAudioPlaying) {
 				audioRef.current.pause();
+			} else if (audioRef.current) {
+				audioRef.current
+					.play()
+					.catch((err) => console.error("Audio playback failed:", err));
 			}
-			setIsPlayingFullSurah(false);
-			setActivePlayingVerse(null);
-			setIsAudioPlaying(false);
-			pendingNextVerseRef.current = null;
 		} else {
 			if (verses && verses.length > 0) {
 				setIsPlayingFullSurah(true);
@@ -313,6 +314,9 @@ export default function SurahPage() {
 		const seconds = Math.floor(secs % 60);
 		return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 	};
+
+	const formatArabicNumber = (number) =>
+		String(number).replace(/\d/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[digit]);
 
 	const handleCopyText = (text, verseKey) => {
 		navigator.clipboard.writeText(text);
@@ -513,6 +517,24 @@ export default function SurahPage() {
 
 					{/* Jump to Ayah & Settings Trigger */}
 					<div className="d-flex align-items-center gap-2">
+						<button
+							className="reader-btn"
+							onClick={togglePlayFullSurah}
+							title={
+								isPlayingFullSurah && isAudioPlaying
+									? "Pause Full Surah"
+									: "Play Full Surah"
+							}
+						>
+							<i
+								className={`bi ${isPlayingFullSurah && isAudioPlaying ? "bi-pause-fill" : "bi-play-fill"}`}
+							></i>{" "}
+							<span className="d-none d-md-inline">
+								{isPlayingFullSurah && isAudioPlaying
+									? "Playing Surah"
+									: "Play Full Surah"}
+							</span>
+						</button>
 						{/* <div className="d-flex align-items-center gap-1">
 							<span className="small text-muted d-none d-md-inline">Ayah:</span>
 							<select
@@ -653,7 +675,7 @@ export default function SurahPage() {
 									{currentChapter.versesCount || verses.length} Ayahs
 								</span>
 								<span className="badge bg-outline-light border text-light px-2 py-1">
-									JUZ {currentChapter.juz || verses[0]?.juz || 1}
+									JUZ {verses[0]?.juz || 1}
 								</span>
 							</div>
 							<h1 className="fw-bold display-6 mb-1">
@@ -666,7 +688,7 @@ export default function SurahPage() {
 							</p>
 						</div>
 
-						<div className="col-md-5 text-md-end text-start mt-3 mt-md-0 d-flex flex-column align-items-md-end align-items-start gap-2 justify-content-center">
+						<div className="col-md-5 text-end mt-3 mt-md-0 d-flex flex-column align-items-end gap-2 justify-content-center">
 							<div
 								className="mt-md-4 font-quranic display-4 fw-bold text-warning mb-0"
 								dir="rtl"
@@ -674,38 +696,13 @@ export default function SurahPage() {
 							>
 								{currentChapter.arabicName}
 							</div>
-							<button
-								className="btn d-inline-flex align-items-center gap-2 px-4 py-2 mt-2 border-0 shadow"
-								style={{
-									backgroundColor:
-										isPlayingFullSurah && isAudioPlaying
-											? "var(--desert-terracotta)"
-											: "var(--desert-gold)",
-									color: "#fff",
-									borderRadius: "50px",
-									fontWeight: "600",
-									fontSize: "0.85rem",
-									cursor: "pointer",
-									transition: "all 0.2s ease",
-								}}
-								onClick={togglePlayFullSurah}
-							>
-								<i
-									className={`bi ${isPlayingFullSurah && isAudioPlaying ? "bi-pause-fill fs-5" : "bi-play-fill fs-5"}`}
-								></i>
-								<span>
-									{isPlayingFullSurah && isAudioPlaying
-										? "Playing Surah"
-										: "Play Full Surah"}
-								</span>
-							</button>
 						</div>
 					</div>
 				</div>
 
 				{/* Bismillah Frame */}
 				{currentChapter.id !== 9 && (
-					<div className="bismillah-card text-center mb-5 shadow-sm">
+					<div className="bismillah-card text-center mb-3 shadow-sm">
 						<div
 							className="font-quranic fs-1 text-dark"
 							dir="rtl"
@@ -754,26 +751,14 @@ export default function SurahPage() {
 											isPlaying,
 											isAudioPlaying,
 											audioTime,
-											audioDuration
+											audioDuration,
 										)}
 										<span
-											className={`badge ${isPlaying ? "bg-terracotta text-white" : "bg-warning text-dark"} mx-2 rounded-circle d-inline-flex align-items-center justify-content-center`}
-											style={{
-												width: "2.2rem",
-												height: "2.2rem",
-												fontSize: `${Math.max(12, arabicFontSize * 0.45)}px`,
-												verticalAlign: "middle",
-												border: isPlaying
-													? "1px solid var(--desert-terracotta)"
-													: "1px solid var(--desert-gold)",
-												backgroundColor: isPlaying
-													? "var(--desert-terracotta)"
-													: undefined,
-												color: isPlaying ? "#ffffff" : undefined,
-												fontFamily: "sans-serif",
-											}}
+											className={`ayah-end-marker ${isPlaying ? "is-playing" : ""}`}
+											style={{ fontSize: `${Math.max(12, arabicFontSize * 0.42)}px` }}
+											aria-label={`Ayah ${index + 1}`}
 										>
-											{index + 1}
+											<span>{formatArabicNumber(index + 1)}</span>
 										</span>
 									</span>
 								);
@@ -867,8 +852,15 @@ export default function SurahPage() {
 										isPlaying,
 										isAudioPlaying,
 										audioTime,
-										audioDuration
+										audioDuration,
 									)}
+									<span
+										className={`ayah-end-marker ${isPlaying ? "is-playing" : ""}`}
+										style={{ fontSize: `${Math.max(12, arabicFontSize * 0.42)}px` }}
+										aria-label={`Ayah ${index + 1}`}
+									>
+										<span>{formatArabicNumber(index + 1)}</span>
+									</span>
 								</div>
 
 								{/* Transliteration */}

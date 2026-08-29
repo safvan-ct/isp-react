@@ -88,7 +88,7 @@ body {
        HERO SECTION
        ======================================================= */
 .hero-section {
-    padding: 5rem 0 4rem 0;
+    padding: 2rem 0 2rem 0;
     position: relative;
 }
 
@@ -801,6 +801,24 @@ footer a:hover {
     gap: 0.5rem;
 }
 
+.book-stat-pills .stat-pill {
+    white-space: nowrap;
+}
+
+@media (max-width: 575.98px) {
+    .book-stat-pills {
+        width: 100%;
+        flex-wrap: nowrap !important;
+        gap: 0.4rem !important;
+    }
+
+    .book-stat-pills .stat-pill {
+        flex: 1 1 0;
+        justify-content: center;
+        padding: 0.45rem 0.5rem;
+    }
+}
+
 /* Search & Filter Bar */
 .search-input-group {
     background: #FFFFFF;
@@ -944,6 +962,10 @@ footer a:hover {
     .sticky-reader-bar {
         top: 75px;
     }
+
+    .sticky-filter-bar {
+        top: 75px;
+    }
 }
 
 .sticky-filter-bar {
@@ -955,12 +977,6 @@ footer a:hover {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     transition: top 0.2s ease;
-}
-
-@media (min-width: 992px) {
-    .sticky-filter-bar {
-        top: 75px;
-    }
 }
 
 .surah-select-dropdown {
@@ -982,6 +998,10 @@ footer a:hover {
         left: -35px;
         transform: none;
         width: 260px;
+    }
+
+    .btn-mb {
+        padding: 0.8rem 0.5rem;
     }
 }
 
@@ -1069,24 +1089,97 @@ footer a:hover {
     background: #FFFDF9;
 }
 
-/* Geometric Number Badge */
+/* Hadith Number Badge */
 .hadith-number-badge {
-    width: 44px;
-    height: 44px;
+    flex: 0 0 auto;
+    display: inline-grid;
+    width: clamp(2rem, 4vw, 2.3rem);
+    aspect-ratio: 1;
+    place-items: center;
+    padding: 0.15rem;
     background: var(--desert-sand);
-    border: 1px solid var(--desert-dune);
+    border: 1px solid var(--desert-gold);
+    border-radius: 50%;
     color: var(--desert-terracotta);
     font-weight: 700;
-    font-size: 0.9rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    transform: rotate(45deg);
+    font-size: clamp(0.7rem, 1.8vw, 0.95rem);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(93, 57, 31, 0.1);
 }
 
 .hadith-number-badge span {
-    transform: rotate(-45deg);
+    max-width: 100%;
+    padding-inline: 0.1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hadith-inline-number {
+    display: inline-block;
+    min-width: 1.6rem;
+    margin-left: 0.2rem;
+    padding: 0.08rem 0.35rem;
+    border: 1px solid var(--desert-dune);
+    border-radius: 3px;
+    background: var(--desert-sand);
+    color: var(--desert-terracotta);
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* Global back-to-top control */
+.back-to-top-btn {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.5rem;
+    z-index: 1030;
+    display: inline-grid;
+    width: 2.8rem;
+    height: 2.8rem;
+    place-items: center;
+    border: 1px solid var(--desert-gold);
+    border-radius: 50%;
+    background: var(--desert-night);
+    color: #fff;
+    box-shadow: 0 5px 16px rgba(31, 27, 22, 0.22);
+    font-size: 1.15rem;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.back-to-top-btn:hover {
+    background: var(--desert-terracotta);
+    transform: translateY(-3px);
+}
+
+@media (max-width: 575.98px) {
+    .back-to-top-btn {
+        right: 1rem;
+        bottom: 1rem;
+        width: 2.55rem;
+        height: 2.55rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hadith-number-badge {
+        width: 2rem;
+    }
+
+    .hadith-card-header {
+        flex-wrap: nowrap !important;
+    }
+
+    .hadith-card-header-details {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .hadith-card-header-actions {
+        flex: 0 0 auto;
+    }
 }
 
 /* Chain of Narrators (Isnad) Styling */
@@ -1851,18 +1944,69 @@ footer a:hover {
     text-align: right;
     direction: rtl;
     word-spacing: 4px;
+    text-align: justify;
+}
+
+/* Ornamental marker displayed after every ayah in the Arabic reader. */
+.ayah-end-marker {
+    position: relative;
+    z-index: 0;
+    display: inline-grid;
+    width: 2.15em;
+    height: 2.15em;
+    margin-inline: 0.38em;
+    vertical-align: middle;
+    place-items: center;
+    color: var(--desert-night);
+    font-family: system-ui, sans-serif;
+    font-weight: 800;
+    line-height: 1;
+    isolation: isolate;
+}
+
+.ayah-end-marker::before,
+.ayah-end-marker::after {
+    position: absolute;
+    z-index: -1;
+    content: "";
+    clip-path: polygon(50% 0%, 65% 18%, 87% 13%, 82% 35%, 100% 50%, 82% 65%, 87% 87%, 65% 82%, 50% 100%, 35% 82%, 13% 87%, 18% 65%, 0% 50%, 18% 35%, 13% 13%, 35% 18%);
+}
+
+.ayah-end-marker::before {
+    inset: 0;
+    background: linear-gradient(135deg, var(--desert-gold), var(--desert-terracotta));
+    filter: drop-shadow(0 2px 3px rgba(74, 45, 28, 0.2));
+}
+
+.ayah-end-marker::after {
+    inset: 0.16em;
+    background: var(--desert-sand-card);
+}
+
+.ayah-end-marker > span {
+    transform: translateY(0.03em);
+}
+
+.ayah-end-marker.is-playing {
+    color: #fff;
+}
+
+.ayah-end-marker.is-playing::after {
+    background: var(--desert-terracotta);
 }
 
 .verse-translation {
     font-size: 1.05rem;
     line-height: 1.7;
     color: var(--desert-night);
+    text-align: justify;
 }
 
 .verse-transliteration {
     font-size: 0.92rem;
     color: var(--desert-muted);
     font-style: italic;
+    text-align: justify;
 }
 
 /* Action Buttons */

@@ -300,30 +300,34 @@ export default function HadithChaptersPage() {
 							<h1 className="display-6 fw-bold mb-2">{bookName}</h1>
 							<p className="mb-3 opacity-75 small">{bookDesc}</p>
 
-							<div className="d-flex flex-wrap gap-3">
+							<div className="book-stat-pills d-flex flex-wrap gap-3">
 								<div className="stat-pill d-flex align-items-center gap-1">
 									<i className="bi bi-journal-bookmark text-warning"></i>
 									<span className="small">
-										<strong>{book.chapter_count || 0}</strong> Chapters (Kutub)
+										<strong>{book.chapter_count || 0}</strong>
+										<span className="d-none d-sm-inline"> Chapters</span>
 									</span>
 								</div>
 								<div className="stat-pill d-flex align-items-center gap-1">
 									<i className="bi bi-chat-square-quote text-warning"></i>
 									<span className="small">
-										<strong>{(book.hadith_count || 0).toLocaleString()}</strong>{" "}
-										Total Ahadith
+										<strong>{(book.hadith_count || 0).toLocaleString()}</strong>
+										<span className="d-none d-sm-inline"> Total Ahadith</span>
 									</span>
 								</div>
-								<div className="stat-pill d-flex align-items-center gap-1">
+								<div className="stat-pill d-flex align-items-center gap-1 text-capitalize">
 									<i className="bi bi-check-circle text-warning"></i>
 									<span className="small">
-										<strong>{getClassification(book.status)}</strong>
+										<strong className="d-none d-sm-inline">
+											{getClassification(book.status)}
+										</strong>
+										<strong className="d-sm-none">{book.status}</strong>
 									</span>
 								</div>
 							</div>
 						</div>
 
-						<div className="col-lg-4 text-lg-end text-start mt-3 mt-lg-0">
+						<div className="col-lg-4 text-end mt-3 mt-lg-0">
 							<div
 								className="font-quranic display-4 fw-bold text-warning mb-1"
 								dir="rtl"
@@ -395,7 +399,7 @@ export default function HadithChaptersPage() {
 				) : (
 					<div className="row g-3 g-md-4 mb-5" id="chapterList">
 						{displayedChapters.map((chapter) => {
-							const chapterNum = chapter.chapter_number || chapter.id;
+							const chapterNum = chapter.chapter_number || 0;
 							const formattedNum = chapterNum.toString().padStart(2, "0");
 							const chapTrans =
 								chapter.translations?.find((t) => t.lang === siteLang) ||
@@ -417,7 +421,7 @@ export default function HadithChaptersPage() {
 										className="chapter-card shadow-sm text-decoration-none w-100"
 									>
 										{/* Upper Body */}
-										<div className="d-flex align-items-start justify-content-between gap-3 mb-3">
+										<div className="d-flex align-items-start justify-content-between gap-3 mb-2">
 											{/* Left: Badge + English Name */}
 											<div
 												className="d-flex align-items-start gap-2"
@@ -452,7 +456,7 @@ export default function HadithChaptersPage() {
 										</div>
 
 										{/* Footer Row */}
-										<div className="d-flex align-items-center justify-content-between pt-2.5 mt-auto border-top border-light-subtle">
+										<div className="d-flex align-items-center justify-content-between pt-2.5 mt-auto border-light-subtle">
 											<span
 												className="small text-muted"
 												style={{ fontSize: "0.75rem" }}
@@ -509,7 +513,7 @@ export default function HadithChaptersPage() {
 								style={{ backgroundColor: "var(--desert-sand)" }}
 							>
 								<div className="d-flex align-items-center gap-2 flex-wrap">
-									<span
+									{/* <span
 										className="hadith-number-badge me-1"
 										style={{
 											width: "36px",
@@ -518,7 +522,7 @@ export default function HadithChaptersPage() {
 										}}
 									>
 										<span>{getHadithNum(singleHadithData.hadith)}</span>
-									</span>
+									</span> */}
 									<div>
 										<h6 className="fw-bold mb-0 text-dark">
 											{singleHadithData.book?.translations?.find(
@@ -647,7 +651,7 @@ export default function HadithChaptersPage() {
 										></i>
 										<span>{isCopiedModal ? "Copied" : "Copy"}</span>
 									</button>
-									<button
+									{/* <button
 										className={`btn btn-sm d-flex align-items-center gap-1 rounded-pill px-3 ${isBookmarkedModal ? "btn-warning text-dark" : "btn-outline-secondary"}`}
 										onClick={() => setIsBookmarkedModal(!isBookmarkedModal)}
 									>
@@ -655,7 +659,7 @@ export default function HadithChaptersPage() {
 											className={`bi ${isBookmarkedModal ? "bi-bookmark-fill" : "bi-bookmark"}`}
 										></i>
 										<span>Bookmark</span>
-									</button>
+									</button> */}
 								</div>
 
 								{/* Navigation to Full Chapter View */}
@@ -670,7 +674,7 @@ export default function HadithChaptersPage() {
 											navigate(`/hadith/${bookId}/${cSlug}`);
 										}}
 									>
-										View Full Chapter <i className="bi bi-arrow-right ms-1"></i>
+										View Chapter <i className="bi bi-arrow-right ms-1"></i>
 									</button>
 								)}
 							</div>

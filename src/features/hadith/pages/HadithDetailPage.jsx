@@ -22,8 +22,6 @@ export default function HadithDetailPage() {
 		error,
 	} = useHadithList(bookSlug, chapterSlug);
 
-
-
 	// UI states
 	const [expandedHeadings, setExpandedHeadings] = useState({});
 	const [bookmarks, setBookmarks] = useState({});
@@ -165,13 +163,7 @@ export default function HadithDetailPage() {
 			chap.translations?.find((t) => t.lang === siteLang) ||
 			chap.translations?.find((t) => t.lang === "en") ||
 			chap.translations?.[0];
-		return (
-			chap.translation ||
-			chap.title ||
-			transObj?.name ||
-			chap.name ||
-			""
-		);
+		return chap.translation || chap.title || transObj?.name || chap.name || "";
 	};
 
 	// Display names
@@ -189,9 +181,7 @@ export default function HadithDetailPage() {
 		bookSlug;
 
 	const chapterName =
-		getChapterName(activeChapter) ||
-		getChapterName(apiChapter) ||
-		chapterSlug;
+		getChapterName(activeChapter) || getChapterName(apiChapter) || chapterSlug;
 
 	// Navigation helpers
 	const isPrevDisabled = currentChapterIndex <= 0 && chapters.length > 0;
@@ -347,7 +337,7 @@ export default function HadithDetailPage() {
 									borderRadius: "8px",
 									minWidth: "120px",
 									flexGrow: 1,
-									maxWidth: "240px",
+									maxWidth: "200px",
 									fontSize: "0.85rem",
 									color: "var(--desert-night)",
 									border: "1px solid var(--desert-dune)",
@@ -405,7 +395,7 @@ export default function HadithDetailPage() {
 												}}
 											>
 												<span className="text-truncate me-2">
-													{c.chapter_number || c.id}. {name}
+													{c.chapter_number || 0}. {name}
 												</span>
 												<span
 													className="font-quranic text-muted small"
@@ -641,7 +631,7 @@ export default function HadithDetailPage() {
 							<div className="d-flex align-items-center gap-2 mb-2 flex-wrap">
 								{currentChapterIndex >= 0 && chapters.length > 0 && (
 									<span className="badge bg-warning text-dark px-3 py-1 fw-bold">
-										CHAPTER {currentChapterIndex + 1} OF {chapters.length}
+										CH #{currentChapterIndex + 1} / {chapters.length}
 									</span>
 								)}
 								<span className="badge bg-outline-light border text-light px-2 py-1 text-uppercase">
@@ -655,7 +645,7 @@ export default function HadithDetailPage() {
 								{chapterName}
 							</h1>
 						</div>
-						<div className="col-md-5 text-md-end text-start mt-3 mt-md-0">
+						<div className="col-md-5 text-end mt-3 mt-md-0">
 							<div
 								className="font-quranic display-4 fw-bold text-warning mb-0"
 								dir="rtl"
@@ -731,8 +721,8 @@ export default function HadithDetailPage() {
 									className={`hadith-card shadow-sm ${index === 0 ? "highlighted" : ""}`}
 								>
 									{/* Header row */}
-									<div className="d-flex align-items-center justify-content-between border-bottom pb-3 mb-4 flex-wrap gap-2">
-										<div className="d-flex align-items-center gap-3">
+									<div className="hadith-card-header d-flex align-items-center justify-content-between border-bottom pb-2 mb-4 flex-wrap gap-2">
+										<div className="hadith-card-header-details d-flex align-items-center gap-3">
 											<div className="hadith-number-badge">
 												<span>{hadithNum}</span>
 											</div>
@@ -742,20 +732,19 @@ export default function HadithDetailPage() {
 														{grade}
 													</span>
 												)}
-												<span className="badge bg-light text-dark border">
+												<span className="badge bg-light text-dark border d-none d-sm-inline-block">
 													{chapterName}, Hadith {hadithNum}
 												</span>
-												{hadith.chapter_number && (
-													<span className="badge bg-light text-dark border d-none d-sm-inline-block">
-														Vol. {hadith.volume} · Ch. {hadith.chapter_number}
-													</span>
-												)}
+
+												<span className="badge bg-light text-dark border d-sm-inline-block">
+													Vol. {hadith.volume} · Ch. {hadith.chapter_number}
+												</span>
 											</div>
 										</div>
 
 										{/* Action toolbar */}
-										<div className="d-flex align-items-center gap-1">
-											<button
+										<div className="hadith-card-header-actions d-flex align-items-center gap-1">
+											{/* <button
 												className={`hadith-action-btn border-0 bg-transparent ${isBookmarked ? "text-warning" : "text-muted"}`}
 												title="Bookmark"
 												onClick={() => toggleBookmark(hadith.id)}
@@ -763,7 +752,7 @@ export default function HadithDetailPage() {
 												<i
 													className={`bi ${isBookmarked ? "bi-bookmark-fill" : "bi-bookmark"}`}
 												></i>
-											</button>
+											</button> */}
 											<button
 												className="hadith-action-btn border-0 bg-transparent"
 												title="Copy Text"
@@ -789,7 +778,11 @@ export default function HadithDetailPage() {
 									)}
 
 									{/* Card Body: Side-by-Side or Stacked */}
-									{isSideBySide && showTranslation && (translations[`${hadith.id}_body`] || translation || translating[hadith.id]) ? (
+									{isSideBySide &&
+									showTranslation &&
+									(translations[`${hadith.id}_body`] ||
+										translation ||
+										translating[hadith.id]) ? (
 										<div className="row g-4 align-items-start">
 											{/* Left Column: Translation */}
 											<div className="col-md-6 order-2 order-md-1">
@@ -824,6 +817,15 @@ export default function HadithDetailPage() {
 														}}
 													>
 														{arabicText}
+														&nbsp;
+														<span
+															className="hadith-inline-number"
+															style={{
+																fontSize: `14px`,
+															}}
+														>
+															{hadithNum}
+														</span>
 													</div>
 												)}
 											</div>
@@ -841,11 +843,23 @@ export default function HadithDetailPage() {
 													}}
 												>
 													{arabicText}
+													&nbsp;
+													<span
+														className="hadith-inline-number"
+														style={{
+															fontSize: `14px`,
+														}}
+													>
+														{hadithNum}
+													</span>
 												</div>
 											)}
 
 											{/* Translation */}
-											{showTranslation && (translations[`${hadith.id}_body`] || translation || translating[hadith.id]) ? (
+											{showTranslation &&
+											(translations[`${hadith.id}_body`] ||
+												translation ||
+												translating[hadith.id]) ? (
 												<div
 													className="hadith-translation fw-medium mb-2"
 													style={{

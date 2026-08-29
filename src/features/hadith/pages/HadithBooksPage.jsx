@@ -162,8 +162,7 @@ export default function HadithBooksPage() {
 							</h1>
 							<p className="mb-0 opacity-75 small">
 								Explore the Prophetic sunnah through the Kutub al-Sittah,
-								verified commentaries, and topical compilations with complete
-								Isnad chains.
+								verified commentaries.
 							</p>
 						</div>
 						<div className="col-lg-5">
