@@ -182,77 +182,88 @@ export default function SurahPage() {
 			}
 			setActivePlayingVerse(null);
 			setIsAudioPlaying(false);
-		} else {
-			if (audioRef.current) {
-				audioRef.current.pause();
+			setIsPlayingFullSurah(false);
+			isPlayingFullSurahRef.current = false;
+			pendingNextVerseRef.current = null;
+			return;
+		}
+
+		if (audioRef.current) {
+			audioRef.current.pause();
+			audioRef.current = null;
+		}
+
+		setIsPlayingFullSurah(true);
+		isPlayingFullSurahRef.current = true;
+		pendingNextVerseRef.current = null;
+
+		// Split "1:1" to chapter 1, ayah 1
+		const [chapterId, verseNumber] = verseKey.split(":");
+		const audioUrl = `https://the-quran-project.github.io/Quran-Audio/Data/1/${chapterId}_${verseNumber}.mp3`;
+
+		const audio = new Audio(audioUrl);
+		audio.playbackRate = playbackRate;
+		audio.loop = isRepeat;
+		audioRef.current = audio;
+		setActivePlayingVerse(verseKey);
+		setIsAudioPlaying(true);
+
+		audio.play().catch((err) => {
+			console.error("Audio playback failed:", err);
+			setActivePlayingVerse(null);
+			setIsAudioPlaying(false);
+			setIsPlayingFullSurah(false);
+			isPlayingFullSurahRef.current = false;
+		});
+
+		// Attach Audio Listeners
+		audio.ontimeupdate = () => {
+			setAudioTime(audio.currentTime);
+		};
+		audio.onloadedmetadata = () => {
+			setAudioDuration(audio.duration || 0);
+		};
+		audio.onplay = () => {
+			setIsAudioPlaying(true);
+		};
+		audio.onpause = () => {
+			setIsAudioPlaying(false);
+		};
+		audio.onended = () => {
+			setIsAudioPlaying(false);
+
+			if (isPlayingFullSurahRef.current) {
+				const currentIndex = verses.findIndex((v) => v.verseKey === verseKey);
+				if (currentIndex !== -1 && currentIndex < verses.length - 1) {
+					const nextVerse = verses[currentIndex + 1];
+					handlePlayAudio(nextVerse.verseKey);
+					setTimeout(() => {
+						const nextEl = document.getElementById(`v${currentIndex + 2}`);
+						if (nextEl) {
+							nextEl.scrollIntoView({ behavior: "smooth", block: "center" });
+						}
+					}, 300);
+					return;
+				}
+
+				if (nextCursor) {
+					const [chapId, vNum] = verseKey.split(":");
+					const nextVerseNumber = parseInt(vNum) + 1;
+					pendingNextVerseRef.current = `${chapId}:${nextVerseNumber}`;
+					loadMore();
+					return;
+				}
+
+				setIsPlayingFullSurah(false);
+				isPlayingFullSurahRef.current = false;
+				setActivePlayingVerse(null);
 				audioRef.current = null;
+				return;
 			}
 
-			// Split "1:1" to chapter 1, ayah 1
-			const [chapterId, verseNumber] = verseKey.split(":");
-			const audioUrl = `https://the-quran-project.github.io/Quran-Audio/Data/1/${chapterId}_${verseNumber}.mp3`;
-
-			const audio = new Audio(audioUrl);
-			audio.playbackRate = playbackRate;
-			audio.loop = isRepeat;
-			audioRef.current = audio;
-			setActivePlayingVerse(verseKey);
-			setIsAudioPlaying(true);
-
-			audio.play().catch((err) => {
-				console.error("Audio playback failed:", err);
-				setActivePlayingVerse(null);
-				setIsAudioPlaying(false);
-			});
-
-			// Attach Audio Listeners
-			audio.ontimeupdate = () => {
-				setAudioTime(audio.currentTime);
-			};
-			audio.onloadedmetadata = () => {
-				setAudioDuration(audio.duration || 0);
-			};
-			audio.onplay = () => {
-				setIsAudioPlaying(true);
-			};
-			audio.onpause = () => {
-				setIsAudioPlaying(false);
-			};
-			audio.onended = () => {
-				setIsAudioPlaying(false);
-
-				// Handle Play Full Surah continuous logic
-				if (isPlayingFullSurahRef.current) {
-					const currentIndex = verses.findIndex((v) => v.verseKey === verseKey);
-					if (currentIndex !== -1 && currentIndex < verses.length - 1) {
-						// Play the next loaded verse
-						const nextVerse = verses[currentIndex + 1];
-						handlePlayAudio(nextVerse.verseKey);
-						// Scroll next verse card into view
-						setTimeout(() => {
-							const nextEl = document.getElementById(`v${currentIndex + 2}`);
-							if (nextEl) {
-								nextEl.scrollIntoView({ behavior: "smooth", block: "center" });
-							}
-						}, 300);
-					} else if (nextCursor) {
-						// Load more verses from server
-						const [chapId, vNum] = verseKey.split(":");
-						const nextVerseNumber = parseInt(vNum) + 1;
-						pendingNextVerseRef.current = `${chapId}:${nextVerseNumber}`;
-						loadMore();
-					} else {
-						// End of Surah
-						setIsPlayingFullSurah(false);
-						setActivePlayingVerse(null);
-						audioRef.current = null;
-					}
-				} else {
-					setActivePlayingVerse(null);
-					audioRef.current = null;
-				}
-			};
-		}
+			setActivePlayingVerse(null);
+			audioRef.current = null;
+		};
 	};
 
 	const togglePlayFullSurah = () => {
@@ -755,7 +766,9 @@ export default function SurahPage() {
 										)}
 										<span
 											className={`ayah-end-marker ${isPlaying ? "is-playing" : ""}`}
-											style={{ fontSize: `${Math.max(12, arabicFontSize * 0.42)}px` }}
+											style={{
+												fontSize: `${Math.max(12, arabicFontSize * 0.42)}px`,
+											}}
 											aria-label={`Ayah ${index + 1}`}
 										>
 											<span>{formatArabicNumber(index + 1)}</span>
@@ -782,7 +795,7 @@ export default function SurahPage() {
 								<div className="d-flex align-items-center justify-content-between border-bottom pb-3 mb-4 flex-wrap gap-2">
 									<div className="d-flex align-items-center gap-3">
 										<div className="verse-number-badge">
-											<span>{verse.verseKey}</span>
+											<span>{verse.number_in_chapter}</span>
 										</div>
 										<div>
 											<span className="badge bg-light text-dark border me-1">
@@ -856,7 +869,9 @@ export default function SurahPage() {
 									)}
 									<span
 										className={`ayah-end-marker ${isPlaying ? "is-playing" : ""}`}
-										style={{ fontSize: `${Math.max(12, arabicFontSize * 0.42)}px` }}
+										style={{
+											fontSize: `${Math.max(12, arabicFontSize * 0.42)}px`,
+										}}
 										aria-label={`Ayah ${index + 1}`}
 									>
 										<span>{formatArabicNumber(index + 1)}</span>
