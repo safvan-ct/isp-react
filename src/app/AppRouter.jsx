@@ -9,6 +9,7 @@ import HadithDetailPage from '../features/hadith/pages/HadithDetailPage';
 import CoursesPage from '../features/courses/pages/CoursesPage';
 import TrackPage from '../features/courses/pages/TrackPage';
 import LearningPage from '../features/courses/pages/LearningPage';
+import CourseDetailsPage from '../features/courses/pages/CourseDetailsPage';
 
 export const router = createBrowserRouter([
   {
@@ -48,7 +49,11 @@ export const router = createBrowserRouter([
         element: <TrackPage />,
       },
       {
-        path: 'courses/view/:courseId',
+        path: 'course/:courseId',
+        element: <CourseDetailsPage />,
+      },
+      {
+        path: 'learn/:courseId',
         element: <LearningPage />,
       },
       {

@@ -1,10 +1,18 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { academyTracks } from '../../../services/mockData';
+import { coursesCatalog, courseModules } from '../../../services/mockData';
 
 export default function LearningPage() {
   const { courseId } = useParams();
-  const track = academyTracks.find(t => t.id === courseId);
+  
+  const courseInfo = coursesCatalog.find(c => c.slug === courseId);
+  const curriculum = courseModules[0][courseId] || [];
+  
+  const track = courseInfo ? {
+    id: courseInfo.slug,
+    title: courseInfo.title,
+    curriculum: curriculum
+  } : null;
 
   // Get first lesson as default
   const defaultLesson = track?.curriculum?.[0]?.lessons?.[0];
@@ -89,7 +97,7 @@ export default function LearningPage() {
               
               <div className="d-flex flex-column gap-3">
                 {track.curriculum.map((module) => (
-                  <div key={module.id}>
+                  <div key={module.slug || module.key}>
                     <span 
                       className="text-uppercase fw-bold text-muted d-block mb-2"
                       style={{ fontSize: '0.7rem', letterSpacing: '0.5px' }}
@@ -98,11 +106,11 @@ export default function LearningPage() {
                     </span>
                     <ul className="list-unstyled mb-0 d-flex flex-column gap-1">
                       {module.lessons.map((lesson) => {
-                        const isActive = activeLesson.id === lesson.id;
-                        const isDone = completedLessons[lesson.id] || false;
+                        const isActive = activeLesson.slug === lesson.slug;
+                        const isDone = completedLessons[lesson.slug] || false;
 
                         return (
-                          <li key={lesson.id}>
+                          <li key={lesson.slug}>
                             <button
                               className="w-100 p-2 text-start border-0 bg-transparent rounded-2 d-flex justify-content-between align-items-center"
                               onClick={() => setActiveLesson(lesson)}
@@ -118,7 +126,7 @@ export default function LearningPage() {
                                   {lesson.title}
                                 </span>
                               </div>
-                              <span className="small text-muted flex-shrink-0" style={{ fontSize: '0.7rem' }}>{lesson.duration}</span>
+                              <span className="small text-muted flex-shrink-0" style={{ fontSize: '0.7rem' }}>{lesson.duration || "10:00"}</span>
                             </button>
                           </li>
                         );
@@ -173,15 +181,15 @@ export default function LearningPage() {
               <div className="d-flex justify-content-between align-items-start mb-3 flex-wrap gap-2">
                 <div>
                   <h4 className="fw-bold mb-1 text-dark">{activeLesson.title}</h4>
-                  <span className="small text-muted"><i className="bi bi-clock me-1"></i> Video Duration: {activeLesson.duration}</span>
+                  <span className="small text-muted"><i className="bi bi-clock me-1"></i> Video Duration: {activeLesson.duration || "10:00"}</span>
                 </div>
                 
                 <button 
-                  className={`btn btn-sm ${completedLessons[activeLesson.id] ? 'btn-success' : 'btn-desert-outline'} px-3 fw-bold`}
-                  onClick={() => toggleLessonCompletion(activeLesson.id)}
+                  className={`btn btn-sm ${completedLessons[activeLesson.slug] ? 'btn-success' : 'btn-desert-outline'} px-3 fw-bold`}
+                  onClick={() => toggleLessonCompletion(activeLesson.slug)}
                 >
-                  <i className={`bi ${completedLessons[activeLesson.id] ? 'bi-check-lg' : 'bi-check'}`}></i>
-                  {completedLessons[activeLesson.id] ? ' Completed' : ' Mark Completed'}
+                  <i className={`bi ${completedLessons[activeLesson.slug] ? 'bi-check-lg' : 'bi-check'}`}></i>
+                  {completedLessons[activeLesson.slug] ? ' Completed' : ' Mark Completed'}
                 </button>
               </div>
 

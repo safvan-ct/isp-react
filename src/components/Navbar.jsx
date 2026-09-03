@@ -33,6 +33,9 @@ export default function Navbar() {
 		if (path === "/") {
 			return pathname === "/" ? "active" : "";
 		}
+		if (path === "/courses" && (pathname.startsWith("/courses") || pathname.startsWith("/course") || pathname.startsWith("/learn"))) {
+			return "active";
+		}
 		return pathname.startsWith(path) ? "active" : "";
 	};
 
