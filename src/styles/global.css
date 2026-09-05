@@ -73,6 +73,47 @@ body {
     font-size: 1.25rem;
 }
 
+.navbar-desert .navbar-brand {
+    padding-top: 0.15rem;
+    padding-bottom: 0.15rem;
+    margin-inline-end: 1.25rem;
+    line-height: 1;
+}
+
+.brand-wordmark {
+    display: inline-block;
+    font-family: var(--font-quranic);
+    font-weight: 700;
+    font-size: 2.35rem;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    padding-inline: 0.15rem;
+    white-space: nowrap;
+    color: var(--desert-terracotta);
+}
+
+.brand-slogan {
+    display: block;
+    color: var(--desert-muted);
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1;
+    margin-top: 0.2rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.navbar-desert .navbar-brand:hover .brand-wordmark {
+    color: var(--desert-gold-hover);
+}
+
+.brand-wordmark--footer {
+    color: var(--desert-gold);
+    font-size: 2.5rem;
+    letter-spacing: 0.14em;
+}
+
 .nav-link {
     color: var(--desert-night);
     font-weight: 500;

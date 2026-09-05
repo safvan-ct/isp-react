@@ -987,5 +987,427 @@ export const courseModules = [
 				],
 			},
 		],
+
+		thafseer: [
+			{
+				key: "introduction-to-tafsir",
+				slug: "introduction-to-tafsir",
+				title: "Introduction to Tafsir",
+				sort_order: 1,
+				lessons: [
+					{
+						slug: "meaning-of-tafsir",
+						title: "Meaning of Tafsir",
+					},
+					{
+						slug: "importance-of-tafsir",
+						title: "Importance of Tafsir",
+					},
+					{
+						slug: "sources-of-tafsir",
+						title: "Sources of Tafsir",
+					},
+					{
+						slug: "quran-and-sunnah",
+						title: "Quran and Sunnah",
+					},
+					{
+						slug: "tafsir-by-quran",
+						title: "Tafsir by Quran",
+					},
+					{
+						slug: "tafsir-by-hadith",
+						title: "Tafsir by Hadith",
+					},
+					{
+						slug: "role-of-arabic-language",
+						title: "Role of Arabic Language",
+					},
+				],
+			},
+			{
+				key: "surah-al-fatihah",
+				slug: "surah-al-fatihah",
+				title: "Surah Al-Fatihah",
+				sort_order: 2,
+				lessons: [
+					{
+						slug: "introduction-to-surah-al-fatihah",
+						title: "Introduction to Surah Al-Fatihah",
+					},
+					{
+						slug: "bismillah",
+						title: "Bismillah",
+					},
+					{
+						slug: "al-hamdulillahi-rabbil-alamin",
+						title: "Al-Hamdulillahi Rabbil Alamin",
+					},
+					{
+						slug: "ar-rahmanir-raheem",
+						title: "Ar-Rahmanir-Raheem",
+					},
+					{
+						slug: "maliki-yawmid-deen",
+						title: "Maliki Yawmid-Deen",
+					},
+					{
+						slug: "iyyaka-nabudu",
+						title: "Iyyaka Na'budu",
+					},
+					{
+						slug: "ihdinas-sirat-al-mustaqim",
+						title: "Ihdinas-Sirat al-Mustaqim",
+					},
+					{
+						slug: "amin",
+						title: "Amin",
+					},
+				],
+			},
+			{
+				key: "short-surahs",
+				slug: "short-surahs",
+				title: "Short Surahs",
+				sort_order: 3,
+				lessons: [
+					{
+						slug: "surah-al-ikhlas",
+						title: "Surah Al-Ikhlas",
+					},
+					{
+						slug: "surah-al-falaq",
+						title: "Surah Al-Falaq",
+					},
+					{
+						slug: "surah-an-nas",
+						title: "Surah An-Nas",
+					},
+					{
+						slug: "surah-al-kawthar",
+						title: "Surah Al-Kawthar",
+					},
+					{
+						slug: "surah-al-asr",
+						title: "Surah Al-Asr",
+					},
+					{
+						slug: "surah-al-maun",
+						title: "Surah Al-Ma'un",
+					},
+					{
+						slug: "surah-al-kafirun",
+						title: "Surah Al-Kafirun",
+					},
+					{
+						slug: "surah-an-nasr",
+						title: "Surah An-Nasr",
+					},
+				],
+			},
+			{
+				key: "selected-makki-surahs",
+				slug: "selected-makki-surahs",
+				title: "Selected Makki Surahs",
+				sort_order: 4,
+				lessons: [
+					{
+						slug: "surah-ad-duha",
+						title: "Surah Ad-Duha",
+					},
+					{
+						slug: "surah-ash-sharh",
+						title: "Surah Ash-Sharh",
+					},
+					{
+						slug: "surah-at-tin",
+						title: "Surah At-Tin",
+					},
+					{
+						slug: "surah-al-alaq",
+						title: "Surah Al-Alaq",
+					},
+					{
+						slug: "surah-al-qadr",
+						title: "Surah Al-Qadr",
+					},
+				],
+			},
+			{
+				key: "selected-madani-surahs",
+				slug: "selected-madani-surahs",
+				title: "Selected Madani Surahs",
+				sort_order: 5,
+				lessons: [
+					{
+						slug: "surah-al-baqarah-introduction",
+						title: "Surah Al-Baqarah — Introduction",
+					},
+					{
+						slug: "ayat-al-kursi",
+						title: "Ayat al-Kursi",
+					},
+					{
+						slug: "selected-verses-from-al-baqarah",
+						title: "Selected Verses from Al-Baqarah",
+					},
+					{
+						slug: "surah-al-hujurat",
+						title: "Surah Al-Hujurat",
+					},
+					{
+						slug: "surah-al-hujurat-social-etiquette",
+						title: "Surah Al-Hujurat — Social Etiquette",
+					},
+				],
+			},
+		],
+
+		"judicial-laws": [
+			{
+				key: "introduction-to-islamic-law",
+				slug: "introduction-to-islamic-law",
+				title: "Introduction to Islamic Law",
+				sort_order: 1,
+				lessons: [
+					{
+						slug: "meaning-of-shariah",
+						title: "Meaning of Shariah",
+					},
+					{
+						slug: "meaning-of-fiqh",
+						title: "Meaning of Fiqh",
+					},
+					{
+						slug: "sources-of-islamic-law",
+						title: "Sources of Islamic Law",
+					},
+					{
+						slug: "quran-as-a-source-of-law",
+						title: "Quran as a Source of Law",
+					},
+					{
+						slug: "sunnah-as-a-source-of-law",
+						title: "Sunnah as a Source of Law",
+					},
+					{
+						slug: "ijma",
+						title: "Ijma",
+					},
+					{
+						slug: "qiyas",
+						title: "Qiyas",
+					},
+					{
+						slug: "maqasid-al-shariah",
+						title: "Maqasid al-Shariah",
+					},
+				],
+			},
+			{
+				key: "legal-principles",
+				slug: "legal-principles",
+				title: "Legal Principles",
+				sort_order: 2,
+				lessons: [
+					{
+						slug: "intention-and-legal-rulings",
+						title: "Intention and Legal Rulings",
+					},
+					{
+						slug: "certainty-and-doubt",
+						title: "Certainty and Doubt",
+					},
+					{
+						slug: "hardship-and-ease",
+						title: "Hardship and Ease",
+					},
+					{
+						slug: "harm-and-its-removal",
+						title: "Harm and Its Removal",
+					},
+					{
+						slug: "custom-in-islamic-law",
+						title: "Custom in Islamic Law",
+					},
+					{
+						slug: "public-interest",
+						title: "Public Interest",
+					},
+				],
+			},
+			{
+				key: "family-law",
+				slug: "family-law",
+				title: "Family Law",
+				sort_order: 3,
+				lessons: [
+					{
+						slug: "marriage",
+						title: "Marriage",
+					},
+					{
+						slug: "conditions-of-marriage",
+						title: "Conditions of Marriage",
+					},
+					{
+						slug: "rights-of-husband-and-wife",
+						title: "Rights of Husband and Wife",
+					},
+					{
+						slug: "mahr",
+						title: "Mahr",
+					},
+					{
+						slug: "divorce",
+						title: "Divorce",
+					},
+					{
+						slug: "khula",
+						title: "Khula",
+					},
+					{
+						slug: "iddah",
+						title: "Iddah",
+					},
+					{
+						slug: "child-custody",
+						title: "Child Custody",
+					},
+					{
+						slug: "maintenance",
+						title: "Maintenance",
+					},
+				],
+			},
+			{
+				key: "financial-law",
+				slug: "financial-law",
+				title: "Financial Law",
+				sort_order: 4,
+				lessons: [
+					{
+						slug: "ownership",
+						title: "Ownership",
+					},
+					{
+						slug: "contracts",
+						title: "Contracts",
+					},
+					{
+						slug: "buying-and-selling",
+						title: "Buying and Selling",
+					},
+					{
+						slug: "debt",
+						title: "Debt",
+					},
+					{
+						slug: "loan",
+						title: "Loan",
+					},
+					{
+						slug: "riba",
+						title: "Riba",
+					},
+					{
+						slug: "gharar",
+						title: "Gharar",
+					},
+					{
+						slug: "business-ethics",
+						title: "Business Ethics",
+					},
+					{
+						slug: "partnership",
+						title: "Partnership",
+					},
+					{
+						slug: "islamic-finance",
+						title: "Islamic Finance",
+					},
+				],
+			},
+			{
+				key: "criminal-law",
+				slug: "criminal-law",
+				title: "Criminal Law",
+				sort_order: 5,
+				lessons: [
+					{
+						slug: "introduction-to-islamic-criminal-law",
+						title: "Introduction to Islamic Criminal Law",
+					},
+					{
+						slug: "categories-of-crimes",
+						title: "Categories of Crimes",
+					},
+					{
+						slug: "hudud",
+						title: "Hudud",
+					},
+					{
+						slug: "qisas",
+						title: "Qisas",
+					},
+					{
+						slug: "diyah",
+						title: "Diyah",
+					},
+					{
+						slug: "tazir",
+						title: "Ta'zir",
+					},
+					{
+						slug: "evidence-and-proof",
+						title: "Evidence and Proof",
+					},
+				],
+			},
+			{
+				key: "judicial-system",
+				slug: "judicial-system",
+				title: "Judicial System",
+				sort_order: 6,
+				lessons: [
+					{
+						slug: "islamic-judiciary",
+						title: "Islamic Judiciary",
+					},
+					{
+						slug: "qualifications-of-a-judge",
+						title: "Qualifications of a Judge",
+					},
+					{
+						slug: "role-of-qadi",
+						title: "Role of Qadi",
+					},
+					{
+						slug: "witnesses",
+						title: "Witnesses",
+					},
+					{
+						slug: "evidence",
+						title: "Evidence",
+					},
+					{
+						slug: "testimony",
+						title: "Testimony",
+					},
+					{
+						slug: "dispute-resolution",
+						title: "Dispute Resolution",
+					},
+					{
+						slug: "reconciliation",
+						title: "Reconciliation",
+					},
+					{
+						slug: "judicial-ethics",
+						title: "Judicial Ethics",
+					},
+				],
+			},
+		],
 	},
 ];

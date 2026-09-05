@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import BrandLogo from "./BrandLogo";
 import {
 	SITE_LANGUAGES,
 	getSiteLanguage,
@@ -33,7 +34,12 @@ export default function Navbar() {
 		if (path === "/") {
 			return pathname === "/" ? "active" : "";
 		}
-		if (path === "/courses" && (pathname.startsWith("/courses") || pathname.startsWith("/course") || pathname.startsWith("/learn"))) {
+		if (
+			path === "/courses" &&
+			(pathname.startsWith("/courses") ||
+				pathname.startsWith("/course") ||
+				pathname.startsWith("/learn"))
+		) {
 			return "active";
 		}
 		return pathname.startsWith(path) ? "active" : "";
@@ -44,31 +50,11 @@ export default function Navbar() {
 			<div className="container">
 				<Link
 					to="/"
-					className="navbar-brand d-flex align-items-center gap-2"
+					className="navbar-brand d-flex flex-column align-items-center py-0 mt-2"
 					onClick={closeNavbar}
 				>
-					<div className="brand-icon">
-						<i className="bi bi-book-half"></i>
-					</div>
-					<div>
-						<span
-							className="fs-4 fw-bold tracking-wide"
-							style={{ color: "var(--desert-night)" }}
-						>
-							Al-Athar
-						</span>
-						<span
-							className="d-block text-muted small text-nowrap"
-							style={{
-								fontSize: "0.65rem",
-								letterSpacing: "1px",
-								marginTop: "-3px",
-								whiteSpace: "nowrap",
-							}}
-						>
-							ISLAMIC STUDY PORTAL
-						</span>
-					</div>
+					<BrandLogo variant="nav" />
+					<span className="brand-slogan mt-2">Islamic learning platform.</span>
 				</Link>
 
 				<button

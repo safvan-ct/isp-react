@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import BrandLogo from "./BrandLogo";
 import {
 	SITE_LANGUAGES,
 	getSiteLanguage,
@@ -149,13 +150,7 @@ export default function Footer() {
 				<div className="row g-4 mb-4">
 					<div className="col-lg-4 text-start">
 						<div className="d-flex align-items-center gap-2 mb-3">
-							<div
-								className="brand-icon"
-								style={{ background: "var(--desert-gold)" }}
-							>
-								<i className="bi bi-book-half"></i>
-							</div>
-							<span className="fs-4 fw-bold text-white">Al-Athar</span>
+							<BrandLogo variant="footer" />
 						</div>
 						<p className="small opacity-75 text-start">
 							A dedicated virtual sanctuary for students of Islamic knowledge,
