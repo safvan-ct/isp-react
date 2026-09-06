@@ -1,34 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import BrandLogo from "./BrandLogo";
-import {
-	SITE_LANGUAGES,
-	getSiteLanguage,
-	setSiteLanguage,
-} from "../services/siteLanguage";
 
 export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
-	const [isLangOpen, setIsLangOpen] = useState(false);
-	const [currentLang, setCurrentLang] = useState(getSiteLanguage());
 	const { pathname } = useLocation();
-
-	useEffect(() => {
-		const onLangChange = () => setCurrentLang(getSiteLanguage());
-		window.addEventListener("siteLanguageChange", onLangChange);
-		return () => window.removeEventListener("siteLanguageChange", onLangChange);
-	}, []);
 
 	const toggleNavbar = () => setIsOpen(!isOpen);
 	const closeNavbar = () => setIsOpen(false);
-
-	const handleLangSelect = (code) => {
-		setSiteLanguage(code);
-		setIsLangOpen(false);
-	};
-
-	const currentLangObj =
-		SITE_LANGUAGES.find((l) => l.code === currentLang) || SITE_LANGUAGES[0];
 
 	const getActiveProps = (path) => {
 		if (path === "/") {
@@ -183,103 +162,6 @@ export default function Navbar() {
           `}</style>
 
 					<div className="d-flex align-items-center gap-2 flex-wrap">
-						{/* Website Language Selector */}
-						<div className="position-relative me-1">
-							{isLangOpen && (
-								<div
-									className="position-fixed top-0 start-0 w-100 h-100"
-									style={{ zIndex: 1040, background: "transparent" }}
-									onClick={() => setIsLangOpen(false)}
-								/>
-							)}
-							<button
-								type="button"
-								className="btn btn-sm border-secondary-subtle fw-bold d-flex align-items-center gap-1.5 px-3 py-1.5 rounded-pill shadow-sm"
-								onClick={() => setIsLangOpen(!isLangOpen)}
-								style={{
-									fontSize: "0.82rem",
-									backgroundColor: "var(--desert-sand-card, #f0ebe0)",
-									color: "var(--desert-terracotta)",
-									border: "1px solid var(--desert-dune)",
-									zIndex: 1045,
-									position: "relative",
-								}}
-							>
-								<i
-									className="bi bi-globe2 me-1"
-									style={{ color: "var(--desert-terracotta)" }}
-								></i>
-								<span>{currentLangObj.label}</span>
-								<i
-									className={`bi bi-chevron-${isLangOpen ? "up" : "down"} small ms-1`}
-									style={{ color: "var(--desert-terracotta)" }}
-								></i>
-							</button>
-
-							{isLangOpen && (
-								<div
-									className="dropdown-menu show shadow-sm border-0 py-1 position-absolute mt-1 lang-dropdown-menu"
-									style={{
-										borderRadius: "14px",
-										minWidth: "155px",
-										backgroundColor: "var(--desert-sand-card, #f0ebe0)",
-										border: "1px solid var(--desert-dune)",
-										zIndex: 1050,
-									}}
-								>
-									<div
-										className="px-3 py-1 text-muted border-bottom mb-1 text-nowrap"
-										style={{
-											fontSize: "0.68rem",
-											textTransform: "uppercase",
-											letterSpacing: "0.5px",
-										}}
-									>
-										Site Language
-									</div>
-									{SITE_LANGUAGES.map((lang) => (
-										<button
-											key={lang.code}
-											onClick={() => handleLangSelect(lang.code)}
-											className={`dropdown-item d-flex align-items-center justify-content-between px-3 py-1.5 border-0 text-start w-100 ${currentLang === lang.code ? "fw-bold" : ""}`}
-											style={{
-												fontSize: "0.83rem",
-												backgroundColor:
-													currentLang === lang.code
-														? "rgba(163, 88, 57, 0.12)"
-														: "transparent",
-												color:
-													currentLang === lang.code
-														? "var(--desert-terracotta)"
-														: "var(--desert-night)",
-												cursor: "pointer",
-												whiteSpace: "nowrap",
-												transition: "all 0.15s ease",
-											}}
-										>
-											<span className="me-2">{lang.name}</span>
-											<span
-												className="badge ms-auto"
-												style={{
-													fontSize: "0.7rem",
-													backgroundColor:
-														currentLang === lang.code
-															? "var(--desert-terracotta)"
-															: "var(--desert-dune)",
-													color:
-														currentLang === lang.code
-															? "#ffffff"
-															: "var(--desert-night)",
-												}}
-											>
-												{lang.label}
-											</span>
-										</button>
-									))}
-								</div>
-							)}
-						</div>
-
 						{/* Sadaqah & Donate Button */}
 						<Link
 							to="/donate"

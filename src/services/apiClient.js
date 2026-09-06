@@ -9,11 +9,11 @@ const apiClient = axios.create({
 	},
 });
 
-// Automatic Interceptor: Inject site language translation param into all API requests
+// Automatic Interceptor: Inject translation param (default 'en') into all API requests
 apiClient.interceptors.request.use((config) => {
 	config.params = config.params || {};
 	if (!config.params.translation) {
-		config.params.translation = getSiteLanguage();
+		config.params.translation = getSiteLanguage() || "en";
 	}
 	return config;
 });

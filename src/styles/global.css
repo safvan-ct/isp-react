@@ -1001,22 +1001,22 @@ footer a:hover {
 
 @media (min-width: 992px) {
     .sticky-reader-bar {
-        top: 75px;
+        top: 72px;
     }
 
     .sticky-filter-bar {
-        top: 75px;
+        top: 72px;
     }
 }
 
 .sticky-filter-bar {
     position: sticky;
-    top: 63px;
+    top: 72px;
     z-index: 1010;
     background-color: var(--desert-sand) !important;
     border-bottom: 1px solid rgba(194, 150, 83, 0.15);
     padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.1rem;
     transition: top 0.2s ease;
 }
 
@@ -2024,7 +2024,7 @@ footer a:hover {
     background: var(--desert-sand-card);
 }
 
-.ayah-end-marker > span {
+.ayah-end-marker>span {
     transform: translateY(0.03em);
 }
 
