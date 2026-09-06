@@ -18,7 +18,7 @@ export const getCourses = async ({
 	type = null,
 } = {}) => {
 	try {
-		const lang = translation || getSiteLanguage();
+		const lang = translation || getSiteLanguage() || "en";
 		const params = {
 			translation: lang,
 		};
@@ -44,6 +44,27 @@ export const getCourses = async ({
 		};
 	} catch (error) {
 		console.error("Error fetching courses list:", error);
+		throw error;
+	}
+};
+
+/**
+ * Fetch details of a single course by slug.
+ *
+ * @param {string} slug - Course slug
+ * @param {string|null} translation - Language code for translation (defaults to site language)
+ * @returns {Promise<Object>} Course details object
+ */
+export const getCourseDetails = async (slug, translation = null) => {
+	try {
+		const lang = translation || getSiteLanguage() || "en";
+		const params = {
+			translation: lang,
+		};
+		const response = await apiClient.get(`/courses/${slug}`, { params });
+		return response.data?.data || response.data;
+	} catch (error) {
+		console.error(`Error fetching course details for ${slug}:`, error);
 		throw error;
 	}
 };

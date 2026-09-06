@@ -490,8 +490,7 @@ footer a:hover {
     overflow: hidden;
 }
 
-.course-hero-banner::after {
-    content: "أُصُولُ الفِقْهِ";
+.course-hero-watermark {
     position: absolute;
     right: 20px;
     bottom: -30px;
@@ -499,6 +498,18 @@ footer a:hover {
     color: rgba(194, 150, 83, 0.05);
     font-family: var(--font-quranic);
     pointer-events: none;
+    line-height: 1;
+    white-space: nowrap;
+    z-index: 1;
+    user-select: none;
+}
+
+@media (max-width: 768px) {
+    .course-hero-watermark {
+        font-size: 5rem;
+        right: 10px;
+        bottom: -15px;
+    }
 }
 
 /* Sticky Navigation Bar for Course Sections */
@@ -666,7 +677,49 @@ footer a:hover {
     background: var(--desert-gold);
 }
 
-/* Buttons */
+/* Creative Donation / Waqf Card Styles */
+.donation-card-creative {
+    border: 1px solid rgba(194, 150, 83, 0.35);
+    background: linear-gradient(180deg, #FAF7F2 0%, var(--desert-sand-card) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.donation-card-creative::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--desert-gold), var(--desert-terracotta), var(--desert-gold));
+}
+
+.sadaqah-quote-box {
+    background: rgba(194, 150, 83, 0.08);
+    border: 1px dashed rgba(194, 150, 83, 0.3);
+}
+
+.amount-card-btn {
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.amount-card-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--desert-terracotta) !important;
+}
+
+.amount-card-btn.active {
+    background: rgba(163, 88, 57, 0.06) !important;
+    border-color: var(--desert-terracotta) !important;
+    box-shadow: 0 4px 10px rgba(163, 88, 57, 0.1);
+}
+
+.impact-box {
+    border-color: rgba(194, 150, 83, 0.25) !important;
+    background: #ffffff;
+}
 /* Footer */
 
 /* =======================================================
